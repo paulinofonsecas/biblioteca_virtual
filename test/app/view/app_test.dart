@@ -1,6 +1,6 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:bilioteca_virtual/app/app.dart';
 import 'package:bilioteca_virtual/counter/counter.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('App', () {

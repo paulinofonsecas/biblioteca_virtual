@@ -1,5 +1,8 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -52,6 +55,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
+        multiDexEnabled true
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -60,17 +64,17 @@ android {
     signingConfigs {
         if (System.getenv("ANDROID_KEYSTORE_PATH")) {
             release {
-                storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
-                keyAlias System.getenv("ANDROID_KEYSTORE_ALIAS")
-                keyPassword System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                // storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
+                // keyAlias System.getenv("ANDROID_KEYSTORE_ALIAS")
+                // keyPassword System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+                // storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
             }
         } else {
             release {
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-                storePassword keystoreProperties['storePassword']
+            //     keyAlias keystoreProperties['keyAlias']
+            //     keyPassword keystoreProperties['keyPassword']
+            //     storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            //     storePassword keystoreProperties['storePassword']
             }
         }
     }
@@ -89,19 +93,19 @@ android {
         }
         development {
             dimension "default"
-            applicationIdSuffix ".dev"
+            applicationIdSuffix ""
             manifestPlaceholders = [appName: "[DEV] Bilioteca Virtual"]
         }
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            // signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
         debug {
-            signingConfig signingConfigs.debug
+            // signingConfig signingConfigs.debug
         }
     }
 }
