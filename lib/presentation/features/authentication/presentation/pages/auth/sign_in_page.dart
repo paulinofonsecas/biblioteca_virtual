@@ -1,7 +1,6 @@
 import 'package:bilioteca_virtual/presentation/features/authentication/presentation/widgets/auth/sign_in_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -17,10 +16,10 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: SvgPicture.asset(
-                'svgs/man-reading-book.svg',
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: Image(
+                image: AssetImage('assets/home_page_background.gif'),
                 height: 200,
                 width: 200,
               ),
