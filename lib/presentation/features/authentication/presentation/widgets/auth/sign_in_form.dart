@@ -80,9 +80,8 @@ class _LoginFormState extends State<LoginForm> {
           case ErrorAuthState():
             return Column(
               children: [
-                Center(
-                  child: Text(state.message),
-                ),
+                Center(child: Text(state.message)),
+                const GutterSmall(),
                 _buildLoginButton(context),
               ],
             );

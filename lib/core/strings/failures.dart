@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-const String SERVER_FAILURE_MESSAGE = 'Por favor tente novamente.';
+const String SERVER_FAILURE_MESSAGE = 'Ocorreu um erro ao contactar o sistema';
 const String OFFLINE_FAILURE_MESSAGE = 'Por favor, verifique a sua conecao';
 const String WEEK_PASS_FAILURE_MESSAGE =
     'Por favor use uma palavra-passe forte.';
