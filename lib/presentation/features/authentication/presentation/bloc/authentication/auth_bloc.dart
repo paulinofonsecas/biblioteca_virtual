@@ -108,7 +108,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       case NotLoggedInFailure:
         return '';
       default:
-        return 'Unexpected Error , Please try again later .';
+        return 'Erro desconhecido, por favor, tente novamente.';
     }
   }
 }
