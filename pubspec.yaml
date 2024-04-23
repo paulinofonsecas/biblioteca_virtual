@@ -26,7 +26,7 @@ dependencies:
   google_sign_in: ^6.2.1
   intl: ^0.18.1
 
-  shared_preferences: ^2.2.2
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   bloc_test: ^9.1.6
