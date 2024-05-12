@@ -1,15 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bilioteca_virtual/presentation/client/features/home_page/bloc/bloc.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/bloc/bloc.dart';
 
 void main() {
-  group('HomePageState', () {
+  group('GestaoDeBooksState', () {
     test('supports value equality', () {
       expect(
-        HomePageState(),
+        GestaoDeBooksState(),
         equals(
-          const HomePageState(),
+          const GestaoDeBooksState(),
         ),
       );
     });
@@ -17,7 +17,7 @@ void main() {
     group('constructor', () {
       test('can be instantiated', () {
         expect(
-          const HomePageState(),
+          const GestaoDeBooksState(),
           isNotNull,
         );
       });
@@ -28,12 +28,12 @@ void main() {
         'copies correctly '
         'when no argument specified',
         () {
-          const homePageState = HomePageState(
+          const gestaoDeBooksState = GestaoDeBooksState(
             customProperty: 'My property',
           );
           expect(
-            homePageState.copyWith(),
-            equals(homePageState),
+            gestaoDeBooksState.copyWith(),
+            equals(gestaoDeBooksState),
           );
         },
       );
@@ -42,19 +42,19 @@ void main() {
         'copies correctly '
         'when all arguments specified',
         () {
-          const homePageState = HomePageState(
+          const gestaoDeBooksState = GestaoDeBooksState(
             customProperty: 'My property',
           );
-          final otherHomePageState = HomePageState(
+          final otherGestaoDeBooksState = GestaoDeBooksState(
             customProperty: 'My property 2',
           );
-          expect(homePageState, isNot(equals(otherHomePageState)));
+          expect(gestaoDeBooksState, isNot(equals(otherGestaoDeBooksState)));
 
           expect(
-            homePageState.copyWith(
-              customProperty: otherHomePageState.customProperty,
+            gestaoDeBooksState.copyWith(
+              customProperty: otherGestaoDeBooksState.customProperty,
             ),
-            equals(otherHomePageState),
+            equals(otherGestaoDeBooksState),
           );
         },
       );

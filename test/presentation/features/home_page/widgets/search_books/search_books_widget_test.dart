@@ -1,5 +1,5 @@
-import 'package:bilioteca_virtual/presentation/features/home_page/view/home_page.dart';
-import 'package:bilioteca_virtual/presentation/features/home_page/widgets/search_books/search_books_widget.dart';
+import 'package:bilioteca_virtual/presentation/client/features/home_page/view/home_page.dart';
+import 'package:bilioteca_virtual/presentation/client/features/home_page/widgets/search_books/search_books_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

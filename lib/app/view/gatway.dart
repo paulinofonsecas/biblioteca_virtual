@@ -1,5 +1,5 @@
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
-import 'package:bilioteca_virtual/presentation/features/authentication/presentation/bloc/authentication/auth_bloc.dart';
+import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

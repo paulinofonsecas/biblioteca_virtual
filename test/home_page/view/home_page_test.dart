@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, strict_raw_type
 
-import 'package:bilioteca_virtual/presentation/features/home_page/home_page.dart';
+import 'package:bilioteca_virtual/presentation/client/features/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

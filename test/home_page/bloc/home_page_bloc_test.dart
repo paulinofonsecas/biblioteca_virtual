@@ -2,7 +2,7 @@
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bilioteca_virtual/presentation/features/home_page/bloc/bloc.dart';
+import 'package:bilioteca_virtual/presentation/client/features/home_page/bloc/bloc.dart';
 
 void main() {
   group('HomePageBloc', () {
