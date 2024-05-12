@@ -1,7 +1,7 @@
 // ignore_for_file: inference_failure_on_instance_creation, lines_longer_than_80_chars
 
 import 'package:bilioteca_virtual/presentation/features/authentication/presentation/bloc/authentication/auth_bloc.dart';
-import 'package:bilioteca_virtual/presentation/features/authentication/presentation/pages/home.dart';
+import 'package:bilioteca_virtual/presentation/features/home_page/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

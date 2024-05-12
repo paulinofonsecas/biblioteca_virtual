@@ -188,7 +188,7 @@ class _SignUpFormState extends State<SignUpForm> {
               SignUpEvent(
                 signUpEntity: SignUpEntity(
                   name: _usernameController.text,
-                  email: _usernameController.text,
+                  email: _emailController.text,
                   password: _passwordController.text,
                   repeatedPassword: _confirmPasswordController.text,
                 ),
