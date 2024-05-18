@@ -1,4 +1,3 @@
-import 'package:bilioteca_virtual/core/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -12,9 +11,7 @@ class LoadingWidget extends StatelessWidget {
         child: SizedBox(
           height: 30,
           width: 30,
-          child: CircularProgressIndicator(
-            color: secondaryColor,
-          ),
+          child: CircularProgressIndicator(),
         ),
       ),
     );

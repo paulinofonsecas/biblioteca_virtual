@@ -19,7 +19,7 @@ class DiscoveryBooksWidget extends StatelessWidget {
       itemCount: 60,
       itemBuilder: (context, index) {
         return BookMiniDisplay(
-          book: Book(),
+          book: Book.nullo(),
         );
       },
     );

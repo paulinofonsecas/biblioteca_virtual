@@ -1,4 +1,7 @@
 import 'package:bilioteca_virtual/app/view/gatway.dart';
+import 'package:bilioteca_virtual/presentation/admin/admin_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/view/gestao_de_books_page.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/sign_in_page.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/sign_up_page.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/verify_email.dart';
@@ -10,7 +13,7 @@ final providers = [EmailAuthProvider()];
 
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: '/home-page',
+  initialLocation: '/admin/',
   routes: [
     GoRoute(
       path: '/gateway',
@@ -44,6 +47,22 @@ final router = GoRouter(
           }),
         ],
       ),
+    ),
+    GoRoute(
+      path: '/admin',
+      builder: (context, state) => const AdminPage(),
+      routes: [
+        GoRoute(
+          path: 'gestao-books',
+          builder: (context, state) => const GestaoDeBooksPage(),
+          routes: [
+            GoRoute(
+              path: 'add-new-book',
+              builder: (context, state) => const AddNewBookPage(),
+            ),
+          ],
+        ),
+      ],
     ),
   ],
 );

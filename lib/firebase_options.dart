@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'biblioteca-virtual-689ea.appspot.com',
     measurementId: 'G-CCN0W2KS1T',
   );
+
 }

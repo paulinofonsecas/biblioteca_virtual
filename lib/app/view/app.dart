@@ -4,6 +4,8 @@ import 'package:bilioteca_virtual/l10n/l10n.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -14,21 +16,26 @@ class App extends StatelessWidget {
       create: (_) => getIt<AuthBloc>(),
       child: Builder(
         builder: (context) {
-          return MaterialApp.router(
-            title: 'Biblioteca Virtual',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              appBarTheme: AppBarTheme(
-                backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          return GlobalLoaderOverlay(
+            useDefaultLoading: false,
+            overlayWidgetBuilder: (_) {
+              //ignored progress for the moment
+              return const Center(
+                child: SpinKitFoldingCube(
+                  color: Colors.red,
+                ),
+              );
+            },
+            child: MaterialApp.router(
+              title: 'Biblioteca Virtual',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData.light().copyWith(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
               ),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.amber,
-              ),
-              useMaterial3: true,
+              routerConfig: router,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
             ),
-            routerConfig: router,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
           );
         },
       ),

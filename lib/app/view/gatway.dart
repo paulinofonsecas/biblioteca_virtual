@@ -15,7 +15,7 @@ class _GatewayState extends State<Gateway> {
   @override
   void initState() {
     if (getIt<AuthBloc>().state is SignedInPageState) {
-      GoRouter.of(context).go('/profile');
+      GoRouter.of(context).go('/admin/add-new-book');
     } else {
       GoRouter.of(context).go('/sign-in');
     }

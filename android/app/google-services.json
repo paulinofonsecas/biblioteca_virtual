@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:789567736:android:84ff69c463889ea5f9030d",
+        "android_client_info": {
+          "package_name": "com.example.e_book"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChZBhIUCXs5RngKrZaDnHVG9rqBIEH54M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:789567736:android:b7830267ce3ec2f2f9030d",
         "android_client_info": {
           "package_name": "com.example.verygoodcore.bilioteca_virtual"

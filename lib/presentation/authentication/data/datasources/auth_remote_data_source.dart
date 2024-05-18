@@ -18,7 +18,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserCredential> signIn(SignInModel signIn) async {
     try {
       final firebaseInstance = FirebaseAuth.instance;
-      await firebaseInstance.currentUser?.reload();
+      // await firebaseInstance.currentUser?.reload();
       return await firebaseInstance.signInWithEmailAndPassword(
         email: signIn.email,
         password: signIn.password,
@@ -38,7 +38,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserCredential> signUp(SignUpModel signUp) async {
     try {
       final firebaseInstance = FirebaseAuth.instance;
-      await firebaseInstance.currentUser?.reload();
+      // await firebaseInstance.currentUser?.reload();
       return await firebaseInstance.createUserWithEmailAndPassword(
         email: signUp.email,
         password: signUp.password,
