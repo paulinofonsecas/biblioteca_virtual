@@ -16,7 +16,7 @@ dependencies:
   equatable: ^2.0.5
   file_picker: ^8.0.3
   firebase_auth: ^4.17.8
-  firebase_core: ^2.27.0
+  firebase_core: ^2.31.1
   firebase_storage: ^11.7.5
   firebase_ui_auth: ^1.13.1
   floating_action_bubble: ^1.1.4
