@@ -1,8 +1,9 @@
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/most_wanted_books_cubit.dart';
-import 'package:bilioteca_virtual/presentation/client/features/p_d_f_reader/p_d_f_reader.dart';
+import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/p_d_f_reader.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/book_mini_display.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TheMostWantedBooksWidget extends StatelessWidget {
   const TheMostWantedBooksWidget({super.key});
@@ -60,10 +61,14 @@ class _BooksListView extends StatelessWidget {
           return BookMiniDisplay(
             book: book,
             onTap: () {
-              Navigator.of(context).push(
-                PDFReaderPage.route(
-                  book: book,
-                ),
+              context.go(
+                Uri(
+                  path: '/pdf-reader',
+                  queryParameters: {
+                    'bookId': book.id,
+                    'parent': '/home-page',
+                  },
+                ).toString(),
               );
             },
           );

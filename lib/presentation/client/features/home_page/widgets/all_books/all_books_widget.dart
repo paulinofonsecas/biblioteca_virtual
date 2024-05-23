@@ -13,7 +13,7 @@ class AllBooksWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Text(
-            'Descubrir',
+            'Descobrir',
             style: Theme.of(context)
                 .textTheme
                 .titleLarge

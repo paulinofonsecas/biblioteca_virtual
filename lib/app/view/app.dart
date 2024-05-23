@@ -30,7 +30,7 @@ class App extends StatelessWidget {
               title: 'Biblioteca Virtual',
               debugShowCheckedModeBanner: false,
               theme: ThemeData.light().copyWith(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
               ),
               routerConfig: router,
               localizationsDelegates: AppLocalizations.localizationsDelegates,

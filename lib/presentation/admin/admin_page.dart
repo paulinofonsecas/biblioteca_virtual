@@ -1,6 +1,9 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/authors/view/authors_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/view/gestao_de_books_page.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -9,14 +12,24 @@ class AdminPage extends StatefulWidget {
   State<AdminPage> createState() => _AdminPageState();
 }
 
-class _AdminPageState extends State<AdminPage> {
-  int _selectedIndex = 0;
+class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
+  int _bottomNavIndex = 0;
   late final PageController _pageController;
+
+  // floating action button icons
+  final iconList = <IconData>[
+    FontAwesomeIcons.book,
+    FontAwesomeIcons.user,
+    FontAwesomeIcons.bookAtlas,
+    Icons.settings,
+  ];
+
+  // Screens
   final _screens = [
+    const GestaoDeBooksPage(),
+    const AuthorsPage(),
+    Container(color: Colors.blueGrey),
     Container(color: Colors.red),
-    Container(color: Colors.blue),
-    Container(color: Colors.green),
-    Container(color: Colors.grey),
   ];
 
   @override
@@ -31,6 +44,13 @@ class _AdminPageState extends State<AdminPage> {
     super.dispose();
   }
 
+  void _onTapNav(int index) {
+    setState(() {
+      _bottomNavIndex = index;
+      _pageController.jumpToPage(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,50 +59,50 @@ class _AdminPageState extends State<AdminPage> {
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (index) {
-            setState(() => _selectedIndex = index);
+            setState(() => _bottomNavIndex = index);
           },
-          children: <Widget>[
-            Container(
-              color: Colors.blueGrey,
-            ),
-            Container(
-              color: Colors.red,
-            ),
-            const GestaoDeBooksPage(),
-            Container(
-              color: Colors.green,
-            ),
-          ],
+          children: _screens,
         ),
       ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _selectedIndex,
-        onItemSelected: (index) => setState(() {
-          _selectedIndex = index;
-          _pageController.jumpToPage(index);
-        }),
-        items: [
-          BottomNavyBarItem(
-            icon: const Icon(Icons.apps),
-            title: const Text('Home'),
-            activeColor: Colors.red,
-          ),
-          BottomNavyBarItem(
-            icon: const Icon(Icons.people),
-            title: const Text('Autores'),
-            activeColor: Colors.purpleAccent,
-          ),
-          BottomNavyBarItem(
-            icon: const Icon(Icons.book_sharp),
-            title: const Text('Books'),
-            activeColor: Colors.pink,
-          ),
-          BottomNavyBarItem(
-            icon: const Icon(Icons.settings),
-            title: const Text('Settings'),
-          ),
-        ],
+      bottomNavigationBar: _buildNavigationBar(),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: FloatingActionButton(
+        shape: const StadiumBorder(),
+        backgroundColor: Colors.black,
+        onPressed: () {
+          context.go(Uri(path: '/admin/add-new-book').toString());
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.amber,
+        ),
       ),
+    );
+  }
+
+  Widget _buildNavigationBar() {
+    return Builder(
+      builder: (context) {
+        return AnimatedBottomNavigationBar.builder(
+          itemCount: iconList.length,
+          tabBuilder: (int index, bool isActive) {
+            return Icon(
+              iconList[index],
+              size: 24,
+              color: isActive ? Colors.amber : Colors.grey,
+            );
+          },
+          backgroundColor:
+              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          activeIndex: _bottomNavIndex,
+          gapLocation: GapLocation.center,
+          notchSmoothness: NotchSmoothness.softEdge,
+          leftCornerRadius: 32,
+          rightCornerRadius: 32,
+          onTap: _onTapNav,
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 import 'dart:convert';
 
 import 'package:bilioteca_virtual/domain/entities/book.dart';
@@ -96,7 +97,8 @@ class BookModel extends Book {
 
   @override
   String toString() {
-    return 'BookModel(id: $id, title: $title, autor: $autor, isbn: $isbn, editora: $editora, resumo: $resumo, capa: $capa, pdf: $pdf)';
+    return 'BookModel(id: $id, title: $title, autor: $autor, isbn: $isbn, '
+        'editora: $editora, resumo: $resumo, capa: $capa, pdf: $pdf)';
   }
 
   @override

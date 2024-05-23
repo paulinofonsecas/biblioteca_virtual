@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bilioteca_virtual/presentation/client/features/home_page/bloc/bloc.dart';
+import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/discovery_book_cubit.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/most_wanted_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/search_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/widgets/custom_app_bar/custom_app_bar.dart';
@@ -29,6 +30,9 @@ class HomePage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MostWantedBooksCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DiscoveryBookCubit(),
         ),
       ],
       child: const Scaffold(
