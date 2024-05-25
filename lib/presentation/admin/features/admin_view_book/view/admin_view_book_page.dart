@@ -41,7 +41,12 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Admin View Book'),
+          leading: BackButton(
+            onPressed: () {
+              GoRouter.of(context).pop();
+            },
+          ),
+          title: const Text('Detalhes do Livro'),
         ),
         body: AdminViewBookView(
           bookId: widget.bookId,

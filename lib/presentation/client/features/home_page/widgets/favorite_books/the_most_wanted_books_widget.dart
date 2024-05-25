@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/most_wanted_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/p_d_f_reader.dart';
@@ -50,29 +51,32 @@ class _BooksListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SizedBox(
-      height: size.height * .25,
-      child: ListView.builder(
-        itemCount: books.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          final book = books[index];
+    return Padding(
+      padding: const EdgeInsets.only(left: kDefaultPadding / 2),
+      child: SizedBox(
+        height: size.height * .25,
+        child: ListView.builder(
+          itemCount: books.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            final book = books[index];
 
-          return BookMiniDisplay(
-            book: book,
-            onTap: () {
-              context.go(
-                Uri(
-                  path: '/pdf-reader',
-                  queryParameters: {
-                    'bookId': book.id,
-                    'parent': '/home-page',
-                  },
-                ).toString(),
-              );
-            },
-          );
-        },
+            return BookMiniDisplay(
+              book: book,
+              onTap: () {
+                context.go(
+                  Uri(
+                    path: '/admin/view-book',
+                    queryParameters: {
+                      'bookId': book.id,
+                      'parent': '/home-page',
+                    },
+                  ).toString(),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

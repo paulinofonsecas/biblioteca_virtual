@@ -12,6 +12,7 @@ class DiscoveryBooksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DiscoveryBookCubit, DiscoveryBookState>(
+      bloc: context.read<DiscoveryBookCubit>()..getDiscoveryBooks(),
       builder: (context, state) {
         if (state is DiscoveryBookLoading) {
           return const Center(
@@ -32,7 +33,7 @@ class DiscoveryBooksWidget extends StatelessWidget {
         }
 
         return const Center(
-          child: Text('Erro'),
+          child: Text('Ocorreu um erro, tente mais tarde'),
         );
       },
     );
@@ -48,30 +49,31 @@ class _BuildLiview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      separatorBuilder: (context, index) => const Divider(),
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        final book = books[index];
-
-        return InLineBookMediumDisplay(
-          onTap: () {
-            context.go(
-              Uri(
-                path: '/admin/view-book',
-                queryParameters: {'bookId': book.id},
-              ).toString(),
-            );
-          },
-          book: Book(
-            id: book.id,
-            title: book.title,
-            autor: book.autor,
-            capa: book.capa,
-            pdf: book.pdf,
-          ),
-        );
-      },
+    return Column(
+      children: [
+        ...books.map((book) {
+          return InLineBookMediumDisplay(
+            onTap: () {
+              context.go(
+                Uri(
+                  path: '/admin/view-book',
+                  queryParameters: {
+                    'bookId': book.id,
+                    'parent': '/home-page',
+                  },
+                ).toString(),
+              );
+            },
+            book: Book(
+              id: book.id,
+              title: book.title,
+              autor: book.autor,
+              capa: book.capa,
+              pdf: book.pdf,
+            ),
+          );
+        }),
+      ],
     );
   }
 }

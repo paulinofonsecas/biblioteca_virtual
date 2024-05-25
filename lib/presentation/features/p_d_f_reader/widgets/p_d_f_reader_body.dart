@@ -76,4 +76,17 @@ class PDFViewerCachedFromUrl extends StatelessWidget {
       },
     );
   }
+
+  // String _extractTextOnPDF(String filePath) {
+  //   final file = File(filePath);
+
+  //   final document = PdfDocument(inputBytes: file.readAsBytesSync());
+  //   final text = PdfTextExtractor(document).extractText(
+  //     startPageIndex: 1,
+  //     endPageIndex: 2,
+  //   );
+
+  //   document.dispose();
+  //   return text;
+  // }
 }

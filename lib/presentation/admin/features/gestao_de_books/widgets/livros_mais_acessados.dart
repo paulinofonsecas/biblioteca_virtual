@@ -59,7 +59,10 @@ class _BuildListOfFeaturedBooks extends StatelessWidget {
             context.go(
               Uri(
                 path: '/admin/view-book',
-                queryParameters: {'bookId': book.id},
+                queryParameters: {
+                  'bookId': book.id,
+                  'parent': '/admin/gestao-books',
+                },
               ).toString(),
             );
           },

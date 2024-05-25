@@ -48,6 +48,7 @@ class _BooksGridView extends StatelessWidget {
     }
     return SliverList.separated(
       separatorBuilder: (context, index) => const Divider(),
+      itemCount: books.length,
       itemBuilder: (context, index) {
         final book = books[index];
 
@@ -56,7 +57,10 @@ class _BooksGridView extends StatelessWidget {
             context.go(
               Uri(
                 path: '/admin/view-book',
-                queryParameters: {'bookId': book.id},
+                queryParameters: {
+                  'bookId': book.id,
+                  'parent': '/admin/gestao-books',
+                },
               ).toString(),
             );
           },

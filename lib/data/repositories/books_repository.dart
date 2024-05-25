@@ -105,7 +105,7 @@ class BooksRepository implements IBooksRepository {
     });
 
     saveInCache = books;
-    final result = List<Book>.generate(40, (index) => books.first);
-    return result;
+    // final result = List<Book>.generate(40, (index) => books.first);
+    return books;
   }
 }

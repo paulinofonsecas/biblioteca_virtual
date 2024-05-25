@@ -1,5 +1,6 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BookMiniDisplay extends StatelessWidget {
@@ -36,8 +37,12 @@ class BookMiniDisplay extends StatelessWidget {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(kDefaultPadding),
-                  child: Image.asset(
-                    'assets/default_book_cover.jpg',
+                  // child: Image.asset(
+                  //   'assets/default_book_cover.jpg',
+                  //   fit: BoxFit.cover,
+                  // ),
+                  child: CachedNetworkImage(
+                    imageUrl: book.capa,
                     fit: BoxFit.cover,
                   ),
                 ),
