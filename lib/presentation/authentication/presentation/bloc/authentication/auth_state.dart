@@ -19,7 +19,14 @@ class VerifyEmailPageState extends AuthState {}
 
 class LoggedOutState extends AuthState {}
 
-class SignedInState extends AuthState {}
+class SignedInState extends AuthState {
+  SignedInState({required this.userCredential});
+
+  final MyUser? userCredential;
+
+  @override
+  List<Object> get props => userCredential != null ?  [] : [userCredential!];
+}
 
 class SignedUpState extends AuthState {}
 

@@ -18,5 +18,5 @@ tasks.register("clean", Delete) {
 }
 
 buildscript {
-    ext.kotlin_version = '<latest-version>' // <= expected version is 1.5.1
+    ext.kotlin_version = '1.7.0' // <= expected version is 1.5.1
 }

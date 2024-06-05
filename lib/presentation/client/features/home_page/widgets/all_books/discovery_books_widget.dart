@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bilioteca_virtual/core/extentions/go_router_extention.dart';
+
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/discovery_book_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/in_line_book_medium_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class DiscoveryBooksWidget extends StatelessWidget {
   const DiscoveryBooksWidget({super.key});

@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/view/authors_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/view/gestao_de_books_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/profile/view/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +30,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     const GestaoDeBooksPage(),
     const AuthorsPage(),
     Container(color: Colors.blueGrey),
-    Container(color: Colors.red),
+    const ProfilePage(),
   ];
 
   @override

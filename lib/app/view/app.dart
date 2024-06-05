@@ -16,25 +16,31 @@ class App extends StatelessWidget {
       create: (_) => getIt<AuthBloc>(),
       child: Builder(
         builder: (context) {
-          return GlobalLoaderOverlay(
-            useDefaultLoading: false,
-            overlayWidgetBuilder: (_) {
-              //ignored progress for the moment
-              return const Center(
-                child: SpinKitFoldingCube(
-                  color: Colors.red,
-                ),
-              );
+          return BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is LoggedOutState) {
+                router.pushReplacement('/sign-in');
+              }
             },
-            child: MaterialApp.router(
-              title: 'Biblioteca Virtual',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData.light().copyWith(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+            child: GlobalLoaderOverlay(
+              useDefaultLoading: false,
+              overlayWidgetBuilder: (_) {
+                return const Center(
+                  child: SpinKitFoldingCube(
+                    color: Colors.red,
+                  ),
+                );
+              },
+              child: MaterialApp.router(
+                title: 'Biblioteca Virtual',
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData.light().copyWith(
+                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                ),
+                routerConfig: router,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
               ),
-              routerConfig: router,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
             ),
           );
         },

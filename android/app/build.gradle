@@ -64,17 +64,17 @@ android {
     signingConfigs {
         if (System.getenv("ANDROID_KEYSTORE_PATH")) {
             release {
-                // storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
-                // keyAlias System.getenv("ANDROID_KEYSTORE_ALIAS")
-                // keyPassword System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-                // storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
+                keyAlias System.getenv("ANDROID_KEYSTORE_ALIAS")
+                keyPassword System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+                storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
             }
         } else {
             release {
-            //     keyAlias keystoreProperties['keyAlias']
-            //     keyPassword keystoreProperties['keyPassword']
-            //     storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            //     storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
             }
         }
     }
@@ -88,7 +88,7 @@ android {
         }
         staging {
             dimension "default"
-            applicationIdSuffix ".stg"
+            applicationIdSuffix ""
             manifestPlaceholders = [appName: "[STG] Bilioteca Virtual"]
         }
         development {
@@ -100,12 +100,12 @@ android {
 
     buildTypes {
         release {
-            // signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
         debug {
-            // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
         }
     }
 }

@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:bilioteca_virtual/core/error/failures.dart';
 import 'package:bilioteca_virtual/core/strings/failures.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_in_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_up_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/usecases/check_verification_usecase.dart';
@@ -41,7 +42,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is SignInEvent) {
         emit(LoadingState());
         final failureOrUserCredential = await signInUseCase(event.signInEntity);
-        emit(eitherToState(failureOrUserCredential, SignedInState()));
+        if (failureOrUserCredential is Right) {
+          failureOrUserCredential.fold(
+            (l) {
+              emit(ErrorAuthState(message: 'Erro desconheicdo.'));
+            },
+            (r) {
+              emit(SignedInState(userCredential: r));
+            },
+          );
+        }
       } else if (event is SignUpEvent) {
         emit(LoadingState());
         final failureOrUserCredential = await signUpUseCase(event.signUpEntity);

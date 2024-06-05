@@ -56,21 +56,27 @@ class _LoginFormState extends State<LoginForm> {
   BlocConsumer<AuthBloc, AuthState> _loginButtonArea() {
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: BlocProvider.of<AuthBloc>(context)
-        ..add(
-          SignInEvent(
-            signInEntity: const SignInEntity(
-              email: 'paulinofonsecass@gmail.com',
-              password: 'password',
-            ),
-          ),
-        ),
+        // ..add(
+        //   SignInEvent(
+        //     signInEntity: const SignInEntity(
+        //       email: 'pedro@gmail.com',
+        //       password: 'password',
+        //     ),
+        //   ),
+        // ),
+        ,
       listener: (context, state) {
         if (state is SignedInState) {
           BlocProvider.of<AuthBloc>(context).add(CheckLoggingInEvent());
+
+          final role = state.userCredential?.role;
+          if (role == 'admin') {
+            context.pushReplacement('/admin');
+          } else if (role == 'usuario') {
+            context.pushReplacement('/home-page');
+          }
         } else if (state is SignedInPageState || state is GoogleSignInState) {
-          GoRouter.of(context).go(
-            '/home',
-          );
+          context.go('/home-page');
         } else if (state is VerifyEmailPageState) {
           Navigator.of(context).push(
             MaterialPageRoute(

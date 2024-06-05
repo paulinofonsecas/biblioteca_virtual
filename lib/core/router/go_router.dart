@@ -15,7 +15,7 @@ final providers = [EmailAuthProvider()];
 
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: '/home-page/',
+  initialLocation: '/sign-in',
   routes: [
     GoRoute(
       path: '/admin',
@@ -38,6 +38,7 @@ final router = GoRouter(
           builder: (context, state) {
             return AdminViewBookPage(
               bookId: state.uri.queryParameters['bookId']!,
+              parent: state.uri.queryParameters['parent']!,
             );
           },
         ),
@@ -45,11 +46,7 @@ final router = GoRouter(
           path: 'read_pdf',
           builder: (context, state) => PDFReaderPage(
             bookId: state.uri.queryParameters['bookId']!,
-            onExit: () {
-              context.go(
-                '/admin/view-book?bookId=${state.uri.queryParameters['bookId']}',
-              );
-            },
+            parent: state.uri.queryParameters['parent']!,
           ),
         ),
       ],
@@ -75,6 +72,12 @@ final router = GoRouter(
     GoRoute(
       path: '/home-page',
       builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/',
+      redirect: (context, state) {
+        return '/home-page';
+      },
     ),
     GoRoute(
       path: '/profile',

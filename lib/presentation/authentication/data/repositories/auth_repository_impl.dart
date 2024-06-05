@@ -9,6 +9,7 @@ import 'package:bilioteca_virtual/presentation/authentication/data/datasources/a
 import 'package:bilioteca_virtual/presentation/authentication/data/models/first_page_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/models/sign_in_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/models/sign_up_model.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_in_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_up_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/repositories/authentication_repository.dart';
@@ -24,7 +25,7 @@ class AuthenticationRepositoryImp implements AuthenticationRepository {
   final NetworkInfo networkInfo;
 
   @override
-  Future<Either<Failure, UserCredential>> signIn(SignInEntity signIn) async {
+  Future<Either<Failure, MyUser>> signIn(SignInEntity signIn) async {
     if (await networkInfo.isConnected) {
       try {
         final signInModel =
@@ -100,14 +101,14 @@ class AuthenticationRepositoryImp implements AuthenticationRepository {
   }
 
   Future<void> waitForVerifiedUser(Completer completer) async {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      FirebaseAuth.instance.currentUser?.reload();
-      if (FirebaseAuth.instance.currentUser!.emailVerified) {
-        completer.complete();
-        timer.cancel();
-      }
-    });
-    await completer.future;
+    // Timer.periodic(const Duration(seconds: 1), (timer) {
+    //   FirebaseAuth.instance.currentUser?.reload();
+    //   if (FirebaseAuth.instance.currentUser!.emailVerified) {
+    //     completer.complete();
+    //     timer.cancel();
+    //   }
+    // });
+    // await completer.future;
   }
 
   @override

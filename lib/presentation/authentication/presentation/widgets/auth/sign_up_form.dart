@@ -1,12 +1,12 @@
 // ignore_for_file: avoid_dynamic_calls
 
-import 'package:bilioteca_virtual/core/extentions/go_router_extention.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_up_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -21,7 +21,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  bool isVisible = false;
+  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -131,9 +131,7 @@ class _SignUpFormState extends State<SignUpForm> {
             BlocConsumer<AuthBloc, AuthState>(
               listener: (_, state) {
                 if (state is SignedUpState) {
-                  context.goReplacement('/verify-email');
-                  BlocProvider.of<AuthBloc>(context)
-                      .add(SendEmailVerificationEvent());
+                  context.pushReplacement('/sign-in');
                 }
               },
               builder: (context, state) {
@@ -164,7 +162,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 const Text('Já tem uma conta?'),
                 TextButton(
                   onPressed: () {
-                    context.goReplacement('/sign-in');
+                    context.pushReplacement('/sign-in');
                   },
                   child: const Text('Login'),
                 ),
@@ -209,7 +207,9 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   Widget optionsBox({
-    required String? imagePath, required Function? onPressed, Color? color,
+    required String? imagePath,
+    required Function? onPressed,
+    Color? color,
   }) {
     return InkWell(
       onTap: () => onPressed!(),

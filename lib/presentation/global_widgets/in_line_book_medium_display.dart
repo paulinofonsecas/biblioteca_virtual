@@ -76,6 +76,7 @@ class InLineBookMediumDisplay extends StatelessWidget {
   }
 }
 
+/*
 class _FooterWidget extends StatelessWidget {
   const _FooterWidget({
     required this.book,
@@ -131,3 +132,5 @@ class _FooterWidget extends StatelessWidget {
     );
   }
 }
+
+*/
