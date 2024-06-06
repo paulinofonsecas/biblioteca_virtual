@@ -5,7 +5,6 @@ import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cu
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/admin_view_book_body.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 
 class AdminViewBookPage extends StatefulWidget {
   const AdminViewBookPage({
@@ -53,30 +52,16 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
         },
         child: Scaffold(
           appBar: AppBar(
-            leading: BackButton(
-              onPressed: () {
-                router.go(widget.parent);
-              },
-            ),
-            title: const Text('Detalhes do Livro'),
+            title: const Text('Comprar Livro'),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(FontAwesomeIcons.bookmark),
+              ),
+            ],
           ),
           body: AdminViewBookView(
             bookId: widget.bookId,
-          ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              context.go(
-                Uri(
-                  path: '/admin/read_pdf',
-                  queryParameters: {
-                    'bookId': widget.bookId,
-                    'parent': widget.parent,
-                  },
-                ).toString(),
-              );
-            },
-            icon: const Icon(FontAwesomeIcons.readme),
-            label: const Text('Ler livro'),
           ),
         ),
       ),
