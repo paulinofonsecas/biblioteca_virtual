@@ -15,7 +15,7 @@ final providers = [EmailAuthProvider()];
 
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: '/sign-in',
+  initialLocation: '/home-page',
   routes: [
     GoRoute(
       path: '/admin',

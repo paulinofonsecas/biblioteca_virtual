@@ -247,10 +247,6 @@ class BookCoverWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             color: Colors.white,
           ),
-          // child: Image.asset(
-          //   'assets/default_book_cover.jpg',
-          //   fit: BoxFit.fill,
-          // ),
           child: CachedNetworkImage(
             imageUrl: book.capa,
             fit: BoxFit.cover,

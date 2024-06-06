@@ -76,6 +76,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(eitherToState(failureOrUserCredential, GoogleSignInState()));
       }
     });
+
+    on<ErrorAuthEvent>((event, emit) {
+      emit(
+        ErrorAuthState(
+          message: 'Alguma coisa está errada. tente novamente!',
+        ),
+      );
+    });
   }
   final SignInUseCase signInUseCase;
   final SignUpUseCase signUpUseCase;

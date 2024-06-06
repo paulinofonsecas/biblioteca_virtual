@@ -55,16 +55,7 @@ class _LoginFormState extends State<LoginForm> {
 
   BlocConsumer<AuthBloc, AuthState> _loginButtonArea() {
     return BlocConsumer<AuthBloc, AuthState>(
-      bloc: BlocProvider.of<AuthBloc>(context)
-        // ..add(
-        //   SignInEvent(
-        //     signInEntity: const SignInEntity(
-        //       email: 'pedro@gmail.com',
-        //       password: 'password',
-        //     ),
-        //   ),
-        // ),
-        ,
+      bloc: BlocProvider.of<AuthBloc>(context),
       listener: (context, state) {
         if (state is SignedInState) {
           BlocProvider.of<AuthBloc>(context).add(CheckLoggingInEvent());
@@ -89,9 +80,14 @@ class _LoginFormState extends State<LoginForm> {
       builder: (context, state) {
         switch (state) {
           case LoadingState():
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            {
+              Future.delayed(const Duration(seconds: 3), () {
+                BlocProvider.of<AuthBloc>(context).add(ErrorAuthEvent());
+              });
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
           case ErrorAuthState():
             return Column(
               children: [

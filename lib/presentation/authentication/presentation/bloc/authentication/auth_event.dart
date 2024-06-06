@@ -13,6 +13,8 @@ class SendEmailVerificationEvent extends AuthEvent {}
 
 class SignInWithGoogleEvent extends AuthEvent {}
 
+class ErrorAuthEvent extends AuthEvent {}
+
 class LogOutEvent extends AuthEvent {}
 
 class SignInEvent extends AuthEvent {
