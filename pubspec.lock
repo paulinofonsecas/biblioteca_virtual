@@ -209,6 +209,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.15"
+  device_frame:
+    dependency: transitive
+    description:
+      name: device_frame
+      sha256: d031a06f5d6f4750009672db98a5aa1536aa4a231713852469ce394779a23d75
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
+  device_preview:
+    dependency: "direct main"
+    description:
+      name: device_preview
+      sha256: a694acdd3894b4c7d600f4ee413afc4ff917f76026b97ab06575fe886429ef19
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
   diff_match_patch:
     dependency: transitive
     description:
@@ -222,7 +238,7 @@ packages:
     description:
       name: dio
       sha256: "11e40df547d418cc0c4900a9318b26304e665da6fa4755399a9ff9efd09034b5"
-      url: "https://pub.dev"
+      url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.4.3+1"
   email_validator:
@@ -541,6 +557,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "10.7.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: c3fd9336eb55a38cc1bbd79ab17573113a8deccd0ecbbf926cca3c62803b5c2d
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -741,6 +765,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.7.1"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.9.0"
   leak_tracker:
     dependency: transitive
     description:
