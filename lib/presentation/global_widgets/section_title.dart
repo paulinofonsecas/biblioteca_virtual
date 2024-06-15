@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
     required this.title,
-    required this.press,
+    this.press,
     super.key,
     this.isMainSection = true,
   });
@@ -12,7 +12,7 @@ class SectionTitle extends StatelessWidget {
 // Main Section means on Home page section
   final bool isMainSection;
   final String title;
-  final VoidCallback press;
+  final VoidCallback? press;
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +27,23 @@ class SectionTitle extends StatelessWidget {
                 ? Theme.of(context).textTheme.titleLarge
                 : Theme.of(context).textTheme.titleMedium,
           ),
-          GestureDetector(
-            onTap: press,
-            child: Text(
-              isMainSection ? 'Ver tudo' : 'Limpar tudo'.toUpperCase(),
-              style: isMainSection
-                  ? Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: Colors.black)
-                  : TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.64),
-                    ),
+          if (press != null)
+            GestureDetector(
+              onTap: press,
+              child: Text(
+                isMainSection ? 'Ver tudo' : 'Limpar tudo'.toUpperCase(),
+                style: isMainSection
+                    ? Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Colors.black)
+                    : TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black.withOpacity(0.64),
+                      ),
+              ),
             ),
-          ),
         ],
       ),
     );

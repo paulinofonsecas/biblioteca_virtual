@@ -11,7 +11,7 @@ class GestaoDeBooksBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: CustomScrollView(
         slivers: [
           SliverList(
@@ -29,7 +29,6 @@ class GestaoDeBooksBody extends StatelessWidget {
                   const GutterLarge(),
                   SectionTitle(
                     title: 'Todos os livros',
-                    press: () {},
                   ),
                   const GutterSmall(),
                 ],

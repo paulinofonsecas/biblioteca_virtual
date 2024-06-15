@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/app/cubit/app_brightness_cubit.dart';
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/l10n/l10n.dart';
@@ -12,10 +13,22 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<AuthBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<AuthBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => AppBrightnessCubit(),
+        ),
+      ],
       child: Builder(
         builder: (context) {
+          final appBrightnessState =
+              context.select<AppBrightnessCubit, AppBrightnessState>(
+            (AppBrightnessCubit cubit) => cubit.state,
+          );
+
           return BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is LoggedOutState) {
@@ -34,8 +47,11 @@ class App extends StatelessWidget {
               child: MaterialApp.router(
                 title: 'Biblioteca Virtual',
                 debugShowCheckedModeBanner: false,
-                theme: ThemeData.light().copyWith(
-                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                theme: ThemeData(
+                  colorScheme: ColorScheme.fromSeed(
+                    seedColor: Colors.green,
+                    brightness: appBrightnessState.brightness,
+                  ),
                 ),
                 routerConfig: router,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,

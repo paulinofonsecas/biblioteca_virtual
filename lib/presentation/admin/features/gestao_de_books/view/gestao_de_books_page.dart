@@ -2,8 +2,8 @@ import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/bl
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/all_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/featured_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/widgets/gestao_de_books_body.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/brightness_control.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class GestaoDeBooksPage extends StatelessWidget {
   const GestaoDeBooksPage({super.key});
@@ -31,36 +31,12 @@ class GestaoDeBooksPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Gestão de livros'),
+          actions: const [
+            BrightnessControl(),
+          ],
         ),
-        body: const PullToRefreshWidget(),
+        body: const GestaoDeBooksView(),
       ),
-    );
-  }
-}
-
-class PullToRefreshWidget extends StatefulWidget {
-  const PullToRefreshWidget({super.key});
-
-  @override
-  State<PullToRefreshWidget> createState() => _PullToRefreshWidgetState();
-}
-
-class _PullToRefreshWidgetState extends State<PullToRefreshWidget> {
-  final RefreshController _refreshController = RefreshController();
-
-  Future<void> _onRefresh() async {
-    _refreshController.refreshCompleted();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SmartRefresher(
-      enablePullUp: true,
-      header: const WaterDropHeader(),
-      controller: _refreshController,
-      onRefresh: _onRefresh,
-      onLoading: () {},
-      child: const GestaoDeBooksView(),
     );
   }
 }

@@ -8,4 +8,8 @@ class ComprarLivroCubit extends Cubit<ComprarLivroState> {
   ComprarLivroCubit() : super(ComprarLivroInitial());
 
   void comprarLivro({required Book book}) {}
+
+  void validarComprovante() {}
+
+  void uploadComprovante() {}
 }

@@ -13,7 +13,7 @@ class FavoriteBooksWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Text(
-            'Em Destaque',
+            'Livros recentes',
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
