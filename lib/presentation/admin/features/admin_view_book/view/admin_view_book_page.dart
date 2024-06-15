@@ -52,11 +52,14 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Comprar Livro'),
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(FontAwesomeIcons.bookmark),
+                icon: const Icon(FontAwesomeIcons.heart, size: 18),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(FontAwesomeIcons.shareFromSquare, size: 18),
               ),
             ],
           ),
