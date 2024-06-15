@@ -1,4 +1,6 @@
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/comprar_livro_cubit.dart';
+import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/p_d_f_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
@@ -34,7 +36,9 @@ class ValidatePaymentWidget extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: OutlinedButton.icon(
             icon: const Icon(Icons.upload_file),
-            onPressed: () {},
+            onPressed: () {
+              context.read<ComprarLivroCubit>().uploadComprovante();
+            },
             label: const Text('Carregar comprovativo'),
           ),
         ),

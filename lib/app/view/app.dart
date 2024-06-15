@@ -34,7 +34,7 @@ class App extends StatelessWidget {
               child: MaterialApp.router(
                 title: 'Biblioteca Virtual',
                 debugShowCheckedModeBanner: false,
-                theme: ThemeData.light().copyWith(
+                theme: ThemeData(
                   colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
                 ),
                 routerConfig: router,

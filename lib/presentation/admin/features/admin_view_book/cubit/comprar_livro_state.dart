@@ -8,3 +8,12 @@ sealed class ComprarLivroState extends Equatable {
 }
 
 final class ComprarLivroInitial extends ComprarLivroState {}
+
+final class SelectedComprovante extends ComprarLivroState {
+  const SelectedComprovante(this.path);
+
+  final String path;
+
+  @override
+  List<Object> get props => [path];
+}

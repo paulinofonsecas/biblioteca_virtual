@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class FazerCheckOutModal extends StatelessWidget {
   const FazerCheckOutModal({
@@ -60,7 +61,17 @@ class _ButtonsWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          context.go(
+            Uri(
+              path: '/admin/read_pdf',
+              queryParameters: {
+                'bookId': book.id,
+                'parent': '/home-page',
+              },
+            ).toString(),
+          );
+        },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.amber[700]),
           foregroundColor: MaterialStateProperty.all(Colors.black),

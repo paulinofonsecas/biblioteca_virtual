@@ -18,15 +18,15 @@ class InfoWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height * .43,
       padding: const EdgeInsets.all(kDefaultPadding),
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 23, 25, 38),
-      ),
+          // color: Color.fromARGB(255, 23, 25, 38),
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             book.title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.white,
+                // color: Colors.white,
                 ),
           ),
           const GutterTiny(),
@@ -35,7 +35,7 @@ class InfoWidget extends StatelessWidget {
               Text(
                 'De: ',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Colors.white,
+                    // color: Colors.white,
                     ),
               ),
               Text(
@@ -73,7 +73,7 @@ class DescriptionAreaWidget extends StatelessWidget {
         Text(
           'Descrição',
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Colors.white,
+                // color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
@@ -81,7 +81,7 @@ class DescriptionAreaWidget extends StatelessWidget {
         Text(
           book.resumo ?? 'Sem qualquer descricão',
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Colors.grey[300],
+                color: Colors.grey[900],
                 fontWeight: FontWeight.normal,
               ),
         ),

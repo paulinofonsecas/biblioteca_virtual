@@ -24,6 +24,9 @@ class BookImageWidget extends StatelessWidget {
           ),
           fit: BoxFit.cover,
         ),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(30),
+        ),
       ),
       child: Stack(
         fit: StackFit.expand,
@@ -31,10 +34,11 @@ class BookImageWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(30),
+              clipBehavior: Clip.hardEdge,
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -50,8 +54,15 @@ class BookImageWidget extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Theme.of(context).colorScheme.primaryContainer,
                   ),
-                  child: const Center(
-                    child: Icon(Icons.favorite_outline),
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primaryContainer,
+                    ),
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite,
+                    ),
                   ),
                 ),
                 const GutterSmall(),

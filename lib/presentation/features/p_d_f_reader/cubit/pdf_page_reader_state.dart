@@ -2,9 +2,9 @@ part of 'pdf_page_reader_cubit.dart';
 
 sealed class PdfPageReaderState extends Equatable {
   const PdfPageReaderState({
-    this.swipeHorizontal = false,
-    this.autoSpacing = false,
-    this.nightMode = false,
+    this.swipeHorizontal = true,
+    this.autoSpacing = true,
+    this.nightMode = true,
   });
 
   final bool swipeHorizontal;

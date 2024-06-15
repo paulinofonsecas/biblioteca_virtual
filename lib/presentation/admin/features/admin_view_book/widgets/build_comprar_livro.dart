@@ -34,9 +34,12 @@ class BuildComprarLivroButton extends StatelessWidget {
             Expanded(
               child: SizedBox(
                 width: 200,
-                height: 60,
+                height: 50,
                 child: OutlinedButton.icon(
                   icon: const Icon(FontAwesomeIcons.shoppingCart),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.green[600],
+                  ),
                   onPressed: () {
                     showCupertinoModalBottomSheet(
                       context: context,
