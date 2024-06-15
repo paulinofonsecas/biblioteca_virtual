@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bilioteca_virtual/app/cubit/app_brightness_cubit.dart';
 import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/cubit/pdf_page_reader_cubit.dart';
@@ -62,15 +63,13 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Livro'),
-              backgroundColor:
-                  displayAppBar ? Colors.white : Colors.transparent,
               leading: BackButton(
                 onPressed: () {
                   router.go(widget.parent);
                 },
               ),
               actions: const [
-                PDFReaderPageHeader(),
+                // PDFReaderPageHeader(),
               ],
             ),
             body: PDFReaderView(
@@ -93,8 +92,14 @@ class PDFReaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PDFReaderBody(
-      bookId: bookId,
+    return BlocBuilder<AppBrightnessCubit, AppBrightnessState>(
+      bloc: context.read<AppBrightnessCubit>(),
+      buildWhen: (previous, current) => current != previous,
+      builder: (context, state) {
+        return PDFReaderBody(
+          bookId: bookId,
+        );
+      },
     );
   }
 }

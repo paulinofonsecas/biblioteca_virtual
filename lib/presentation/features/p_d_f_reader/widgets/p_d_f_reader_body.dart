@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/app/cubit/app_brightness_cubit.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/cubit/pdf_page_reader_cubit.dart';
@@ -25,6 +26,7 @@ class PDFReaderBody extends StatelessWidget {
         if (state is PDFReaderGetBookLoaded) {
           return PDFViewerCachedFromUrl(
             book: state.book,
+            nightMode: Theme.of(context).brightness == Brightness.dark,
           );
         }
 
@@ -42,27 +44,50 @@ class PDFReaderBody extends StatelessWidget {
   }
 }
 
-class PDFViewerCachedFromUrl extends StatelessWidget {
+class PDFViewerCachedFromUrl extends StatefulWidget {
   const PDFViewerCachedFromUrl({
     required this.book,
+    required this.nightMode,
     super.key,
   });
 
+  final bool nightMode;
   final Book book;
 
   @override
+  State<PDFViewerCachedFromUrl> createState() => _PDFViewerCachedFromUrlState();
+}
+
+class _PDFViewerCachedFromUrlState extends State<PDFViewerCachedFromUrl> {
+  late PDF pdf;
+
+  @override
+  void initState() {
+    pdf = PDF(
+      swipeHorizontal: context.read<PdfPageReaderCubit>().state.swipeHorizontal,
+      autoSpacing: context.read<PdfPageReaderCubit>().state.autoSpacing,
+      nightMode: widget.nightMode,
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    context.select((AppBrightnessCubit cubit) {
+      setState(() {
+        pdf = const PDF(
+          swipeHorizontal: true,
+          nightMode: true,
+        );
+      });
+      return cubit;
+    });
+
     return BlocBuilder<PdfPageReaderCubit, PdfPageReaderState>(
       bloc: context.read<PdfPageReaderCubit>()..initState(),
-      buildWhen: (previous, current) => current != previous,
       builder: (context, state) {
-        return PDF(
-          swipeHorizontal:
-              context.read<PdfPageReaderCubit>().state.swipeHorizontal,
-          autoSpacing: context.read<PdfPageReaderCubit>().state.autoSpacing,
-          nightMode: context.read<PdfPageReaderCubit>().state.nightMode,
-        ).cachedFromUrl(
-          book.pdf,
+        return pdf.cachedFromUrl(
+          widget.book.pdf,
           placeholder: (double progress) => Center(
             child: Text(
               '${progress.toInt()} %',
@@ -76,17 +101,4 @@ class PDFViewerCachedFromUrl extends StatelessWidget {
       },
     );
   }
-
-  // String _extractTextOnPDF(String filePath) {
-  //   final file = File(filePath);
-
-  //   final document = PdfDocument(inputBytes: file.readAsBytesSync());
-  //   final text = PdfTextExtractor(document).extractText(
-  //     startPageIndex: 1,
-  //     endPageIndex: 2,
-  //   );
-
-  //   document.dispose();
-  //   return text;
-  // }
 }

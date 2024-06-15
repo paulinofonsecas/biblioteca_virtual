@@ -2,6 +2,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/bl
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/all_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/featured_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/widgets/gestao_de_books_body.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/brightness_control.dart';
 import 'package:flutter/material.dart';
 
 class GestaoDeBooksPage extends StatelessWidget {
@@ -30,6 +31,9 @@ class GestaoDeBooksPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Gestão de livros'),
+          actions: const [
+            BrightnessControl(),
+          ],
         ),
         body: const GestaoDeBooksView(),
       ),

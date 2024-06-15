@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/presentation/global_widgets/brightness_control.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -8,6 +9,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: const Text('Biblioteca Virtual'),
       centerTitle: true,
+      actions: const [
+        BrightnessControl(),
+      ],
       leading: const DrawerButton(),
     );
   }
