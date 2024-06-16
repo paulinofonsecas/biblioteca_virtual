@@ -1,6 +1,6 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
-import 'package:bilioteca_virtual/presentation/global_widgets/book_item.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/book_medium_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
