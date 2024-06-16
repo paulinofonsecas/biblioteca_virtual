@@ -1,9 +1,8 @@
-import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/bloc/bloc.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/all_books_cubit.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/featured_books_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/list_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/widgets/gestao_de_books_body.dart';
-import 'package:bilioteca_virtual/presentation/global_widgets/brightness_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 
 class GestaoDeBooksPage extends StatelessWidget {
   const GestaoDeBooksPage({super.key});
@@ -16,23 +15,17 @@ class GestaoDeBooksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => GestaoDeBooksBloc(),
-        ),
-        BlocProvider(
-          create: (context) => AllBooksCubit(),
-        ),
-        BlocProvider(
-          create: (context) => FeaturedBooksCubit(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => ListBooksCubit(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Gestão de livros'),
-          actions: const [
-            BrightnessControl(),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.search),
+            ),
+            const Gutter(),
           ],
         ),
         body: const GestaoDeBooksView(),

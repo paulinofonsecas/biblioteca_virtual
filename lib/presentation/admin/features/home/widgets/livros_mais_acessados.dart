@@ -1,5 +1,5 @@
 import 'package:bilioteca_virtual/domain/entities/book.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/featured_books_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/featured_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/book_mini_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
