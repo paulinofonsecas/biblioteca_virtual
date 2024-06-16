@@ -20,7 +20,7 @@ class AllBooksWidget extends StatelessWidget {
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
-        const DiscoveryBooksWidget(),
+        const Text('fgsdrgerz'),
       ],
     );
   }

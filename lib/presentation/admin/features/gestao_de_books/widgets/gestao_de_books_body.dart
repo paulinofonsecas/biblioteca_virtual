@@ -27,7 +27,7 @@ class GestaoDeBooksBody extends StatelessWidget {
                   const GutterSmall(),
                   const LivrosMaisAcessadosWidget(),
                   const GutterLarge(),
-                  SectionTitle(
+                  const SectionTitle(
                     title: 'Todos os livros',
                   ),
                   const GutterSmall(),

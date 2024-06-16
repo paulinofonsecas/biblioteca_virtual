@@ -1,5 +1,6 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/book_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -26,21 +27,7 @@ class InLineBookMediumDisplay extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(kDefaultPadding),
-                // child: Image.asset(
-                //   'assets/default_book_cover.jpg',
-                //   width: 80,
-                //   height: 100,
-                //   fit: BoxFit.cover,
-                // ),
-                child: CachedNetworkImage(
-                  imageUrl: book.capa,
-                  width: 80,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
-              ),
+              BookItem(img: book.capa, title: 'title'),
               const Gutter(),
               Expanded(
                 child: Align(

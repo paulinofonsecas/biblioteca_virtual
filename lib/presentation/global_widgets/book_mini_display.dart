@@ -1,5 +1,6 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/book_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -23,41 +24,13 @@ class BookMiniDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 4),
-        child: SizedBox(
-          width: width ?? size.width * widthFactory,
-          height: height ?? size.height * heightFactory,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(kDefaultPadding),
-                  // child: Image.asset(
-                  //   'assets/default_book_cover.jpg',
-                  //   fit: BoxFit.cover,
-                  // ),
-                  child: CachedNetworkImage(
-                    imageUrl: book.capa,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              // const SizedBox(height: kDefaultPadding / 2),
-              // Text(
-              //   book.title,
-              //   maxLines: 2,
-              //   overflow: TextOverflow.ellipsis,
-              //   style: Theme.of(context).textTheme.labelSmall,
-              // ),
-            ],
-          ),
-        ),
-      ),
-    );
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding / 4),
+          child: SizedBox(
+              child: BookItem(
+                  img: book.capa, title: 'title')),
+        ));
   }
 }
