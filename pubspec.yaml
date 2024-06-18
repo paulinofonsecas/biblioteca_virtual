@@ -47,6 +47,9 @@ dependencies:
   verify_payment:
     git: https://github.com/paulinofonsecas/veryfi_payment.git
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c9432ea (add the create, edit and delete author)
   device_preview: ^1.0.0
 
 =======
