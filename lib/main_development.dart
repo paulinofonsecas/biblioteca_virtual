@@ -13,8 +13,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await setupDependencies();
+  await setupDependencies(); 
 
+<<<<<<< HEAD
   await bootstrap(
     () => DevicePreview(
       builder: (context) {
@@ -22,4 +23,11 @@ void main() async {
       },
     ),
   );
+=======
+  await bootstrap(() => DevicePreview(
+    builder: (context) {
+      return const App();
+    },
+  ));
+>>>>>>> b2248e0705493be7eec00680b6cafb005821164e
 }
