@@ -89,7 +89,7 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<List<Book>> getBooks([bool inCache = false]) async {
+  Future<List<Book>> getBooks([bool inCache = true]) async {
     if (inCache == true && _cachedBooks.isNotEmpty) {
       return _getCachedBooks();
     }
@@ -105,7 +105,6 @@ class BooksRepository implements IBooksRepository {
     });
 
     saveInCache = books;
-    // final result = List<Book>.generate(40, (index) => books.first);
     return books;
   }
 
