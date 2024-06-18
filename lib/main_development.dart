@@ -16,6 +16,10 @@ void main() async {
   await setupDependencies();
 
   await bootstrap(
-    () => const App(),
+    () => DevicePreview(
+      builder: (context) {
+        return const App();
+      },
+    ),
   );
 }

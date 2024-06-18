@@ -15,3 +15,8 @@ class CustomAuthorsEvent extends AuthorsEvent {
   /// {@macro custom_authors_event}
   const CustomAuthorsEvent();
 }
+
+class DeleteAuthorsEvent extends AuthorsEvent {
+  /// {@macro custom_authors_event}
+  const DeleteAuthorsEvent();
+}

@@ -66,7 +66,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
               onPressed: () {
                 switch (bottomNavIndex) {
                   case 1:
-                    context.go(Uri(path: '/admin/authors').toString());
+                    context.go(Uri(path: '/admin/add-new-author').toString());
                   case 2:
                     context.go(Uri(path: '/admin/add-new-book').toString());
                   default:
