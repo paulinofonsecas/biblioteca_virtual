@@ -108,4 +108,32 @@ class BooksRepository implements IBooksRepository {
     // final result = List<Book>.generate(40, (index) => books.first);
     return books;
   }
+
+  @override
+  Future<bool> deleteBook(String id) async {
+    var status = false;
+
+    // delete pdf;
+    await _storage
+        .ref('pdfs')
+        .child(id)
+        .delete()
+        .onError((error, stackTrace) => status = false);
+
+    // delete capa
+    await _storage
+        .ref('capas')
+        .child(id)
+        .delete()
+        .onError((error, stackTrace) => status = false);
+
+    // delete book info;
+    await _firestore
+        .collection('books')
+        .doc(id)
+        .delete()
+        .onError((error, stackTrace) => status = false);
+
+    return status;
+  }
 }
