@@ -15,7 +15,7 @@ final providers = [EmailAuthProvider()];
 
 // GoRouter configuration
 final router = GoRouter(
-  initialLocation: '/admin/gestao-books',
+  initialLocation: '/admin',
   routes: [
     GoRoute(
       path: '/admin',

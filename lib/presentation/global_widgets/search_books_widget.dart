@@ -1,11 +1,23 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
-import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/search_books_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SearchBooksWidget extends StatelessWidget {
-  const SearchBooksWidget({super.key});
+class SearchBooksWidget extends StatefulWidget {
+  const SearchBooksWidget({
+    this.onSearch,
+    this.onChangeWord,
+    super.key,
+  });
+
+  final void Function(String)? onSearch;
+  final void Function(String)? onChangeWord;
+
+  @override
+  State<SearchBooksWidget> createState() => _SearchBooksWidgetState();
+}
+
+class _SearchBooksWidgetState extends State<SearchBooksWidget> {
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +27,18 @@ class SearchBooksWidget extends StatelessWidget {
         vertical: kDefaultPadding / 2,
       ),
       child: TextField(
+        controller: _controller,
         onChanged: (value) {
-          context.read<SearchBooksCubit>().changeWord(value);
+          if (widget.onChangeWord != null) {
+            widget.onChangeWord!.call(value);
+          }
         },
         decoration: InputDecoration(
           prefixIcon: IconButton(
             onPressed: () {
-              context.read<SearchBooksCubit>().searchBooks();
+              if (widget.onSearch != null) {
+                widget.onSearch!.call(_controller.text);
+              }
             },
             icon: const Icon(
               FontAwesomeIcons.magnifyingGlass,

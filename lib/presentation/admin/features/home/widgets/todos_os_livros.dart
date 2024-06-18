@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bilioteca_virtual/domain/entities/book.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/all_books_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/all_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/in_line_book_medium_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
