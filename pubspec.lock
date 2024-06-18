@@ -765,6 +765,7 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.7.1"
+<<<<<<< HEAD
   json_annotation:
     dependency: transitive
     description:
@@ -773,6 +774,8 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.9.0"
+=======
+>>>>>>> 990d0e0 (feat: global search books)
   leak_tracker:
     dependency: transitive
     description:
@@ -1021,6 +1024,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.27.7"
+  searchable_listview:
+    dependency: "direct main"
+    description:
+      name: searchable_listview
+      sha256: "5e547f2a3f88f99a798cfe64882cfce51496d8f3177bea4829dd7bcf3fa8910d"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.14.0"
   shared_preferences:
     dependency: "direct main"
     description:

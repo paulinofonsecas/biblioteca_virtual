@@ -3,6 +3,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/all_boo
 import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/featured_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/widgets/home_body.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/brightness_control.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/global_search_book_widget.dart';
 import 'package:flutter/material.dart';
 
 /// {@template home_page}
@@ -35,6 +36,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Biblioteca Digital'),
           actions: const [
+            GlobalSearchBookWidget(),
             BrightnessControl(),
           ],
         ),
