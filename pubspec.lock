@@ -765,7 +765,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.7.1"
-<<<<<<< HEAD
   json_annotation:
     dependency: transitive
     description:
@@ -774,8 +773,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.9.0"
-=======
->>>>>>> 990d0e0 (feat: global search books)
   leak_tracker:
     dependency: transitive
     description:
