@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bilioteca_virtual/core/util/enums.dart';
 import 'package:bilioteca_virtual/domain/entities/author.dart';
-import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/name_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/pick_image_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
@@ -15,11 +14,8 @@ part 'add_new_author_state.dart';
 
 class AddNewAuthorBloc extends Bloc<AddNewAuthorEvent, AddNewAuthorState> {
   AddNewAuthorBloc() : super(const AddNewAuthorInitial()) {
-    // _booksUseCases = getIt<IBooksUseCases>();
     on<SaveNewAuthorEvent>(_onSaveNewAuthorEvent);
   }
-
-  late final IBooksUseCases _booksUseCases;
 
   FutureOr<void> _onSaveNewAuthorEvent(
     SaveNewAuthorEvent event,
@@ -38,24 +34,19 @@ class AddNewAuthorBloc extends Bloc<AddNewAuthorEvent, AddNewAuthorState> {
         return;
       }
 
-      final newToSave = Author(
-        id: const Uuid().v4(),
-        name: name,
-        photo: image
-      );
+      final newToSave = Author(id: const Uuid().v4(), name: name, photo: image);
 
       if (event.manageMode == ManageMode.add) {
-    //   final result = await _booksUseCases.addBook(newAuthor);
+        //   final result = await _booksUseCases.addBook(newAuthor);
 
-    //   if (result) {
-    //     emit(const SaveNewAuthorSuccess());
-    //   } else {
-    //     emit(const SaveNewAuthorError('Erro ao adicionar o livro'));
-    //   }
+        //   if (result) {
+        //     emit(const SaveNewAuthorSuccess());
+        //   } else {
+        //     emit(const SaveNewAuthorError('Erro ao adicionar o livro'));
+        //   }
       } else {
         // await _booksUseCases.updateAuthor(newToSave);
       }
-
     } catch (e) {
       emit(SaveNewAuthorError('Erro desconhecido\t$e'));
     }
