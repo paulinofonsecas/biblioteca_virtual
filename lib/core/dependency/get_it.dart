@@ -1,6 +1,11 @@
 import 'package:bilioteca_virtual/core/network/network_info.dart';
+import 'package:bilioteca_virtual/data/datasource/contracts/i_authors_datasource.dart';
+import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_authors_datasource.dart';
+import 'package:bilioteca_virtual/data/repositories/authors_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/books_repository.dart';
+import 'package:bilioteca_virtual/domain/repositories/i_author_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
+import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/datasources/auth_remote_data_source.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/repositories/auth_repository_impl.dart';
@@ -26,9 +31,20 @@ Future<void> setupDependencies() async {
     ..registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance)
     ..registerSingleton<FirebaseStorage>(FirebaseStorage.instance)
 
-// Usecases
+    // Books dependancies
     ..registerLazySingleton<IBooksRepository>(BooksRepository.new)
     ..registerLazySingleton<IBooksUseCases>(() => BooksUseCases(getIt()))
+
+    // Authors dependencies
+    ..registerLazySingleton<IAuthorsDatasource>(
+      FirebaseAuthorsDatasource.new,
+    )
+    ..registerLazySingleton<IAuthorsRepository>(
+      () => AuthorsRepository(getIt()),
+    )
+    ..registerLazySingleton<IAuthorsUseCases>(() => AuthorsUseCases(getIt()))
+
+    // outher
     ..registerLazySingleton(() => SignInUseCase(getIt()))
     ..registerLazySingleton(() => SignUpUseCase(getIt()))
     ..registerLazySingleton(() => FirstPageUseCase(getIt()))
