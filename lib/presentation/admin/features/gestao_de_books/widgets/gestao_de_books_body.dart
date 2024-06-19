@@ -10,21 +10,13 @@ class GestaoDeBooksBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fakeBooks = List.generate(
-      10,
-      (index) => Book(
-        id: index.toString(),
-        title: 'Título do Livro $index',
-        autor: 'Autor do Livro $index',
-        editora: 'Editora do Livro $index',
-        resumo: 'Resumo do Livro $index',
-        capa: 'Capa do Livro $index',
-        pdf: 'PDF do Livro $index',
-      ),
-    );
-
-    return BlocBuilder<ListBooksCubit, ListBooksState>(
+    return BlocConsumer<ListBooksCubit, ListBooksState>(
       bloc: context.read<ListBooksCubit>()..loadBookList(),
+      listener: (BuildContext context, ListBooksState state) {
+        if (state is ListBooksError) {
+          _showErrorMessage(context, state.message);
+        }
+      },
       builder: (context, state) {
         if (state is ListBooksLoading) {
           return const Center(
@@ -34,7 +26,19 @@ class GestaoDeBooksBody extends StatelessWidget {
 
         if (state is ListBooksError) {
           return Center(
-            child: Text(state.message),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Ups, algo correu mal. Tente novamente'),
+                const Gutter(),
+                TextButton.icon(
+                  onPressed: () {},
+                  label: const Text('Recarregar a pagina'),
+                  icon: const Icon(Icons.refresh),
+                ),
+              ],
+            ),
           );
         }
 
@@ -47,11 +51,25 @@ class GestaoDeBooksBody extends StatelessWidget {
     );
   }
 
-  ListView _buildListBooks(List<Book> fakeBooks) {
+  void _showErrorMessage(BuildContext context, String message) {
+    final controller = showBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListTile(
+          title: const Text('Ocorreu um erro'),
+          subtitle: Text(message),
+        );
+      },
+    );
+
+    Future.delayed(const Duration(seconds: 3), controller.close);
+  }
+
+  ListView _buildListBooks(List<Book> books) {
     return ListView.builder(
-      itemCount: fakeBooks.length,
+      itemCount: books.length,
       itemBuilder: (context, index) {
-        final book = fakeBooks[index];
+        final book = books[index];
 
         return ListTile(
           title: Text(
@@ -68,10 +86,20 @@ class GestaoDeBooksBody extends StatelessWidget {
               ),
               const GutterSmall(),
               IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.red,
+                onPressed: () {
+                  context.read<ListBooksCubit>().deleteBook(book.id);
+                },
+                icon: BlocBuilder<ListBooksCubit, ListBooksState>(
+                  builder: (context, state) {
+                    if (state is ListBooksDeleteLoading) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    return const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    );
+                  },
                 ),
               ),
             ],

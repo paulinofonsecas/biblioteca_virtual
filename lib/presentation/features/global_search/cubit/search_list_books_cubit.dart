@@ -6,34 +6,34 @@ import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part 'list_books_state.dart';
+part 'search_list_books_state.dart';
 
-class ListBooksCubit extends Cubit<ListBooksState> {
-  ListBooksCubit() : super(ListBooksInitial());
+class SearchListBooksCubit extends Cubit<SearchListBooksState> {
+  SearchListBooksCubit() : super(SearchListBooksInitial());
 
   void loadBookList() {
     try {
-      emit(ListBooksLoading());
+      emit(SearchListBooksLoading());
       final booksUC = getIt<IBooksUseCases>();
 
       unawaited(
         booksUC
             .getBooks()
-            .then((books) => emit(ListBooksLoaded(books)))
+            .then((books) => emit(SearchListBooksLoaded(books)))
             .onError((error, stackTrace) {
           emit(
-            ListBooksError(error.toString()),
+            SearchListBooksError(error.toString()),
           );
         }),
       );
     } catch (e) {
-      const ListBooksError('Ocorreu um erro ao adicionar o livro');
+      const SearchListBooksError('Ocorreu um erro ao adicionar o livro');
     }
   }
 
   Future<void> deleteBook(String id) async {
     try {
-      emit(ListBooksDeleteLoading());
+      emit(SearchListBooksDeleteLoading());
       final booksUC = getIt<IBooksUseCases>();
 
       final result = await booksUC.deleteBook(id);
@@ -41,10 +41,10 @@ class ListBooksCubit extends Cubit<ListBooksState> {
       if (result) {
         loadBookList();
       } else {
-        emit(const ListBooksError('Erro ao deletar o livro'));
+        emit(const SearchListBooksError('Erro ao deletar o livro'));
       }
     } catch (e) {
-      emit(const ListBooksError('Erro ao deletar o livro'));
+      emit(const SearchListBooksError('Erro ao deletar o livro'));
     }
   }
 }
