@@ -7,10 +7,12 @@ class AuthorsRepository implements IAuthorsRepository {
   AuthorsRepository(this._datasource);
 
   final IAuthorsDatasource _datasource;
+  List<Author> _cachedAuthors = [];
 
   @override
   Future<bool> addAuthor(Author author) {
     try {
+      _cachedAuthors.clear();
       return _datasource.addAuthor(AuthorModel.fromEntity(author));
     } catch (e) {
       rethrow;
@@ -20,6 +22,7 @@ class AuthorsRepository implements IAuthorsRepository {
   @override
   Future<bool> deleteAuthor(String id) {
     try {
+      _cachedAuthors.removeWhere((element) => element.id == id);
       return _datasource.deleteAuthor(id);
     } catch (e) {
       rethrow;
@@ -27,27 +30,48 @@ class AuthorsRepository implements IAuthorsRepository {
   }
 
   @override
-  Future<Author?> getAuthor(String id) {
+  Future<Author?> getAuthor(String id) async {
     try {
-      return _datasource.getAuthor(id);
+      if (_cachedAuthors.any((element) => element.id == id)) {
+        return Future.value(
+          _cachedAuthors.firstWhere((element) => element.id == id),
+        );
+      }
+      final author = await _datasource.getAuthor(id);
+
+      if (author != null) {
+        _cachedAuthors.add(author);
+      }
+
+      return author;
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<List<Author>> getAuthors() {
+  Future<List<Author>> getAuthors() async {
+    if (_cachedAuthors.isNotEmpty) {
+      return Future.value(_cachedAuthors);
+    }
+
     try {
-      return _datasource.getAuthors();
+      final authors = await _datasource.getAuthors();
+
+      _cachedAuthors = authors;
+
+      return authors;
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<bool> updateAuthor(Author author) {
+  Future<bool> updateAuthor(Author author) async {
     try {
-      return _datasource.updateAuthor(AuthorModel.fromEntity(author));
+      _cachedAuthors.clear();
+      await _datasource.updateAuthor(AuthorModel.fromEntity(author));
+      return true;
     } catch (e) {
       rethrow;
     }
