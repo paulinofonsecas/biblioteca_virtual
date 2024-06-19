@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/core/util/enums.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/bloc/add_new_author_bloc.dart';
@@ -13,7 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 /// {@endtemplate}
 class AddNewAuthorPage extends StatelessWidget {
   /// {@macro add_new_book_page}
-  const AddNewAuthorPage({super.key, required this.manageMode});
+  const AddNewAuthorPage({required this.manageMode, super.key});
 
   final ManageMode manageMode;
 
@@ -28,7 +29,7 @@ class AddNewAuthorPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AddNewAuthorBloc(),
+          create: (context) => getIt<AddNewAuthorBloc>(),
         ),
 
         //Inputs
@@ -45,21 +46,27 @@ class AddNewAuthorPage extends StatelessWidget {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(manageMode == ManageMode.add
-                  ? 'Adicionar novo Livro'
-                  : 'Editar novo Livro'),
+              title: Text(
+                manageMode == ManageMode.add
+                    ? 'Adicionar novo Livro'
+                    : 'Editar novo Livro',
+              ),
             ),
             body: const SafeArea(child: AddNewAuthorView()),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 if (manageMode == ManageMode.add) {
-                  context
-                      .read<AddNewAuthorBloc>()
-                      .add(SaveNewAuthorEvent(context, manageMode: manageMode));
+                  context.read<AddNewAuthorBloc>().add(
+                        SaveNewAuthorEvent(
+                          name: context.read<NameInputCubit>().state.text,
+                          path: context.read<PickImageCubit>().state.path,
+                          manageMode: manageMode,
+                        ),
+                      );
                 } else {
-                  context
-                      .read<AddNewAuthorBloc>()
-                      .add(SaveNewAuthorEvent(context, manageMode: manageMode));
+                  // context
+                  //     .read<AddNewAuthorBloc>()
+                  //     .add(SaveNewAuthorEvent(context, manageMode: manageMode));
                 }
               },
               child: const Icon(FontAwesomeIcons.floppyDisk),

@@ -17,13 +17,16 @@ class CustomAddNewAuthorEvent extends AddNewAuthorEvent {
 }
 
 class SaveNewAuthorEvent extends AddNewAuthorEvent {
-  const SaveNewAuthorEvent(
-    this.context, {required this.manageMode}
-  );
+  const SaveNewAuthorEvent({
+    required this.name,
+    required this.manageMode,
+    this.path,
+  });
 
-  final BuildContext context;
+  final String name;
+  final String? path;
   final ManageMode manageMode;
 
   @override
-  List<Object> get props => [context];
+  List<Object> get props => [name, path ?? '', manageMode];
 }
