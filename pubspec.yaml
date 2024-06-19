@@ -48,10 +48,15 @@ dependencies:
     git: https://github.com/paulinofonsecas/veryfi_payment.git
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> c9432ea (add the create, edit and delete author)
   device_preview: ^1.0.0
 
+=======
+  device_preview: ^1.1.0
+  
+>>>>>>> 3c586fb (resolve bug causado pelo processo de merging)
 =======
   device_preview: ^1.1.0
   
