@@ -7,6 +7,7 @@ import 'package:bilioteca_virtual/domain/repositories/i_author_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/bloc/add_new_author_bloc.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/datasources/auth_remote_data_source.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/repositories/authentication_repository.dart';
@@ -66,6 +67,7 @@ Future<void> setupDependencies() async {
         googleAuthUseCase: getIt(),
       ),
     )
+    ..registerLazySingleton(AddNewAuthorBloc.new)
 
 // Repository
     ..registerLazySingleton<AuthenticationRepository>(
