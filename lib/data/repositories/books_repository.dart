@@ -91,7 +91,11 @@ class BooksRepository implements IBooksRepository {
   @override
   Future<List<Book>> getBooks([bool inCache = true]) async {
     if (inCache == true && _cachedBooks.isNotEmpty) {
-      return _getCachedBooks();
+      final searchedList = _getCachedBooks();
+
+      if (searchedList.isNotEmpty) {
+        return searchedList;
+      }
     }
 
     final books = await _firestore.collection('books').get().then((value) {

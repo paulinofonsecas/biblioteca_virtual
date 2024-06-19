@@ -22,7 +22,7 @@ class SearchedItem extends StatelessWidget {
             path: '/admin/view-book',
             queryParameters: {
               'bookId': book.id,
-              'parent': '/home-page',
+              'parent': '/admin/home-page',
             },
           ).toString(),
         );
