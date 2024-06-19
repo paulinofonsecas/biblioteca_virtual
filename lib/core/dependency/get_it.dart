@@ -67,7 +67,7 @@ Future<void> setupDependencies() async {
         googleAuthUseCase: getIt(),
       ),
     )
-    ..registerLazySingleton(AddNewAuthorBloc.new)
+    // ..registerLazySingleton(AddNewAuthorBloc.new)
 
 // Repository
     ..registerLazySingleton<AuthenticationRepository>(

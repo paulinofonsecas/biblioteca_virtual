@@ -1,6 +1,11 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
+import 'package:bilioteca_virtual/data/models/author_model.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AutorInputWidget extends StatelessWidget {
   const AutorInputWidget({super.key});
@@ -13,7 +18,9 @@ class AutorInputWidget extends StatelessWidget {
           child: CustomAuthorDropdown(),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            context.go('/admin/add-new-author');
+          },
           icon: const Icon(Icons.add),
         ),
       ],
@@ -21,33 +28,33 @@ class AutorInputWidget extends StatelessWidget {
   }
 }
 
-class CustomAuthorDropdown extends StatelessWidget {
+class CustomAuthorDropdown extends StatefulWidget {
   const CustomAuthorDropdown({super.key});
+
+  @override
+  State<CustomAuthorDropdown> createState() => _CustomAuthorDropdownState();
+}
+
+class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
+  final selectedItems = <String>[];
 
   @override
   Widget build(BuildContext context) {
     return _buildAutorList();
   }
 
-  DropdownSearch<String> _buildAutorList() {
+  Widget _buildAutorList() {
     return DropdownSearch<String>.multiSelection(
-      items: const [
-        'Brazil',
-        'Italia (Disabled)',
-        'Tunisia',
-        'Canada',
-        'Brazil',
-        'Italia (Disabled)',
-        'Tunisia',
-        'Canada',
-        'Brazil',
-        'Italia (Disabled)',
-        'Tunisia',
-        'Canada',
-      ],
       clearButtonProps: const ClearButtonProps(
         icon: Icon(Icons.close),
       ),
+      asyncItems: (text) {
+        return context.read<DropdownAutorInputCubit>().getAuthors(text).then(
+              (list) =>
+                  list.map((e) => AuthorModel.fromEntity(e).toJson()).toList(),
+            );
+      },
+      itemAsString: (item) => AuthorModel.fromJson(item).name,
       popupProps: PopupPropsMultiSelection.modalBottomSheet(
         modalBottomSheetProps: const ModalBottomSheetProps(
           padding: EdgeInsets.only(
@@ -74,20 +81,42 @@ class CustomAuthorDropdown extends StatelessWidget {
           child: popupWidget,
         ),
         selectionWidget: (context, item, isSelected) {
+          final author = AuthorModel.fromJson(item);
+
           return Checkbox(
             value: isSelected,
-            onChanged: (value) {},
+            onChanged: (value) {
+              if (selectedItems.contains(author.id)) {
+                selectedItems.remove(author.id);
+              } else {
+                selectedItems.add(author.id);
+              }
+            },
             shape: const CircleBorder(),
           );
         },
         itemBuilder: (context, item, isSelected) {
-          return const ListTile(
-            title: Text('Elemento'),
+          final author = AuthorModel.fromJson(item);
+
+          return ListTile(
+            title: Text(author.name),
           );
         },
       ),
-      onChanged: print,
-      selectedItems: const ['Brazil'],
+      dropdownDecoratorProps: const DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+          hintText: 'Selecionar autores',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+        ),
+      ),
+      onChanged: (value) {
+        context.read<AutorInputCubit>().changeAuthors(
+              value.map((e) => AuthorModel.fromJson(e).id).toList(),
+            );
+      },
+      selectedItems: selectedItems,
     );
   }
 }

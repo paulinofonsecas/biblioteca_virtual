@@ -1,10 +1,11 @@
-import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/core/util/enums.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/bloc/add_new_author_bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/name_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/pick_image_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/widgets/add_new_author_body.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,7 +30,7 @@ class AddNewAuthorPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<AddNewAuthorBloc>(),
+          create: (context) => AddNewAuthorBloc(),
         ),
 
         //Inputs
