@@ -32,3 +32,8 @@ class AuthorsInitial extends AuthorsState {
   /// {@macro authors_initial}
   const AuthorsInitial() : super();
 }
+
+class DeleteAuthors extends AuthorsState {
+  /// {@macro authors_initial}
+  const DeleteAuthors() : super();
+}

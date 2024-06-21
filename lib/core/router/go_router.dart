@@ -1,5 +1,7 @@
 import 'package:bilioteca_virtual/app/view/gatway.dart';
+import 'package:bilioteca_virtual/core/util/enums.dart';
 import 'package:bilioteca_virtual/presentation/admin/admin_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/view/add_new_author_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/view/gestao_de_books_page.dart';
@@ -28,6 +30,18 @@ final router = GoRouter(
         GoRoute(
           path: 'add-new-book',
           builder: (context, state) => const AddNewBookPage(),
+        ),
+        GoRoute(
+          path: 'add-new-author',
+          builder: (context, state) => const AddNewAuthorPage(
+            manageMode: ManageMode.add,
+          ),
+        ),
+        GoRoute(
+          path: 'edit-author',
+          builder: (context, state) => const AddNewAuthorPage(
+            manageMode: ManageMode.edit,
+          ),
         ),
         GoRoute(
           path: 'edit-book',

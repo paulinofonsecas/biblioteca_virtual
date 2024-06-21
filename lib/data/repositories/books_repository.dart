@@ -89,9 +89,13 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<List<Book>> getBooks([bool inCache = false]) async {
+  Future<List<Book>> getBooks([bool inCache = true]) async {
     if (inCache == true && _cachedBooks.isNotEmpty) {
-      return _getCachedBooks();
+      final searchedList = _getCachedBooks();
+
+      if (searchedList.isNotEmpty) {
+        return searchedList;
+      }
     }
 
     final books = await _firestore.collection('books').get().then((value) {
@@ -105,7 +109,34 @@ class BooksRepository implements IBooksRepository {
     });
 
     saveInCache = books;
-    // final result = List<Book>.generate(40, (index) => books.first);
     return books;
+  }
+
+  @override
+  Future<bool> deleteBook(String id) async {
+    var status = false;
+
+    // delete pdf;
+    await _storage
+        .ref('pdfs')
+        .child(id)
+        .delete()
+        .onError((error, stackTrace) => status = false);
+
+    // delete capa
+    await _storage
+        .ref('capas')
+        .child(id)
+        .delete()
+        .onError((error, stackTrace) => status = false);
+
+    // delete book info;
+    await _firestore
+        .collection('books')
+        .doc(id)
+        .delete()
+        .onError((error, stackTrace) => status = false);
+
+    return status;
   }
 }

@@ -9,7 +9,9 @@ sealed class ListBooksState extends Equatable {
 
 final class ListBooksInitial extends ListBooksState {}
 
-final class ListBooksLoading extends ListBooksState {}
+ class ListBooksLoading extends ListBooksState {}
+
+final class ListBooksDeleteLoading extends ListBooksState {}
 
 final class ListBooksLoaded extends ListBooksState {
   const ListBooksLoaded(this.books);

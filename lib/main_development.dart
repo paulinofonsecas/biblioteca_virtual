@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bilioteca_virtual/app/app.dart';
 import 'package:bilioteca_virtual/bootstrap.dart';
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
@@ -13,11 +15,19 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await setupDependencies(); 
+  await setupDependencies();
 
-  await bootstrap(() => DevicePreview(
-    builder: (context) {
-      return const App();
+  await bootstrap(
+    () {
+      if (Platform.isAndroid || Platform.isIOS) {
+        return const App();
+      }
+
+      return DevicePreview(
+        builder: (context) {
+          return const App();
+        },
+      );
     },
-  ));
+  );
 }
