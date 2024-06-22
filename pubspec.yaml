@@ -48,6 +48,7 @@ dependencies:
     git: https://github.com/paulinofonsecas/veryfi_payment.git
   device_preview: ^1.0.0
   dropdown_search: ^5.0.6
+  flutter_modular: ^6.3.4
 
 dev_dependencies:
   bloc_test: ^9.1.6

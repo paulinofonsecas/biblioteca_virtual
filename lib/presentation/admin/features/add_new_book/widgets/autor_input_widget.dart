@@ -1,29 +1,33 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/data/models/author_model.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
+import 'package:bilioteca_virtual/presentation/features/global_search/bloc/bloc.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class AutorInputWidget extends StatelessWidget {
   const AutorInputWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Expanded(
-          child: CustomAuthorDropdown(),
-        ),
-        IconButton(
-          onPressed: () {
-            context.go('/admin/add-new-author');
-          },
-          icon: const Icon(Icons.add),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => DropdownAutorInputCubit(),
+      child: Row(
+        children: [
+          const Expanded(
+            child: CustomAuthorDropdown(),
+          ),
+          IconButton(
+            onPressed: () {
+              Modular.to.pushNamed('/admin/add-new-author');
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -67,7 +71,7 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
         searchFieldProps: const TextFieldProps(
           decoration: InputDecoration(
             hintText: 'Pesquisar autores',
-            border: OutlineInputBorder(
+            border: UnderlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
           ),
@@ -106,7 +110,7 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
       dropdownDecoratorProps: const DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
           hintText: 'Selecionar autores',
-          border: OutlineInputBorder(
+          border: UnderlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
@@ -115,6 +119,12 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
         context.read<AutorInputCubit>().changeAuthors(
               value.map((e) => AuthorModel.fromJson(e).id).toList(),
             );
+      },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Seleciona 1 ou mais autores';
+        }
+        return null;
       },
       selectedItems: selectedItems,
     );
