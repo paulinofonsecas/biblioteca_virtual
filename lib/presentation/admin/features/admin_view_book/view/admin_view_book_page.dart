@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/bl
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/admin_view_book_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/admin_view_book_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AdminViewBookPage extends StatefulWidget {
@@ -12,6 +13,12 @@ class AdminViewBookPage extends StatefulWidget {
     required this.parent,
     super.key,
   });
+
+  static void toScreen(String bookId) {
+    Modular.to.pushNamed(
+      '/admin/view-book/$bookId',
+    );
+  }
 
   static Route<dynamic> route(String bookId, String parent) {
     return MaterialPageRoute<dynamic>(
@@ -37,6 +44,7 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(

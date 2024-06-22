@@ -16,6 +16,12 @@ class EditoraInputWidget extends StatelessWidget {
             onChanged: (value) {
               context.read<EditoraInputCubit>().changeText(value);
             },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Preencha o campo';
+              }
+              return null;
+            },
             decoration: InputDecoration(
               prefixIcon: IconButton(
                 onPressed: () {},

@@ -7,7 +7,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -41,7 +41,7 @@ class _LoginFormState extends State<LoginForm> {
                 const Text('Precisa de uma conta?'),
                 TextButton(
                   onPressed: () {
-                    context.go('/sign-up');
+                    Modular.to.pushNamed('/sign-up');
                   },
                   child: const Text('Criar conta'),
                 ),
@@ -62,12 +62,12 @@ class _LoginFormState extends State<LoginForm> {
 
           final role = state.userCredential?.role;
           if (role == 'admin') {
-            context.pushReplacement('/admin');
+            Modular.to.pushReplacementNamed('/admin');
           } else if (role == 'usuario') {
-            context.pushReplacement('/home-page');
+            Modular.to.pushReplacementNamed('/home-page');
           }
         } else if (state is SignedInPageState || state is GoogleSignInState) {
-          context.go('/home-page');
+          Modular.to.pushReplacementNamed('/home-page');
         } else if (state is VerifyEmailPageState) {
           Navigator.of(context).push(
             MaterialPageRoute(
@@ -110,7 +110,7 @@ class _LoginFormState extends State<LoginForm> {
         controller: _usernameController,
         decoration: const InputDecoration(
           labelText: 'Email',
-          border: OutlineInputBorder(),
+          border: UnderlineInputBorder(),
         ),
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
@@ -133,7 +133,7 @@ class _LoginFormState extends State<LoginForm> {
         obscureText: isVisible,
         decoration: InputDecoration(
           labelText: 'Palavra-passe',
-          border: const OutlineInputBorder(),
+          border: const UnderlineInputBorder(),
           suffixIcon: IconButton(
             icon: Icon(
               isVisible ? Icons.visibility : Icons.visibility_off,

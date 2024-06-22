@@ -13,6 +13,12 @@ class IsbnInputWidget extends StatelessWidget {
       onChanged: (value) {
         context.read<IsbnInputCubit>().changeText(value);
       },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Preencha o campo';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         prefixIcon: IconButton(
           onPressed: () {},
