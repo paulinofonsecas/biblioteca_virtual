@@ -2,27 +2,32 @@ import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/data/models/author_model.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
+import 'package:bilioteca_virtual/presentation/features/global_search/bloc/bloc.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class AutorInputWidget extends StatelessWidget {
   const AutorInputWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Expanded(
-          child: CustomAuthorDropdown(),
-        ),
-        IconButton(
-          onPressed: () {
-            Modular.to.pushNamed('/admin/add-new-author');
-          },
-          icon: const Icon(Icons.add),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => DropdownAutorInputCubit(),
+      child: Row(
+        children: [
+          const Expanded(
+            child: CustomAuthorDropdown(),
+          ),
+          IconButton(
+            onPressed: () {
+              Modular.to.pushNamed('/admin/add-new-author');
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
     );
   }
 }

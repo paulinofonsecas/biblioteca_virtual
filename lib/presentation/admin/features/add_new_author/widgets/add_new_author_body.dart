@@ -33,9 +33,10 @@ class AddNewAuthorBody extends StatelessWidget {
       child: const SingleChildScrollView(
         child: Column(
           children: [
+            ImageInputBody(),
+            Gutter(),
             NameInputWidget(),
             Gutter(),
-            ImageInputBody(),
             GutterLarge(),
           ],
         ),
