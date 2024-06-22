@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class SearchedItem extends StatelessWidget {
   const SearchedItem({
@@ -17,15 +17,9 @@ class SearchedItem extends StatelessWidget {
     return ListTile(
       title: Text(book.title),
       onTap: () {
-        Modular.to.pushNamed(
-          '/admin/view-book',
-          arguments: {
-            'bookId': book.id,
-            'parent': '/admin/home-page',
-          },
-        );
+        AdminViewBookPage.toScreen(book.id);
       },
-      subtitle: Text(book.resumo ?? 'Sem resumo'),
+      subtitle: Text(book.resumo ?? 'Sem resumo', maxLines: 2),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: CachedNetworkImage(
