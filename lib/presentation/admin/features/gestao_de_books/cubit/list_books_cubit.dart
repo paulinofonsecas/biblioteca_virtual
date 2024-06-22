@@ -21,9 +21,7 @@ class ListBooksCubit extends Cubit<ListBooksState> {
             .getBooks()
             .then((books) => emit(ListBooksLoaded(books)))
             .onError((error, stackTrace) {
-          emit(
-            ListBooksError(error.toString()),
-          );
+          emit(ListBooksError(error.toString()));
         }),
       );
     } catch (e) {

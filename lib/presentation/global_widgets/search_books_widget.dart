@@ -46,7 +46,7 @@ class _SearchBooksWidgetState extends State<SearchBooksWidget> {
             ),
           ),
           hintText: 'Pesquisar livros',
-          border: OutlineInputBorder(
+          border: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(kDefaultPadding / 2),
           ),
         ),

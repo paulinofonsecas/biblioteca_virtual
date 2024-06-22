@@ -15,6 +15,12 @@ class ResumoInputWidget extends StatelessWidget {
       onChanged: (value) {
         context.read<ResumoInputCubit>().changeText(value);
       },
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Preencha o campo';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         prefixIcon: IconButton(
           onPressed: () {},
@@ -26,7 +32,7 @@ class ResumoInputWidget extends StatelessWidget {
         // label: const Text('Resumo do livro'),
         hintText: 'Informe em poucas palavras, o resumo do livro.',
         alignLabelWithHint: true,
-        border: OutlineInputBorder(
+        border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
         ),
       ),

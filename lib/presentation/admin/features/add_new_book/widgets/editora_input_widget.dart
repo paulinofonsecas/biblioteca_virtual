@@ -16,6 +16,12 @@ class EditoraInputWidget extends StatelessWidget {
             onChanged: (value) {
               context.read<EditoraInputCubit>().changeText(value);
             },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Preencha o campo';
+              }
+              return null;
+            },
             decoration: InputDecoration(
               prefixIcon: IconButton(
                 onPressed: () {},
@@ -25,7 +31,7 @@ class EditoraInputWidget extends StatelessWidget {
                 ),
               ),
               label: const Text('Editora do livro'),
-              border: OutlineInputBorder(
+              border: UnderlineInputBorder(
                 borderRadius: BorderRadius.circular(kDefaultPadding / 2),
               ),
             ),

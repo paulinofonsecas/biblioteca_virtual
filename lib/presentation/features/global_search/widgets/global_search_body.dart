@@ -44,7 +44,7 @@ class GlobalSearchBody extends StatelessWidget {
               inputDecoration: InputDecoration(
                 labelText: 'Pesquisar livros',
                 fillColor: Colors.white,
-                border: OutlineInputBorder(
+                border: UnderlineInputBorder(
                   borderSide: const BorderSide(
                     color: Colors.blue,
                   ),
