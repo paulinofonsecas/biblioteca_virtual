@@ -44,7 +44,6 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('book: ${widget.bookId}');
 
     return MultiBlocProvider(
       providers: [

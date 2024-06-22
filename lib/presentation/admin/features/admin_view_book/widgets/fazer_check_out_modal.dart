@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/validate_payment_widget.dart';
+import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FazerCheckOutModal extends StatelessWidget {
@@ -62,13 +62,7 @@ class _ButtonsWidget extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          Modular.to.pushNamed(
-            '/admin/read_pdf',
-            arguments: {
-              'bookId': book.id,
-              'parent': '/home-page',
-            },
-          );
+          PDFReaderPage.toScreen(book.id);
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.amber[700]),

@@ -53,11 +53,14 @@ class AppModule extends Module {
         },
       )
       ..child(
-        '/admin/read_pdf',
-        child: (context) => PDFReaderPage(
-          bookId: r.args.params['bookId'] as String,
-          parent: r.args.params['parent'] as String,
-        ),
+        '/admin/read_pdf/:bookId',
+        child: (context) {
+          print(r.args.params['bookId']);
+          return PDFReaderPage(
+            bookId: r.args.params['bookId'] as String,
+            parent: 'parent',
+          );
+        },
       );
   }
 }
