@@ -2,7 +2,7 @@
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class SearchedItem extends StatelessWidget {
   const SearchedItem({
@@ -17,14 +17,12 @@ class SearchedItem extends StatelessWidget {
     return ListTile(
       title: Text(book.title),
       onTap: () {
-        context.go(
-          Uri(
-            path: '/admin/view-book',
-            queryParameters: {
-              'bookId': book.id,
-              'parent': '/admin/home-page',
-            },
-          ).toString(),
+        Modular.to.pushNamed(
+          '/admin/view-book',
+          arguments: {
+            'bookId': book.id,
+            'parent': '/admin/home-page',
+          },
         );
       },
       subtitle: Text(book.resumo ?? 'Sem resumo'),

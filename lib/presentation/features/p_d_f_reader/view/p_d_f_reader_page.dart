@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:bilioteca_virtual/app/cubit/app_brightness_cubit.dart';
 import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/cubit/pdf_page_reader_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/widgets/p_d_f_reader_body.dart';
-import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/widgets/pdf_reader_page_header.dart';
 import 'package:flutter/material.dart';
 
 class PDFReaderPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
         setState(() {
           displayAppBar = !displayAppBar;
         });
-        print(displayAppBar);
+        log(displayAppBar.toString());
       },
       child: MultiBlocProvider(
         providers: [

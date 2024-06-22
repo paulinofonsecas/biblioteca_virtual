@@ -1,11 +1,10 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/data/models/author_model.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AutorInputWidget extends StatelessWidget {
   const AutorInputWidget({super.key});
@@ -19,7 +18,7 @@ class AutorInputWidget extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            context.go('/admin/add-new-author');
+            Modular.to.pushNamed('/admin/add-new-author');
           },
           icon: const Icon(Icons.add),
         ),

@@ -5,7 +5,6 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cub
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/pick_image_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/widgets/add_new_author_body.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -67,7 +66,8 @@ class AddNewAuthorPage extends StatelessWidget {
                 } else {
                   // context
                   //     .read<AddNewAuthorBloc>()
-                  //     .add(SaveNewAuthorEvent(context, manageMode: manageMode));
+                  //     .add(SaveNewAuthorEvent(context, manageMode:
+                  // manageMode));
                 }
               },
               child: const Icon(FontAwesomeIcons.floppyDisk),
