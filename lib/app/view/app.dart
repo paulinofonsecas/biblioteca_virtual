@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/app/cubit/app_brightness_cubit.dart';
+import 'package:bilioteca_virtual/app/view/themes/app_theme.dart';
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
@@ -47,14 +48,7 @@ class App extends StatelessWidget {
               child: MaterialApp.router(
                 title: 'Biblioteca Virtual',
                 debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: Colors.green,
-                    brightness: appBrightnessState.brightness,
-                  ),
-                ),
-                // localizationsDelegates: AppLocalizations.localizationsDelegates,
-                // supportedLocales: AppLocalizations.supportedLocales,
+                theme: appTheme(appBrightnessState),
                 routerConfig: Modular.routerConfig,
               ),
             ),

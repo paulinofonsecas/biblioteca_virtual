@@ -144,7 +144,7 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
 //           ),
 //         ),
 //         label: const Text('Autor do livro'),
-//         border: UnderlineInputBorder(
+//         border: OutlineInputBorder(
 //           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
 //         ),
 //       ),

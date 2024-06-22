@@ -16,6 +16,8 @@ class AddNewBookBody extends StatelessWidget {
     return const SingleChildScrollView(
       child: Column(
         children: [
+          ImagensInputWidget(),
+          GutterLarge(),
           TituloInputWidget(),
           Gutter(),
           AutorInputWidget(),
@@ -25,8 +27,6 @@ class AddNewBookBody extends StatelessWidget {
           EditoraInputWidget(),
           Gutter(),
           ResumoInputWidget(),
-          GutterLarge(),
-          ImagensInputWidget(),
           GutterLarge(),
           PDFInputWidget(),
           GutterLarge(),

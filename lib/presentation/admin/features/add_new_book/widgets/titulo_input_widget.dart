@@ -22,7 +22,7 @@ class TituloInputWidget extends StatelessWidget {
           ),
         ),
         label: const Text('Título do livro'),
-        border: UnderlineInputBorder(
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
         ),
       ),

@@ -14,7 +14,7 @@ class NameInputWidget extends StatelessWidget {
         Expanded(
           child: TextFormField(
             onChanged: (value) {
-              context.read<NameInputCubit>().changeText(value)  ;
+              context.read<NameInputCubit>().changeText(value);
             },
             decoration: InputDecoration(
               prefixIcon: IconButton(

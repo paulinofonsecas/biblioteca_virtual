@@ -13,8 +13,6 @@ class PickCapaImageCubit extends Cubit<PickCapaImageState> {
 
       if (result != null) {
         emit(PickCapaImageSuccess(result.path));
-      } else {
-        emit(const PickCapaImageError('Objecto null'));
       }
     } catch (e) {
       emit(PickCapaImageError(e.toString()));
