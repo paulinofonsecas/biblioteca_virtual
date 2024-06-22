@@ -47,31 +47,32 @@ class AddNewAuthorPage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                manageMode == ManageMode.add
-                    ? 'Adicionar novo Livro'
-                    : 'Editar novo Livro',
+                manageMode == ManageMode.add ? 'Novo autor' : 'Editar autor',
               ),
+              actions: [
+                TextButton.icon(
+                  onPressed: () {
+                    if (manageMode == ManageMode.add) {
+                      context.read<AddNewAuthorBloc>().add(
+                            SaveNewAuthorEvent(
+                              name: context.read<NameInputCubit>().state.text,
+                              path: context.read<PickImageCubit>().state.path,
+                              manageMode: manageMode,
+                            ),
+                          );
+                    } else {
+                      // context
+                      //     .read<AddNewAuthorBloc>()
+                      //     .add(SaveNewAuthorEvent(context, manageMode:
+                      // manageMode));
+                    }
+                  },
+                  label: const Text('Salvar'),
+                  icon: const Icon(FontAwesomeIcons.floppyDisk),
+                ),
+              ],
             ),
             body: const SafeArea(child: AddNewAuthorView()),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (manageMode == ManageMode.add) {
-                  context.read<AddNewAuthorBloc>().add(
-                        SaveNewAuthorEvent(
-                          name: context.read<NameInputCubit>().state.text,
-                          path: context.read<PickImageCubit>().state.path,
-                          manageMode: manageMode,
-                        ),
-                      );
-                } else {
-                  // context
-                  //     .read<AddNewAuthorBloc>()
-                  //     .add(SaveNewAuthorEvent(context, manageMode:
-                  // manageMode));
-                }
-              },
-              child: const Icon(FontAwesomeIcons.floppyDisk),
-            ),
           );
         },
       ),
