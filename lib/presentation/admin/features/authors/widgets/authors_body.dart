@@ -2,7 +2,6 @@ import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
@@ -12,15 +11,6 @@ class AuthorsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fakeAuthors = List.generate(
-      10,
-      (index) => Author(
-        id: index.toString(),
-        name: 'Name $index',
-        photo: 'Photo $index',
-      ),
-    );
-
     return BlocBuilder<ListAuthorsCubit, ListAuthorsState>(
       bloc: context.read<ListAuthorsCubit>()..loadAuthorList(),
       builder: (context, state) {
@@ -45,11 +35,11 @@ class AuthorsBody extends StatelessWidget {
     );
   }
 
-  ListView _buildListAuthors(List<Author> fakeAuthors) {
+  ListView _buildListAuthors(List<Author> authors) {
     return ListView.builder(
-      itemCount: fakeAuthors.length,
+      itemCount: authors.length,
       itemBuilder: (context, index) {
-        final author = fakeAuthors[index];
+        final author = authors[index];
 
         return ListTile(
           title: Text(
@@ -81,4 +71,3 @@ class AuthorsBody extends StatelessWidget {
     );
   }
 }
-

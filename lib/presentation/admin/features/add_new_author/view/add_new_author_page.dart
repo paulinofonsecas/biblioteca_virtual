@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/blo
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/name_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/pick_image_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/widgets/add_new_author_body.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,7 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 /// {@endtemplate}
 class AddNewAuthorPage extends StatelessWidget {
   /// {@macro add_new_book_page}
-  const AddNewAuthorPage({super.key, required this.manageMode});
+  const AddNewAuthorPage({required this.manageMode, super.key});
 
   final ManageMode manageMode;
 
@@ -45,25 +46,33 @@ class AddNewAuthorPage extends StatelessWidget {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(manageMode == ManageMode.add
-                  ? 'Adicionar novo Livro'
-                  : 'Editar novo Livro'),
+              title: Text(
+                manageMode == ManageMode.add ? 'Novo autor' : 'Editar autor',
+              ),
+              actions: [
+                TextButton.icon(
+                  onPressed: () {
+                    if (manageMode == ManageMode.add) {
+                      context.read<AddNewAuthorBloc>().add(
+                            SaveNewAuthorEvent(
+                              name: context.read<NameInputCubit>().state.text,
+                              path: context.read<PickImageCubit>().state.path,
+                              manageMode: manageMode,
+                            ),
+                          );
+                    } else {
+                      // context
+                      //     .read<AddNewAuthorBloc>()
+                      //     .add(SaveNewAuthorEvent(context, manageMode:
+                      // manageMode));
+                    }
+                  },
+                  label: const Text('Salvar'),
+                  icon: const Icon(FontAwesomeIcons.floppyDisk),
+                ),
+              ],
             ),
             body: const SafeArea(child: AddNewAuthorView()),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                if (manageMode == ManageMode.add) {
-                  context
-                      .read<AddNewAuthorBloc>()
-                      .add(SaveNewAuthorEvent(context, manageMode: manageMode));
-                } else {
-                  context
-                      .read<AddNewAuthorBloc>()
-                      .add(SaveNewAuthorEvent(context, manageMode: manageMode));
-                }
-              },
-              child: const Icon(FontAwesomeIcons.floppyDisk),
-            ),
           );
         },
       ),

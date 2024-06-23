@@ -57,6 +57,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.11.0"
+  auto_injector:
+    dependency: transitive
+    description:
+      name: auto_injector
+      sha256: b5c2874d1bb1b92851955a1ac93802e54cf3f24ba40b98dfc4e4b0b2b4b0ae3f
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.4"
   back_button_interceptor:
     dependency: transitive
     description:
@@ -241,6 +249,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.4.3+1"
+  dropdown_search:
+    dependency: "direct main"
+    description:
+      name: dropdown_search
+      sha256: "55106e8290acaa97ed15bea1fdad82c3cf0c248dd410e651f5a8ac6870f783ab"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.0.6"
   email_validator:
     dependency: "direct main"
     description:
@@ -499,6 +515,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_modular:
+    dependency: "direct main"
+    description:
+      name: flutter_modular
+      sha256: bc17a1eb1da676b9111e59d27834fb6673bdea01aead12f0803a0847ff9d451c
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.3.4"
   flutter_pdfview:
     dependency: transitive
     description:
@@ -861,6 +885,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
+  modular_core:
+    dependency: transitive
+    description:
+      name: modular_core
+      sha256: bd60317c81cff3a510aca19d6ddd661c7c79e3cba97b9f39e9ad199156ff255d
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.3.3"
   nested:
     dependency: transitive
     description:
@@ -1013,6 +1045,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
+  result_dart:
+    dependency: transitive
+    description:
+      name: result_dart
+      sha256: "3c69c864a08df0f413a86be211d07405e9a53cc1ac111e3cc8365845a0fb5288"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   rxdart:
     dependency: transitive
     description:

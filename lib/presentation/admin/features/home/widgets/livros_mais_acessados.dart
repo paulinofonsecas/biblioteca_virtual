@@ -1,9 +1,11 @@
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/featured_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/book_mini_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class LivrosMaisAcessadosWidget extends StatelessWidget {
   const LivrosMaisAcessadosWidget({super.key});
@@ -56,15 +58,7 @@ class _BuildListOfFeaturedBooks extends StatelessWidget {
 
         return BookMiniDisplay(
           onTap: () {
-            context.go(
-              Uri(
-                path: '/admin/view-book',
-                queryParameters: {
-                  'bookId': book.id,
-                  'parent': '/admin/gestao-books',
-                },
-              ).toString(),
-            );
+            AdminViewBookPage.toScreen(book.id);
           },
           book: Book(
             id: book.id,

@@ -13,5 +13,5 @@ class Author {
 
   final String id;
   final String name;
-  final String photo;
+  final String? photo;
 }

@@ -33,14 +33,10 @@ class SectionTitle extends StatelessWidget {
               child: Text(
                 isMainSection ? 'Ver tudo' : 'Limpar tudo'.toUpperCase(),
                 style: isMainSection
-                    ? Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Colors.black)
-                    : TextStyle(
+                    ? Theme.of(context).textTheme.bodyMedium!
+                    : const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
-                        color: Colors.black.withOpacity(0.64),
                       ),
               ),
             ),

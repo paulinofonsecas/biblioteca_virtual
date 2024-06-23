@@ -37,7 +37,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 controller: _usernameController,
                 decoration: const InputDecoration(
                   labelText: 'Nome completo',
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
                 keyboardType: TextInputType.text,
                 validator: (value) {
@@ -57,7 +57,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 controller: _emailController,
                 decoration: const InputDecoration(
                   labelText: 'E-mail',
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
@@ -80,7 +80,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 obscureText: isVisible,
                 decoration: InputDecoration(
                   labelText: 'Criar uma palavra-passe',
-                  border: const OutlineInputBorder(),
+                  border: const UnderlineInputBorder(),
                   suffixIcon: IconButton(
                     icon: Icon(
                       isVisible ? Icons.visibility : Icons.visibility_off,
@@ -113,7 +113,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 obscureText: isVisible,
                 decoration: const InputDecoration(
                   labelText: 'Confirm password',
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {

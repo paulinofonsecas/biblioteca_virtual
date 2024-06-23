@@ -41,15 +41,9 @@ class GlobalSearchBody extends StatelessWidget {
                   )
                   .toList(),
               emptyWidget: const EmptyListBooks(),
-              inputDecoration: InputDecoration(
-                labelText: 'Pesquisar livros',
+              inputDecoration: const InputDecoration(
+                hintText: 'Pesquisar livros',
                 fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.blue,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
               ),
             );
           }
