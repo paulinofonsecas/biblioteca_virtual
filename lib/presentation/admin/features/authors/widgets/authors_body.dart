@@ -58,14 +58,14 @@ class AuthorsBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {
-                  context.read<ListAuthorsCubit>().deleteAuthor(author.id);
-                },
+                onPressed: () {},
                 icon: const Icon(Icons.edit),
               ),
               const GutterSmall(),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<ListAuthorsCubit>().deleteAuthor(author.id);
+                },
                 icon: const Icon(
                   Icons.delete,
                   color: Colors.red,
