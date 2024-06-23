@@ -2,6 +2,7 @@ import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/banner_example_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
@@ -11,27 +12,34 @@ class AuthorsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListAuthorsCubit, ListAuthorsState>(
-      bloc: context.read<ListAuthorsCubit>()..loadAuthorList(),
-      builder: (context, state) {
-        if (state is ListAuthorsLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+    return Column(
+      children: [
+        const BannerExample(),
+        Expanded(
+          child: BlocBuilder<ListAuthorsCubit, ListAuthorsState>(
+            bloc: context.read<ListAuthorsCubit>()..loadAuthorList(),
+            builder: (context, state) {
+              if (state is ListAuthorsLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
 
-        if (state is ListAuthorsError) {
-          return Center(
-            child: Text(state.message),
-          );
-        }
+              if (state is ListAuthorsError) {
+                return Center(
+                  child: Text(state.message),
+                );
+              }
 
-        if (state is ListAuthorsLoaded) {
-          return _buildListAuthors(state.authors);
-        }
+              if (state is ListAuthorsLoaded) {
+                return _buildListAuthors(state.authors);
+              }
 
-        return const Placeholder();
-      },
+              return const Placeholder();
+            },
+          ),
+        ),
+      ],
     );
   }
 
