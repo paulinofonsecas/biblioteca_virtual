@@ -40,8 +40,9 @@ class _AdminNavigationWidgetState extends State<AdminNavigationWidget> {
               color: isActive ? Colors.amber : Colors.grey,
             );
           },
-          backgroundColor:
-              Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Colors.black
+              : Colors.white,
           activeIndex: widget.bottomNavIndex,
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.softEdge,

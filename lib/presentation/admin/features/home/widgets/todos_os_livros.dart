@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/admin_view_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/all_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/in_line_book_medium_display.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class TodosOsLivrosWidget extends StatelessWidget {
   const TodosOsLivrosWidget({super.key});
@@ -54,15 +53,7 @@ class _BooksGridView extends StatelessWidget {
 
         return InLineBookMediumDisplay(
           onTap: () {
-            context.go(
-              Uri(
-                path: '/admin/view-book',
-                queryParameters: {
-                  'bookId': book.id,
-                  'parent': '/admin/gestao-books',
-                },
-              ).toString(),
-            );
+            AdminViewBookPage.toScreen(book.id);
           },
           book: Book(
             id: book.id,

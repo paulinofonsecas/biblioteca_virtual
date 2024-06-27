@@ -1,10 +1,11 @@
 import 'package:bilioteca_virtual/app/cubit/app_brightness_cubit.dart';
+import 'package:bilioteca_virtual/app/view/themes/app_theme.dart';
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/router/go_router.dart';
-import 'package:bilioteca_virtual/l10n/l10n.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -47,15 +48,8 @@ class App extends StatelessWidget {
               child: MaterialApp.router(
                 title: 'Biblioteca Virtual',
                 debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: Colors.green,
-                    brightness: appBrightnessState.brightness,
-                  ),
-                ),
-                routerConfig: router,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: AppLocalizations.supportedLocales,
+                theme: appTheme(appBrightnessState),
+                routerConfig: Modular.routerConfig,
               ),
             ),
           );

@@ -4,8 +4,9 @@ import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/cubit/pdf_page_reader_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/widgets/p_d_f_reader_body.dart';
-import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/widgets/pdf_reader_page_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class PDFReaderPage extends StatefulWidget {
   const PDFReaderPage({
@@ -14,6 +15,12 @@ class PDFReaderPage extends StatefulWidget {
     super.key,
     this.onExit,
   });
+
+  static void toScreen(String bookId) {
+    Modular.to.pushNamed(
+      '/admin/read_pdf/$bookId',
+    );
+  }
 
   final String bookId;
   final String parent;
@@ -40,41 +47,29 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          displayAppBar = !displayAppBar;
-        });
-        print(displayAppBar);
-      },
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => PDFReaderBloc(),
+    print(widget.bookId);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => PDFReaderBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PdfPageReaderCubit(),
+        ),
+      ],
+      child: PopScope(
+        onPopInvoked: (b) {
+          router.go(widget.parent);
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Livro'),
+            actions: const [
+              // PDFReaderPageHeader(),
+            ],
           ),
-          BlocProvider(
-            create: (context) => PdfPageReaderCubit(),
-          ),
-        ],
-        child: PopScope(
-          onPopInvoked: (b) {
-            router.go(widget.parent);
-          },
-          child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Livro'),
-              leading: BackButton(
-                onPressed: () {
-                  router.go(widget.parent);
-                },
-              ),
-              actions: const [
-                // PDFReaderPageHeader(),
-              ],
-            ),
-            body: PDFReaderView(
-              bookId: widget.bookId,
-            ),
+          body: PDFReaderView(
+            bookId: widget.bookId,
           ),
         ),
       ),

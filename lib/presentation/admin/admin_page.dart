@@ -4,7 +4,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/home/view/home_pag
 import 'package:bilioteca_virtual/presentation/admin/features/profile/view/profile_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/widgets/admin_navigation_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -66,9 +66,9 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
               onPressed: () {
                 switch (bottomNavIndex) {
                   case 1:
-                    context.go(Uri(path: '/admin/authors').toString());
+                    Modular.to.pushNamed('/admin/add-new-author');
                   case 2:
-                    context.go(Uri(path: '/admin/add-new-book').toString());
+                    Modular.to.pushNamed('/admin/add-new-book');
                   default:
                 }
               },

@@ -12,18 +12,37 @@ class ListBooksCubit extends Cubit<ListBooksState> {
   ListBooksCubit() : super(ListBooksInitial());
 
   void loadBookList() {
-    emit(ListBooksLoading());
-    final booksUC = getIt<IBooksUseCases>();
+    try {
+      emit(ListBooksLoading());
+      final booksUC = getIt<IBooksUseCases>();
 
-    unawaited(
-      booksUC
-          .getBooks()
-          .then((books) => emit(ListBooksLoaded(books)))
-          .onError((error, stackTrace) {
-        emit(
-          ListBooksError(error.toString()),
-        );
-      }),
-    );
+      unawaited(
+        booksUC
+            .getBooks()
+            .then((books) => emit(ListBooksLoaded(books)))
+            .onError((error, stackTrace) {
+          emit(ListBooksError(error.toString()));
+        }),
+      );
+    } catch (e) {
+      const ListBooksError('Ocorreu um erro ao adicionar o livro');
+    }
+  }
+
+  Future<void> deleteBook(String id) async {
+    try {
+      emit(ListBooksDeleteLoading());
+      final booksUC = getIt<IBooksUseCases>();
+
+      final result = await booksUC.deleteBook(id);
+
+      if (result) {
+        loadBookList();
+      } else {
+        emit(const ListBooksError('Erro ao deletar o livro'));
+      }
+    } catch (e) {
+      emit(const ListBooksError('Erro ao deletar o livro'));
+    }
   }
 }

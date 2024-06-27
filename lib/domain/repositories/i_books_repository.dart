@@ -4,4 +4,5 @@ abstract class IBooksRepository {
   Future<bool> addBook(Book book);
   Future<Book> getBook(String id);
   Future<List<Book>> getBooks();
+  Future<bool> deleteBook(String id);
 }

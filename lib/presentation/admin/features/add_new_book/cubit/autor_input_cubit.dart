@@ -9,4 +9,8 @@ class AutorInputCubit extends Cubit<AutorInputState> {
   void changeText(String value) {
     emit(AutorInputTextChanged(value));
   }
+
+  void changeAuthors(List<String> value) {
+    print(value);
+  }
 }

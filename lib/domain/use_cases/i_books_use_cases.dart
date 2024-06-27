@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
 abstract class IBooksUseCases {
   Future<bool> addBook(Book book);
   Future<Book> getBook(String id);
+  Future<bool> deleteBook(String id);
   Future<List<Book>> getBooks();
 }
 
@@ -25,5 +26,10 @@ class BooksUseCases implements IBooksUseCases {
   @override
   Future<List<Book>> getBooks() {
     return _booksRepository.getBooks();
+  }
+
+  @override
+  Future<bool> deleteBook(String id) {
+    return _booksRepository.deleteBook(id);
   }
 }

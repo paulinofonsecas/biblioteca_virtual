@@ -17,7 +17,7 @@ class MoreFromAutorWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Mais sobre o autor',
+            'Mais do autor',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: Colors.lightBlue[300],
                   fontWeight: FontWeight.bold,

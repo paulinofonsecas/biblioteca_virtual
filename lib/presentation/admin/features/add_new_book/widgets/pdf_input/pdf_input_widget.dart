@@ -11,18 +11,44 @@ class PDFInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final formKey = GlobalKey<FormState>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomTitleWidget(title: 'Arquivo PDF'),
+        FormField(
+          key: formKey,
+          builder: (field) {
+            return Column(
+              children: [
+                const CustomTitleWidget(title: 'Arquivo PDF'),
+                if (field.hasError)
+                  Text(
+                    '* ${field.errorText!}',
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                const Gutter(),
+              ],
+            );
+          },
+          validator: (value) {
+            if (context.read<PickPDFCubit>().state is! PickPDFSuccess) {
+              return 'Selecione o livro pdf';
+            } else {
+              return null;
+            }
+          },
+        ),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
             width: double.infinity,
             height: size.height * .2,
             decoration: BoxDecoration(
-              color: Colors.deepOrange.withOpacity(.25),
+              color: Theme.of(context)
+                  .colorScheme
+                  .primaryContainer
+                  .withOpacity(.3),
             ),
             child: BlocBuilder<PickPDFCubit, PickPDFState>(
               builder: (context, state) {

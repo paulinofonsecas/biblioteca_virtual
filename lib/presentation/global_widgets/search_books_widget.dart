@@ -1,6 +1,8 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
+import 'package:bilioteca_virtual/presentation/features/global_search/view/global_search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SearchBooksWidget extends StatefulWidget {
   const SearchBooksWidget({
@@ -28,27 +30,22 @@ class _SearchBooksWidgetState extends State<SearchBooksWidget> {
       ),
       child: TextField(
         controller: _controller,
-        onChanged: (value) {
-          if (widget.onChangeWord != null) {
-            widget.onChangeWord!.call(value);
-          }
+        canRequestFocus: false,
+        onTap: () {
+          showCupertinoModalBottomSheet(
+            context: context,
+            builder: (context) => const GlobalSearchPage(),
+          );
         },
-        decoration: InputDecoration(
-          prefixIcon: IconButton(
-            onPressed: () {
-              if (widget.onSearch != null) {
-                widget.onSearch!.call(_controller.text);
-              }
-            },
-            icon: const Icon(
+        decoration: const InputDecoration(
+          prefix: Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: Icon(
               FontAwesomeIcons.magnifyingGlass,
               size: 16,
             ),
           ),
           hintText: 'Pesquisar livros',
-          border: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(kDefaultPadding / 2),
-          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/list_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/widgets/gestao_de_books_body.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/global_search_book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -20,12 +21,9 @@ class GestaoDeBooksPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Gestão de livros'),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
-            ),
-            const Gutter(),
+          actions: const [
+            GlobalSearchBookWidget(),
+            Gutter(),
           ],
         ),
         body: const GestaoDeBooksView(),
@@ -39,6 +37,11 @@ class GestaoDeBooksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GestaoDeBooksBody();
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<ListBooksCubit>().loadBookList();
+      },
+      child: const GestaoDeBooksBody(),
+    );
   }
 }
