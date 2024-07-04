@@ -1,6 +1,7 @@
 import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/widgets/authors_body.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/global_search_authors_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
@@ -23,12 +24,9 @@ class AuthorsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Gestão de Autores'),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
-            ),
-            const Gutter(),
+          actions: const [
+            GlobalSearchAuthorsWidget(),
+            Gutter(),
           ],
         ),
         body: const AuthorsView(),

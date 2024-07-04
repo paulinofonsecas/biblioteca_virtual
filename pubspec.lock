@@ -506,11 +506,7 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_gutter
-<<<<<<< HEAD
       sha256: "194aa213d4f3d89fd74657e3f1c12f2981ebdd62dbcf9603206676823989bfdb"
-=======
-      sha256: c1fb998f87d08450a779bdcbb00dd9e8e22e9dbcab10b857da6e243d66fa6df8
->>>>>>> bc348354b04722b4823132081845cef761bb8454
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
@@ -661,17 +657,10 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_android
-<<<<<<< HEAD
       sha256: "60e4f7947fa413cd9f2e23c955e8406afe640a8b2fbd00b46fb2901058047b8f"
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.1.25"
-=======
-      sha256: "8f2606fffd912ff8c23e8d94da106764c116112ce65fb18c78123331ae628eb3"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "6.1.24"
->>>>>>> bc348354b04722b4823132081845cef761bb8454
   google_sign_in_ios:
     dependency: transitive
     description:
@@ -692,11 +681,7 @@ packages:
     dependency: transitive
     description:
       name: google_sign_in_web
-<<<<<<< HEAD
       sha256: d606264c7a1a526a3aa79d938b85a601d8589731a478bd4a3dcbdeb14a572228
-=======
-      sha256: fc0f14ed45ea616a6cfb4d1c7534c2221b7092cc4f29a709f0c3053cc3e821bd
->>>>>>> bc348354b04722b4823132081845cef761bb8454
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.12.4+1"
@@ -812,8 +797,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.7.1"
-<<<<<<< HEAD
-=======
   json_annotation:
     dependency: transitive
     description:
@@ -822,7 +805,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.9.0"
->>>>>>> bc348354b04722b4823132081845cef761bb8454
   leak_tracker:
     dependency: transitive
     description:
@@ -979,17 +961,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-<<<<<<< HEAD
       sha256: bca87b0165ffd7cdb9cad8edd22d18d2201e886d9a9f19b4fb3452ea7df3a72a
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.6"
-=======
-      sha256: "9c96da072b421e98183f9ea7464898428e764bc0ce5567f27ec8693442e72514"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.2.5"
->>>>>>> bc348354b04722b4823132081845cef761bb8454
   path_provider_foundation:
     dependency: transitive
     description:
