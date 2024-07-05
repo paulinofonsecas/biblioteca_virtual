@@ -1,11 +1,14 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'dart:developer';
+
 import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthorsBody extends StatelessWidget {
   /// {@macro authors_body}
@@ -34,7 +37,7 @@ class AuthorsBody extends StatelessWidget {
         // const GlobalSearchAuthorsWidget(),
         Expanded(
           child: BlocBuilder<ListAuthorsCubit, ListAuthorsState>(
-            bloc: context.read<ListAuthorsCubit>()..loadAuthorList(),
+            bloc: BlocProvider.of<ListAuthorsCubit>(context)..loadAuthorList(),
             builder: (context, state) {
               if (state is ListAuthorsLoading) {
                 return const Center(
@@ -75,13 +78,15 @@ class AuthorsBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Modular.to.pushNamed('/admin/edit-author', arguments: author);
+                },
                 icon: const Icon(Icons.edit),
               ),
               const GutterSmall(),
               IconButton(
                 onPressed: () {
-                  context.read<ListAuthorsCubit>().deleteAuthor(author.id);
+                  BlocProvider.of<ListAuthorsCubit>(context).deleteAuthor(author.id, authors);
                 },
                 icon: const Icon(
                   Icons.delete,
