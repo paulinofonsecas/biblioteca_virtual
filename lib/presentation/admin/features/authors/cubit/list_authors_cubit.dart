@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
 import 'package:bloc/bloc.dart';
@@ -27,5 +28,17 @@ class ListAuthorsCubit extends Cubit<ListAuthorsState> {
     );
   }
 
-  void deleteAuthor(String id) {}
+  void deleteAuthor(String id, List<Author> authors) {
+    emit(ListAuthorsLoading());
+    unawaited(_authorsUseCases.deleteAuthor(id).then((value) {
+      authors.removeWhere((e) => e.id == id);
+      emit(ListAuthorsLoaded(authors));
+    }).onError(
+      (error, stackTrace) {
+        emit(
+          ListAuthorsError(error.toString()),
+        );
+      },
+    ));
+  }
 }
