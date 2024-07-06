@@ -11,5 +11,4 @@ class ComprarLivroCubit extends Cubit<ComprarLivroState> {
 
   void validarComprovante() {}
 
-  void uploadComprovante() {}
 }
