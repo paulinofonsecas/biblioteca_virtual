@@ -52,7 +52,7 @@ class BookInfoWidget extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      'book.authorsId',
+                      book.authors.firstOrNull?.name ?? 'N/D',
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                             color: Colors.grey[500],
                           ),

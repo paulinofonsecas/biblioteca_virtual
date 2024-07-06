@@ -77,7 +77,7 @@ class GestaoDeBooksBody extends StatelessWidget {
             book.title,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          subtitle: const Text('book.authorsId'),
+          subtitle: Text(book.authors.firstOrNull?.name ?? 'N/D'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

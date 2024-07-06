@@ -200,7 +200,7 @@ class _InfoWidget extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(
-                    'book.authorsId',
+                    book.authors.firstOrNull?.name ?? 'N/D',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,
