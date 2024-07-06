@@ -18,7 +18,7 @@ class BookMiniDisplay extends StatelessWidget {
   final double? width;
   final double? height;
   static double widthFactory = .32;
-  static double heightFactory = .1;
+  static double heightFactory = .13;
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +37,20 @@ class BookMiniDisplay extends StatelessWidget {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(kDefaultPadding),
-                  // child: Image.asset(
-                  //   'assets/default_book_cover.jpg',
-                  //   fit: BoxFit.cover,
-                  // ),
                   child: CachedNetworkImage(
                     imageUrl: book.capa,
                     fit: BoxFit.cover,
+                    width: width ?? size.width * widthFactory,
                   ),
                 ),
               ),
-              // const SizedBox(height: kDefaultPadding / 2),
-              // Text(
-              //   book.title,
-              //   maxLines: 2,
-              //   overflow: TextOverflow.ellipsis,
-              //   style: Theme.of(context).textTheme.labelSmall,
-              // ),
+              const SizedBox(height: kDefaultPadding / 2),
+              Text(
+                book.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
             ],
           ),
         ),
