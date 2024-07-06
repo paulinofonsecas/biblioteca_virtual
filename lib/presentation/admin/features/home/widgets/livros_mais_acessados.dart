@@ -4,8 +4,6 @@ import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/feature
 import 'package:bilioteca_virtual/presentation/global_widgets/book_mini_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart'
-    hide ModularWatchExtension;
 
 class LivrosMaisAcessadosWidget extends StatelessWidget {
   const LivrosMaisAcessadosWidget({super.key});
@@ -15,7 +13,7 @@ class LivrosMaisAcessadosWidget extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
 
     return SizedBox(
-      height: size.width * .4,
+      height: size.width * .5,
       child: BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
         bloc: context.read<FeaturedBooksCubit>()..getFeaturedBooks(),
         builder: (context, state) {

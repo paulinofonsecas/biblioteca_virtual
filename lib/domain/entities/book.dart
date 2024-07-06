@@ -12,9 +12,10 @@ class Book {
 
   factory Book.nullo() => Book(
         id: '',
-        title: '',
+        title: 'Titulo de exemplo grande',
         autor: '',
-        capa: '',
+        capa:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx4ONp_TLFBtxBvGsPl3Ny-r3l-EYkYjB6pQ&s',
         pdf: '',
       );
 

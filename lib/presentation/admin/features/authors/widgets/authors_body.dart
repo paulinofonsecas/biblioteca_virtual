@@ -1,9 +1,9 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:bilioteca_virtual/domain/entities/author.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
+import 'package:bilioteca_virtual/presentation/features/author_details/author_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
@@ -67,6 +67,13 @@ class AuthorsBody extends StatelessWidget {
         final author = authors[index];
 
         return ListTile(
+          onTap: () {
+            Navigator.of(context).push(
+              AuthorDetailsPage.route(
+                author: author,
+              ),
+            );
+          },
           title: Text(
             author.name,
             style: const TextStyle(fontWeight: FontWeight.bold),
