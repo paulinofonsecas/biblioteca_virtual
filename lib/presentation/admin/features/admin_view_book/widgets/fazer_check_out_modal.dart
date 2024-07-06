@@ -257,7 +257,7 @@ class _HeaderWidget extends StatelessWidget {
         Expanded(
           child: Center(
             child: Text(
-              'Efeturar pagamento',
+              'Efetuar pagamento',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
