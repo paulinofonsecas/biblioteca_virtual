@@ -13,7 +13,7 @@ class FazerCheckOutModal extends StatelessWidget {
     super.key,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _ButtonsWidget extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class _InformationPaymentWidget extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +171,7 @@ class _InfoWidget extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +200,7 @@ class _InfoWidget extends StatelessWidget {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(
-                    book.autor,
+                    'book.authorsId',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,

@@ -12,7 +12,7 @@ class BookMiniDisplay extends StatelessWidget {
     this.height,
   });
 
-  final Book book;
+  final BookModel book;
   final GestureTapCallback? onTap;
 
   final double? width;

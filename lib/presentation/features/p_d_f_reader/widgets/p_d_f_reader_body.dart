@@ -52,7 +52,7 @@ class PDFViewerCachedFromUrl extends StatefulWidget {
   });
 
   final bool nightMode;
-  final Book book;
+  final BookModel book;
 
   @override
   State<PDFViewerCachedFromUrl> createState() => _PDFViewerCachedFromUrlState();

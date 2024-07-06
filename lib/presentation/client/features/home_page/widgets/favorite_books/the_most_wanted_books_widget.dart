@@ -4,7 +4,8 @@ import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/m
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/p_d_f_reader.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/book_mini_display.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide ModularWatchExtension;
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 
 class TheMostWantedBooksWidget extends StatelessWidget {
   const TheMostWantedBooksWidget({super.key});
@@ -45,7 +46,7 @@ class _BooksListView extends StatelessWidget {
     required this.books,
   });
 
-  final List<Book> books;
+  final List<BookModel> books;
 
   @override
   Widget build(BuildContext context) {

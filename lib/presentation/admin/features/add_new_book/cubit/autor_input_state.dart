@@ -1,17 +1,17 @@
 part of 'autor_input_cubit.dart';
 
 sealed class AutorInputState extends Equatable {
-  const AutorInputState(this.text);
-  final String text;
+  const AutorInputState(this.authors);
+  final List<Author> authors;
 
   @override
-  List<Object> get props => [text];
+  List<Object> get props => [authors];
 }
 
 final class AutorInputInitial extends AutorInputState {
-  const AutorInputInitial() : super('');
+  const AutorInputInitial() : super(const []);
 }
 
-final class AutorInputTextChanged extends AutorInputState {
-  const AutorInputTextChanged(super.text);
+final class AuthorsInputChangedChanged extends AutorInputState {
+  const AuthorsInputChangedChanged(super.authors);
 }

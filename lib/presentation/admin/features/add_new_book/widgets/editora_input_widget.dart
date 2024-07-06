@@ -31,7 +31,7 @@ class EditoraInputWidget extends StatelessWidget {
                 ),
               ),
               label: const Text('Editora do livro'),
-              border: UnderlineInputBorder(
+              border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(kDefaultPadding / 2),
               ),
             ),

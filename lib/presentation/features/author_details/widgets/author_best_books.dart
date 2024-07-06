@@ -30,7 +30,7 @@ class AuthorBestBooks extends StatelessWidget {
               separatorBuilder: (context, index) => const Gutter(),
               itemBuilder: (context, index) => BookMiniDisplay(
                 onTap: () {},
-                book: Book.nullo(),
+                book: BookModel.nullo(),
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
+import 'package:bilioteca_virtual/core/util/snackbar_message.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
@@ -7,6 +8,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/isbn_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/pick_capa_image_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/pick_pdf_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/preco_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/resumo_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/titulo_input_cubit.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +66,9 @@ class AddNewBookPage extends StatelessWidget {
         BlocProvider(
           create: (context) => ResumoInputCubit(),
         ),
+        BlocProvider(
+          create: (context) => PrecoInputCubit(),
+        ),
 
         // para uploads
         BlocProvider(
@@ -88,6 +93,10 @@ class AddNewBookPage extends StatelessWidget {
 
               if (state is SaveNewBookSuccess) {
                 Navigator.of(context).pop();
+                SnackBarMessage.showSuccessSnackBar(
+                  message: 'Livro salvo com sucesso',
+                  context: context,
+                );
               }
 
               if (state is SaveNewBookError) {

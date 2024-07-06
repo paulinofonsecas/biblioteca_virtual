@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widge
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/images_input/imagens_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/isbn_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/pdf_input/pdf_input_widget.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/preco_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/resumo_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/titulo_input_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,8 @@ class AddNewBookBody extends StatelessWidget {
             ImagensInputWidget(),
             Gutter(),
             TituloInputWidget(),
+            Gutter(),
+            PrecoInputWidget(),
             Gutter(),
             AutorInputWidget(),
             Gutter(),

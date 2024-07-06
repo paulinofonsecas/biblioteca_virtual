@@ -16,7 +16,7 @@ class AdminViewBookBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AdminViewBookCubit, AdminViewBookState>(
-      bloc: context.read<AdminViewBookCubit>()..getBook(bookId),
+      bloc: context.read<AdminViewBookCubit>()..getBookModel(bookId),
       builder: (context, state) {
         if (state is AdminViewBookLoading) {
           return const Center(
@@ -47,7 +47,7 @@ class AdminViewBookBody extends StatelessWidget {
 class _BuildScreen extends StatelessWidget {
   const _BuildScreen({required this.book});
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {

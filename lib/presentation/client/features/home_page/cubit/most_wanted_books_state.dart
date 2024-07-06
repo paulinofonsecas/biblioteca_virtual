@@ -14,7 +14,7 @@ final class MostWantedBooksLoading extends MostWantedBooksState {}
 final class MostWantedBooksLoaded extends MostWantedBooksState {
   const MostWantedBooksLoaded({required this.books});
 
-  final List<Book> books;
+  final List<BookModel> books;
 
   @override
   List<Object> get props => [books];

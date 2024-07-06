@@ -1,5 +1,7 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
+import 'package:bilioteca_virtual/core/util/corrency.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/categories_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 class BookInfoWidget extends StatelessWidget {
   const BookInfoWidget({required this.book, super.key});
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class BookInfoWidget extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      book.autor,
+                      'book.authorsId',
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                             color: Colors.grey[500],
                           ),
@@ -69,7 +71,9 @@ class BookInfoWidget extends StatelessWidget {
                     Align(
                       alignment: Alignment.topCenter,
                       child: Text(
-                        '12.000,00 Kz',
+                        book.preco == Preco.gratis()
+                            ? 'Gratuito'
+                            : normalizePrice(book.preco.valor),
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: Colors.green[600],
                               fontWeight: FontWeight.bold,

@@ -35,10 +35,10 @@ class TodosOsLivrosWidget extends StatelessWidget {
 
 class _BooksGridView extends StatelessWidget {
   const _BooksGridView({
-    this.books = const <Book>[],
+    this.books = const <BookModel>[],
   });
 
-  final List<Book> books;
+  final List<BookModel> books;
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +55,13 @@ class _BooksGridView extends StatelessWidget {
           onTap: () {
             AdminViewBookPage.toScreen(book.id);
           },
-          book: Book(
+          book: BookModel(
             id: book.id,
             title: book.title,
-            autor: book.autor,
+            authors: book.authors,
             capa: book.capa,
             pdf: book.pdf,
+            preco: book.preco,
           ),
         );
       },

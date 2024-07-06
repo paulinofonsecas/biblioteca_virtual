@@ -16,7 +16,7 @@ final class ListBooksDeleteLoading extends ListBooksState {}
 final class ListBooksLoaded extends ListBooksState {
   const ListBooksLoaded(this.books);
 
-  final List<Book> books;
+  final List<BookModel> books;
 
   @override
   List<Object> get props => [books];

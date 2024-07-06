@@ -11,7 +11,7 @@ class InLineBookMediumDisplay extends StatelessWidget {
     super.key,
   });
 
-  final Book book;
+  final BookModel book;
   final VoidCallback onTap;
   static double widthFactory = .32;
   static double heightFactory = .1;
@@ -120,7 +120,7 @@ class _FooterWidget extends StatelessWidget {
                     ),
               ),
               Text(
-                book.autor,
+                book.authorsId,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(),

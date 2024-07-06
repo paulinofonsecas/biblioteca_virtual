@@ -28,7 +28,7 @@ class IsbnInputWidget extends StatelessWidget {
           ),
         ),
         label: const Text('ISBN'),
-        border: UnderlineInputBorder(
+        border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
         ),
       ),

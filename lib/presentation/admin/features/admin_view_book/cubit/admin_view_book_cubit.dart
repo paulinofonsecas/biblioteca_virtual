@@ -13,10 +13,10 @@ class AdminViewBookCubit extends Cubit<AdminViewBookState> {
 
   late final IBooksUseCases _iBooksUseCases;
 
-  void getBook(String bookId) {
+  void getBookModel(String bookId) {
     emit(AdminViewBookLoading());
 
-    _iBooksUseCases.getBook(bookId).then((book) {
+    _iBooksUseCases.getBookModel(bookId).then((book) {
       emit(AdminViewBookLoaded(book));
     }).onError((error, stackTrace) {
       emit(AdminViewBookError(error.toString()));

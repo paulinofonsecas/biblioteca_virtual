@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
-import 'package:bilioteca_virtual/data/models/book_model.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,18 +12,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 class BooksRepository implements IBooksRepository {
   late final FirebaseFirestore _firestore;
   late final FirebaseStorage _storage;
-  List<Book> _cachedBooks = [];
+  List<BookModel> _cachedBooks = [];
 
   BooksRepository() {
     _firestore = getIt();
     _storage = getIt();
   }
 
-  set saveInCache(List<Book> books) {
+  set saveInCache(List<BookModel> books) {
     _cachedBooks = books;
   }
 
-  List<Book> _getCachedBooks() {
+  List<BookModel> _getCachedBooks() {
     return _cachedBooks;
   }
 
@@ -32,7 +31,7 @@ class BooksRepository implements IBooksRepository {
     _cachedBooks = [];
   }
 
-  Future<String> _salvarCapaNoStorage(Book book) async {
+  Future<String> _salvarCapaNoStorage(BookModel book) async {
     final ref = _storage.ref('/capas').child(book.id);
     try {
       return ref.putFile(File(book.capa)).then((p0) => p0.ref.getDownloadURL());
@@ -41,7 +40,7 @@ class BooksRepository implements IBooksRepository {
     }
   }
 
-  Future<String> _salvarArquivoNoStorage(Book book) async {
+  Future<String> _salvarArquivoNoStorage(BookModel book) async {
     try {
       final ref = _storage.ref('pdfs').child(book.id).putFile(File(book.pdf));
       return ref.then((p0) => p0.ref.getDownloadURL());
@@ -51,7 +50,7 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<bool> addBook(Book book) async {
+  Future<bool> addBookModel(BookModel book) async {
     try {
       final capaUrl = await _salvarCapaNoStorage(book);
       final pdfUrl = await _salvarArquivoNoStorage(book);
@@ -70,7 +69,7 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<Book> getBook(String id) async {
+  Future<BookModel> getBookModel(String id) async {
     if (_getCachedBooks().isNotEmpty) {
       return _cachedBooks.firstWhere((element) => element.id == id);
     }
@@ -89,7 +88,7 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<List<Book>> getBooks([bool inCache = true]) async {
+  Future<List<BookModel>> getBooks([bool inCache = true]) async {
     if (inCache == true && _cachedBooks.isNotEmpty) {
       final searchedList = _getCachedBooks();
 
@@ -99,7 +98,7 @@ class BooksRepository implements IBooksRepository {
     }
 
     final books = await _firestore.collection('books').get().then((value) {
-      final saida = <Book>[];
+      final saida = <BookModel>[];
       for (final book in value.docs) {
         final b = BookModel.fromMap(book.data());
         saida.add(b);
@@ -113,7 +112,7 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<bool> deleteBook(String id) async {
+  Future<bool> deleteBookModel(String id) async {
     var status = false;
 
     // delete pdf;

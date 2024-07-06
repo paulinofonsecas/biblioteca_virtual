@@ -31,12 +31,12 @@ class SearchListBooksCubit extends Cubit<SearchListBooksState> {
     }
   }
 
-  Future<void> deleteBook(String id) async {
+  Future<void> deleteBookModel(String id) async {
     try {
       emit(SearchListBooksDeleteLoading());
       final booksUC = getIt<IBooksUseCases>();
 
-      final result = await booksUC.deleteBook(id);
+      final result = await booksUC.deleteBookModel(id);
 
       if (result) {
         loadBookList();
