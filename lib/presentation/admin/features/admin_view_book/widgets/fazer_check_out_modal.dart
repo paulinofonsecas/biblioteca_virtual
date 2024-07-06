@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/carregar_comprovante_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/validate_payment_widget.dart';
-import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,26 +19,29 @@ class FazerCheckOutModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const _HeaderWidget(),
-              _InfoWidget(book: book),
-              const GutterSmall(),
-              const Divider(),
-              _InformationPaymentWidget(book: book),
-              const GutterSmall(),
-              const Divider(),
-              const GutterSmall(),
-              ValidatePaymentWidget(book: book),
-              const GutterLarge(),
-              _ButtonsWidget(book: book),
-              const Gutter(),
-            ],
+    return BlocProvider(
+      create: (context) => getIt<CarregarComprovanteCubit>(),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const _HeaderWidget(),
+                _InfoWidget(book: book),
+                const GutterSmall(),
+                const Divider(),
+                _InformationPaymentWidget(book: book),
+                const GutterSmall(),
+                const Divider(),
+                const GutterSmall(),
+                ValidatePaymentWidget(book: book),
+                const GutterLarge(),
+                _ButtonsWidget(book: book),
+                const Gutter(),
+              ],
+            ),
           ),
         ),
       ),
@@ -62,7 +67,7 @@ class _ButtonsWidget extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          PDFReaderPage.toScreen(book.id);
+          // PDFReaderPage.toScreen(book.id);
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.amber[700]),
@@ -93,26 +98,14 @@ class _InformationPaymentWidget extends StatelessWidget {
         const GutterSmall(),
         const GroupInformation(
           icon: FontAwesomeIcons.creditCard,
-          title: 'Banco',
-          value: 'BAI',
+          title: 'Nome',
+          value: 'Biblioteca Digital',
         ),
         const GutterSmall(),
         const GroupInformation(
           icon: FontAwesomeIcons.creditCard,
           title: 'IBAN',
           value: 'AO06.0040.0000.2323.8763.6341.2',
-        ),
-        const GutterSmall(),
-        const GroupInformation(
-          icon: Icons.numbers,
-          title: 'Nº Conta',
-          value: '1323876363412',
-        ),
-        const GutterSmall(),
-        const GroupInformation(
-          icon: FontAwesomeIcons.phone,
-          title: 'Nº Telefone',
-          value: '925412030',
         ),
       ],
     );
@@ -206,6 +199,7 @@ class _InfoWidget extends StatelessWidget {
                 children: [
                   Text(
                     book.title,
+                    maxLines: 2,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(
