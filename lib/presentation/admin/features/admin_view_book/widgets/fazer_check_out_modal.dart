@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
 import 'package:bilioteca_virtual/domain/entities/book.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/validate_payment_widget.dart';
-import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
+import 'package:bilioteca_virtual/presentation/features/validate_payment/view/validate_payment_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class FazerCheckOutModal extends StatelessWidget {
   const FazerCheckOutModal({
@@ -13,7 +13,7 @@ class FazerCheckOutModal extends StatelessWidget {
     super.key,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,6 @@ class FazerCheckOutModal extends StatelessWidget {
               const GutterSmall(),
               const Divider(),
               const GutterSmall(),
-              ValidatePaymentWidget(book: book),
               const GutterLarge(),
               _ButtonsWidget(book: book),
               const Gutter(),
@@ -49,7 +48,7 @@ class _ButtonsWidget extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,10 @@ class _ButtonsWidget extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () {
-          PDFReaderPage.toScreen(book.id);
+          showCupertinoModalBottomSheet(
+            context: context,
+            builder: (context) => const ValidatePaymentPage(),
+          );
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.amber[700]),
@@ -79,7 +81,7 @@ class _InformationPaymentWidget extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -93,26 +95,14 @@ class _InformationPaymentWidget extends StatelessWidget {
         const GutterSmall(),
         const GroupInformation(
           icon: FontAwesomeIcons.creditCard,
-          title: 'Banco',
-          value: 'BAI',
+          title: 'Nome',
+          value: 'Biblioteca Digital',
         ),
         const GutterSmall(),
         const GroupInformation(
           icon: FontAwesomeIcons.creditCard,
           title: 'IBAN',
           value: 'AO06.0040.0000.2323.8763.6341.2',
-        ),
-        const GutterSmall(),
-        const GroupInformation(
-          icon: Icons.numbers,
-          title: 'Nº Conta',
-          value: '1323876363412',
-        ),
-        const GutterSmall(),
-        const GroupInformation(
-          icon: FontAwesomeIcons.phone,
-          title: 'Nº Telefone',
-          value: '925412030',
         ),
       ],
     );
@@ -181,7 +171,7 @@ class _InfoWidget extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +196,11 @@ class _InfoWidget extends StatelessWidget {
                 children: [
                   Text(
                     book.title,
+                    maxLines: 2,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   Text(
-                    book.autor,
+                    'book.authorsId',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 12,
@@ -257,7 +248,7 @@ class _HeaderWidget extends StatelessWidget {
         Expanded(
           child: Center(
             child: Text(
-              'Efeturar pagamento',
+              'Efetuar pagamento',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),

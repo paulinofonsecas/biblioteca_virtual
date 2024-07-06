@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SnackBarMessage {
-  void showSuccessSnackBar({
+  static void showSuccessSnackBar({
     required String message,
     required BuildContext context,
   }) {
@@ -16,7 +16,7 @@ class SnackBarMessage {
     );
   }
 
-  void showErrorSnackBar({
+  static void showErrorSnackBar({
     required String message,
     required BuildContext context,
   }) {

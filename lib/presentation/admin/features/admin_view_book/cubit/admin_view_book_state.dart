@@ -23,7 +23,7 @@ final class AdminViewBookError extends AdminViewBookState {
 final class AdminViewBookLoaded extends AdminViewBookState {
   const AdminViewBookLoaded(this.book);
 
-  final Book book;
+  final BookModel book;
 
   @override
   List<Object> get props => [book];

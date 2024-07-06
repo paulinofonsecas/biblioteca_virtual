@@ -30,9 +30,9 @@ class GlobalSearchBody extends StatelessWidget {
           }
 
           if (state is SearchListBooksLoaded) {
-            return SearchableList<Book>(
+            return SearchableList<BookModel>(
               initialList: state.books,
-              itemBuilder: (Book user) => SearchedItem(book: user),
+              itemBuilder: (BookModel user) => SearchedItem(book: user),
               filter: (String value) => state.books
                   .where(
                     (element) => element.title

@@ -11,30 +11,30 @@ part 'list_books_state.dart';
 class ListBooksCubit extends Cubit<ListBooksState> {
   ListBooksCubit() : super(ListBooksInitial());
 
-  void loadBookList() {
+  Future<void> loadBookList() async {
     try {
       emit(ListBooksLoading());
       final booksUC = getIt<IBooksUseCases>();
 
-      unawaited(
-        booksUC
-            .getBooks()
-            .then((books) => emit(ListBooksLoaded(books)))
-            .onError((error, stackTrace) {
+      await booksUC
+          .getBooks()
+          .then((books) => emit(ListBooksLoaded(books)))
+          .onError(
+        (error, stackTrace) {
           emit(ListBooksError(error.toString()));
-        }),
+        },
       );
     } catch (e) {
       const ListBooksError('Ocorreu um erro ao adicionar o livro');
     }
   }
 
-  Future<void> deleteBook(String id) async {
+  Future<void> deleteBookModel(String id) async {
     try {
       emit(ListBooksDeleteLoading());
       final booksUC = getIt<IBooksUseCases>();
 
-      final result = await booksUC.deleteBook(id);
+      final result = await booksUC.deleteBookModel(id);
 
       if (result) {
         loadBookList();

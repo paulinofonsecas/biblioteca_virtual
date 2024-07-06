@@ -1,11 +1,12 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:bilioteca_virtual/domain/entities/author.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/authors/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
+import 'package:bilioteca_virtual/presentation/features/author_details/author_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AuthorsBody extends StatelessWidget {
   /// {@macro authors_body}
@@ -34,7 +35,7 @@ class AuthorsBody extends StatelessWidget {
         // const GlobalSearchAuthorsWidget(),
         Expanded(
           child: BlocBuilder<ListAuthorsCubit, ListAuthorsState>(
-            bloc: context.read<ListAuthorsCubit>()..loadAuthorList(),
+            bloc: BlocProvider.of<ListAuthorsCubit>(context)..loadAuthorList(),
             builder: (context, state) {
               if (state is ListAuthorsLoading) {
                 return const Center(
@@ -67,6 +68,13 @@ class AuthorsBody extends StatelessWidget {
         final author = authors[index];
 
         return ListTile(
+          onTap: () {
+            Navigator.of(context).push(
+              AuthorDetailsPage.route(
+                author: author,
+              ),
+            );
+          },
           title: Text(
             author.name,
             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -75,13 +83,47 @@ class AuthorsBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Modular.to.pushNamed('/admin/edit-author', arguments: author);
+                },
                 icon: const Icon(Icons.edit),
               ),
               const GutterSmall(),
               IconButton(
                 onPressed: () {
-                  context.read<ListAuthorsCubit>().deleteAuthor(author.id);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text('Deletar autor'),
+                        content:
+                            const Text('Desejas realmente deletar este autor?'),
+                        actions: [
+                          Theme(
+                            data: ThemeData(
+                              colorScheme: ColorScheme.fromSeed(
+                                seedColor: Colors.red,
+                              ),
+                            ),
+                            child: TextButton(
+                              style: TextButton.styleFrom(),
+                              onPressed: () {
+                                BlocProvider.of<ListAuthorsCubit>(context)
+                                    .deleteAuthor(author.id, authors);
+                              },
+                              child: const Text('Sim'),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Não'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 icon: const Icon(
                   Icons.delete,

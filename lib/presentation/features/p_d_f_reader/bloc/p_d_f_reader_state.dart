@@ -23,7 +23,7 @@ class PDFReaderGetBookError extends PDFReaderState {
 class PDFReaderGetBookLoaded extends PDFReaderState {
   const PDFReaderGetBookLoaded(this.book) : super();
 
-  final Book book;
+  final BookModel book;
 
   @override
   List<Object?> get props => [book];

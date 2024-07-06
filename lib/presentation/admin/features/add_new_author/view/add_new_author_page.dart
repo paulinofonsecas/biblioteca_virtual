@@ -52,20 +52,13 @@ class AddNewAuthorPage extends StatelessWidget {
               actions: [
                 TextButton.icon(
                   onPressed: () {
-                    if (manageMode == ManageMode.add) {
-                      context.read<AddNewAuthorBloc>().add(
-                            SaveNewAuthorEvent(
-                              name: context.read<NameInputCubit>().state.text,
-                              path: context.read<PickImageCubit>().state.path,
-                              manageMode: manageMode,
-                            ),
-                          );
-                    } else {
-                      // context
-                      //     .read<AddNewAuthorBloc>()
-                      //     .add(SaveNewAuthorEvent(context, manageMode:
-                      // manageMode));
-                    }
+                    context.read<AddNewAuthorBloc>().add(
+                          SaveNewAuthorEvent(
+                            name: context.read<NameInputCubit>().state.text,
+                            path: context.read<PickImageCubit>().state.path,
+                            manageMode: manageMode,
+                          ),
+                        );
                   },
                   label: const Text('Salvar'),
                   icon: const Icon(FontAwesomeIcons.floppyDisk),
