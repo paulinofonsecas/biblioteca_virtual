@@ -1,7 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'dart:developer';
-
 import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
@@ -93,7 +91,39 @@ class AuthorsBody extends StatelessWidget {
               const GutterSmall(),
               IconButton(
                 onPressed: () {
-                  BlocProvider.of<ListAuthorsCubit>(context).deleteAuthor(author.id, authors);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text('Deletar autor'),
+                        content:
+                            const Text('Desejas realmente deletar este autor?'),
+                        actions: [
+                          Theme(
+                            data: ThemeData(
+                              colorScheme: ColorScheme.fromSeed(
+                                seedColor: Colors.red,
+                              ),
+                            ),
+                            child: TextButton(
+                              style: TextButton.styleFrom(),
+                              onPressed: () {
+                                BlocProvider.of<ListAuthorsCubit>(context)
+                                    .deleteAuthor(author.id, authors);
+                              },
+                              child: const Text('Sim'),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Não'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 icon: const Icon(
                   Icons.delete,
