@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bilioteca_virtual/domain/entities/author.dart';
-import 'package:bilioteca_virtual/presentation/features/author_details/author_details.dart';
 import 'package:flutter/material.dart';
 
 class AuthorSearchedItem extends StatelessWidget {
@@ -16,7 +15,7 @@ class AuthorSearchedItem extends StatelessWidget {
     return ListTile(
       title: Text(author.name),
       onTap: () {
-        Navigator.push(context, AuthorDetailsPage.route(author: author));
+        // AdminViewBookPage.toScreen(author.id);
       },
       // subtitle: Text(book.resumo ?? 'Sem resumo', maxLines: 2),
       // leading: ClipRRect(

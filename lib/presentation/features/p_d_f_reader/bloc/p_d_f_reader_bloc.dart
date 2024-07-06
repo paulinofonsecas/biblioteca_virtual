@@ -24,7 +24,7 @@ class PDFReaderBloc extends Bloc<PDFReaderEvent, PDFReaderState> {
     emit(PDFReaderGetBookLoading());
 
     _booksUseCases
-        .getBookModel(event.bookId)
+        .getBook(event.bookId)
         .then((book) => emit(PDFReaderGetBookLoaded(book)))
         .onError(
           (error, stackTrace) => emit(PDFReaderGetBookError(error.toString())),

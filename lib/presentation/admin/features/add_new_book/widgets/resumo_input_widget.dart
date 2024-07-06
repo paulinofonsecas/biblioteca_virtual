@@ -32,7 +32,7 @@ class ResumoInputWidget extends StatelessWidget {
         // label: const Text('Resumo do livro'),
         hintText: 'Informe em poucas palavras, o resumo do livro.',
         alignLabelWithHint: true,
-        border: OutlineInputBorder(
+        border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
         ),
       ),

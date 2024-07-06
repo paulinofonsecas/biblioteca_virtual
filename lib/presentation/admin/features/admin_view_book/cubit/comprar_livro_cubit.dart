@@ -7,7 +7,9 @@ part 'comprar_livro_state.dart';
 class ComprarLivroCubit extends Cubit<ComprarLivroState> {
   ComprarLivroCubit() : super(ComprarLivroInitial());
 
-  void comprarLivro({required BookModel book}) {}
+  void comprarLivro({required Book book}) {}
 
   void validarComprovante() {}
+
+  void uploadComprovante() {}
 }

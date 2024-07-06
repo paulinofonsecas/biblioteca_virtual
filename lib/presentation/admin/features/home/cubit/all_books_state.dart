@@ -14,7 +14,7 @@ final class AllBooksLoading extends AllBooksState {}
 final class AllBooksLoaded extends AllBooksState {
   const AllBooksLoaded({required this.books});
 
-  final List<BookModel> books;
+  final List<Book> books;
 
   @override
   List<Object> get props => [books];

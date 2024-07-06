@@ -23,7 +23,7 @@ final class DiscoveryBookError extends DiscoveryBookState {
 final class DiscoveryBookLoaded extends DiscoveryBookState {
   const DiscoveryBookLoaded(this.books);
 
-  final List<BookModel> books;
+  final List<Book> books;
 
   @override
   List<Object> get props => [books];

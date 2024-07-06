@@ -2,10 +2,10 @@ import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
 
 abstract class IBooksUseCases {
-  Future<bool> addBookModel(BookModel book);
-  Future<BookModel> getBookModel(String id);
-  Future<bool> deleteBookModel(String id);
-  Future<List<BookModel>> getBooks();
+  Future<bool> addBook(Book book);
+  Future<Book> getBook(String id);
+  Future<bool> deleteBook(String id);
+  Future<List<Book>> getBooks();
 }
 
 class BooksUseCases implements IBooksUseCases {
@@ -14,22 +14,22 @@ class BooksUseCases implements IBooksUseCases {
   final IBooksRepository _booksRepository;
 
   @override
-  Future<bool> addBookModel(BookModel book) {
-    return _booksRepository.addBookModel(book);
+  Future<bool> addBook(Book book) {
+    return _booksRepository.addBook(book);
   }
 
   @override
-  Future<BookModel> getBookModel(String id) {
-    return _booksRepository.getBookModel(id);
+  Future<Book> getBook(String id) {
+    return _booksRepository.getBook(id);
   }
 
   @override
-  Future<List<BookModel>> getBooks() {
+  Future<List<Book>> getBooks() {
     return _booksRepository.getBooks();
   }
 
   @override
-  Future<bool> deleteBookModel(String id) {
-    return _booksRepository.deleteBookModel(id);
+  Future<bool> deleteBook(String id) {
+    return _booksRepository.deleteBook(id);
   }
 }

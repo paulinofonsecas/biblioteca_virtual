@@ -23,7 +23,7 @@ final class FeaturedBooksError extends FeaturedBooksState {
 final class FeaturedBooksLoaded extends FeaturedBooksState {
   const FeaturedBooksLoaded(this.books);
 
-  final List<BookModel> books;
+  final List<Book> books;
 
   @override
   List<Object> get props => [books];

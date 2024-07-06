@@ -10,7 +10,7 @@ class SearchedItem extends StatelessWidget {
     super.key,
   });
 
-  final BookModel book;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {

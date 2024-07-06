@@ -65,7 +65,7 @@ class GestaoDeBooksBody extends StatelessWidget {
     Future.delayed(const Duration(seconds: 3), controller.close);
   }
 
-  ListView _buildListBooks(List<BookModel> books) {
+  ListView _buildListBooks(List<Book> books) {
     return ListView.builder(
       itemCount: books.length,
       itemBuilder: (context, index) {
@@ -76,7 +76,7 @@ class GestaoDeBooksBody extends StatelessWidget {
             book.title,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          subtitle: Text('book.authorsId'),
+          subtitle: Text(book.autor),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -87,7 +87,7 @@ class GestaoDeBooksBody extends StatelessWidget {
               const GutterSmall(),
               IconButton(
                 onPressed: () {
-                  context.read<ListBooksCubit>().deleteBookModel(book.id);
+                  context.read<ListBooksCubit>().deleteBook(book.id);
                 },
                 icon: BlocBuilder<ListBooksCubit, ListBooksState>(
                   builder: (context, state) {

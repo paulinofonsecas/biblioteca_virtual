@@ -17,9 +17,8 @@ class CustomAddNewAuthorEvent extends AddNewAuthorEvent {
 }
 
 class SaveNewAuthorEvent extends AddNewAuthorEvent {
-  SaveNewAuthorEvent({
+  const SaveNewAuthorEvent({
     required this.name,
-    this.author,
     required this.manageMode,
     this.path,
   });
@@ -27,7 +26,6 @@ class SaveNewAuthorEvent extends AddNewAuthorEvent {
   final String name;
   final String? path;
   final ManageMode manageMode;
-  Author? author;
 
   @override
   List<Object> get props => [name, path ?? '', manageMode];

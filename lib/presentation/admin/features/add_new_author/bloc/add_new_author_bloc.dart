@@ -7,7 +7,6 @@ import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_new_author_event.dart';
@@ -32,7 +31,7 @@ class AddNewAuthorBloc extends Bloc<AddNewAuthorEvent, AddNewAuthorState> {
       final image = event.path;
 
       final newToSave = Author(
-        id: event.manageMode == ManageMode.add ? const Uuid().v4(): (Modular.args.data as Author).id,
+        id: const Uuid().v4(),
         name: name,
         photo: image,
       );
@@ -54,16 +53,7 @@ class AddNewAuthorBloc extends Bloc<AddNewAuthorEvent, AddNewAuthorState> {
           },
         );
       } else {
-        await _authorsUseCases.updateAuthor(newToSave)
-        .then((value) => emit(const SaveNewAuthorSuccess()))
-        .onError((error, stackTrace) {
-          log(error.toString());
-          emit(
-            const SaveNewAuthorError(
-              'Ocorreu um erro ao editar o autor',
-            ),
-          );
-        });
+        // await _booksUseCases.updateAuthor(newToSave);
       }
     } catch (e) {
       emit(SaveNewAuthorError('Erro desconhecido\t$e'));

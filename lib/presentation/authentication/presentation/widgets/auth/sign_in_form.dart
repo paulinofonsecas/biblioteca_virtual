@@ -110,7 +110,7 @@ class _LoginFormState extends State<LoginForm> {
         controller: _usernameController,
         decoration: const InputDecoration(
           labelText: 'Email',
-          border: OutlineInputBorder(),
+          border: UnderlineInputBorder(),
         ),
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
@@ -133,7 +133,7 @@ class _LoginFormState extends State<LoginForm> {
         obscureText: isVisible,
         decoration: InputDecoration(
           labelText: 'Palavra-passe',
-          border: const OutlineInputBorder(),
+          border: const UnderlineInputBorder(),
           suffixIcon: IconButton(
             icon: Icon(
               isVisible ? Icons.visibility : Icons.visibility_off,

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
-import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
@@ -10,7 +9,6 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/isbn_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/pick_capa_image_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/pick_pdf_cubit.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/preco_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/resumo_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/titulo_input_cubit.dart';
 import 'package:equatable/equatable.dart';
@@ -38,12 +36,11 @@ class AddNewBookBloc extends Bloc<AddNewBookEvent, AddNewBookState> {
       final context = event.context;
 
       final titulo = context.read<TituloInputCubit>().state.text;
-      final autor = context.read<AutorInputCubit>().state.authors;
+      final autor = context.read<AutorInputCubit>().state.text;
       final isbn = context.read<IsbnInputCubit>().state.text;
       final editora = context.read<EditoraInputCubit>().state.text;
       final resumo = context.read<ResumoInputCubit>().state.text;
       final capa = context.read<PickCapaImageCubit>().state.path;
-      final preco = context.read<PrecoInputCubit>().state.preco;
       final pdf = context.read<PickPDFCubit>().state.path;
 
       if (capa == null || capa.isEmpty) {
@@ -56,19 +53,18 @@ class AddNewBookBloc extends Bloc<AddNewBookEvent, AddNewBookState> {
         return;
       }
 
-      final newBook = BookModel(
+      final newBook = Book(
         id: const Uuid().v4(),
         title: titulo,
-        authors: autor,
+        autor: autor,
         isbn: isbn,
         editora: editora,
         resumo: resumo,
         capa: capa,
         pdf: pdf,
-        preco: Preco(valor: preco),
       );
 
-      final result = await _booksUseCases.addBookModel(newBook);
+      final result = await _booksUseCases.addBook(newBook);
 
       if (result) {
         emit(const SaveNewBookSuccess());

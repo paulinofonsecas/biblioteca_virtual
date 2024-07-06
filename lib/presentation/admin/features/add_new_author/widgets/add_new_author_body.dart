@@ -1,7 +1,6 @@
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/widgets/images_input/image_input_body.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/widgets/name_input_widget.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -31,14 +30,14 @@ class AddNewAuthorBody extends StatelessWidget {
           }
         }
       },
-      child: SingleChildScrollView(
+      child: const SingleChildScrollView(
         child: Column(
           children: [
-            const ImageInputBody(),
-            const Gutter(),
+            ImageInputBody(),
+            Gutter(),
             NameInputWidget(),
-            const Gutter(),
-            const GutterLarge(),
+            Gutter(),
+            GutterLarge(),
           ],
         ),
       ),

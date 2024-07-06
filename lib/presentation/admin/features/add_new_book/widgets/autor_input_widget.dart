@@ -71,7 +71,7 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
         searchFieldProps: const TextFieldProps(
           decoration: InputDecoration(
             hintText: 'Pesquisar autores',
-            border: OutlineInputBorder(
+            border: UnderlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
           ),
@@ -110,14 +110,14 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
       dropdownDecoratorProps: const DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
           hintText: 'Selecionar autores',
-          border: OutlineInputBorder(
+          border: UnderlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
       ),
       onChanged: (value) {
         context.read<AutorInputCubit>().changeAuthors(
-              value.map(AuthorModel.fromJson).toList(),
+              value.map((e) => AuthorModel.fromJson(e).id).toList(),
             );
       },
       validator: (value) {
@@ -150,7 +150,7 @@ class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
 //           ),
 //         ),
 //         label: const Text('Autor do livro'),
-//         border: OutlineInputBorder(
+//         border: UnderlineInputBorder(
 //           borderRadius: BorderRadius.circular(kDefaultPadding / 2),
 //         ),
 //       ),

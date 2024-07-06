@@ -16,7 +16,7 @@ final class SearchListBooksDeleteLoading extends SearchListBooksState {}
 final class SearchListBooksLoaded extends SearchListBooksState {
   const SearchListBooksLoaded(this.books);
 
-  final List<BookModel> books;
+  final List<Book> books;
 
   @override
   List<Object> get props => [books];

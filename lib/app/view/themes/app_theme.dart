@@ -11,7 +11,7 @@ ThemeData appTheme(AppBrightnessState appBrightnessState) => ThemeData(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding / 2,
         ),
-        border: OutlineInputBorder(
+        border: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),

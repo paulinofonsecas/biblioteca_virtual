@@ -6,7 +6,7 @@ import 'package:flutter_gutter/flutter_gutter.dart';
 class MoreFromAutorWidget extends StatelessWidget {
   const MoreFromAutorWidget({required this.book, super.key});
 
-  final BookModel book;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class MoreBookForAuthorWidget extends StatelessWidget {
     super.key,
   });
 
-  final BookModel book;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class MoreBookForAuthorWidget extends StatelessWidget {
                       ),
                 ),
                 Text(
-                  'book.authorsId',
+                  book.autor,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         color: Colors.blue[400],
                       ),

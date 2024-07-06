@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:bilioteca_virtual/domain/entities/book.dart';
-import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/discovery_book_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/in_line_book_medium_display.dart';
@@ -47,7 +46,7 @@ class _BuildLiview extends StatelessWidget {
     required this.books,
   });
 
-  final List<BookModel> books;
+  final List<Book> books;
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +57,12 @@ class _BuildLiview extends StatelessWidget {
             onTap: () {
               AdminViewBookPage.toScreen(book.id);
             },
-            book: BookModel(
+            book: Book(
               id: book.id,
               title: book.title,
-              authors: book.authors,
+              autor: book.autor,
               capa: book.capa,
               pdf: book.pdf,
-              preco: Preco.gratis(),
             ),
           );
         }),

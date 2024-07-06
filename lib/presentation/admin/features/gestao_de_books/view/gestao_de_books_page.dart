@@ -39,7 +39,7 @@ class GestaoDeBooksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        return context.read<ListBooksCubit>().loadBookList();
+        context.read<ListBooksCubit>().loadBookList();
       },
       child: const GestaoDeBooksBody(),
     );
