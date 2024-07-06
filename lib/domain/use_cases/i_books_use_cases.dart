@@ -5,7 +5,7 @@ abstract class IBooksUseCases {
   Future<bool> addBookModel(BookModel book);
   Future<BookModel> getBookModel(String id);
   Future<bool> deleteBookModel(String id);
-  Future<List<BookModel>> getBooks();
+  Future<List<BookModel>> getBooks({bool cache = true});
 }
 
 class BooksUseCases implements IBooksUseCases {
@@ -24,8 +24,8 @@ class BooksUseCases implements IBooksUseCases {
   }
 
   @override
-  Future<List<BookModel>> getBooks() {
-    return _booksRepository.getBooks();
+  Future<List<BookModel>> getBooks({bool cache = true}) {
+    return _booksRepository.getBooks(cache: cache);
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/pick_pdf_cubit.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/custom_title_widget.dart';
@@ -32,6 +34,10 @@ class PDFInputWidget extends StatelessWidget {
             );
           },
           validator: (value) {
+            if (getIt.isRegistered<BookModel>()) {
+              return null;
+            }
+
             if (context.read<PickPDFCubit>().state is! PickPDFSuccess) {
               return 'Selecione o livro pdf';
             } else {

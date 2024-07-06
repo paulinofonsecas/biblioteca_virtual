@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/cubit/list_books_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -76,12 +77,14 @@ class GestaoDeBooksBody extends StatelessWidget {
             book.title,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          subtitle: Text('book.authorsId'),
+          subtitle: const Text('book.authorsId'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, AddNewBookPage.route(book: book));
+                },
                 icon: const Icon(Icons.edit),
               ),
               const GutterSmall(),

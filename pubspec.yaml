@@ -51,6 +51,7 @@ dependencies:
   flutter_modular: ^6.3.4
   google_mobile_ads: ^5.1.0
   lottie: ^3.1.2
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   bloc_test: ^9.1.6

@@ -52,8 +52,12 @@ class BooksRepository implements IBooksRepository {
   @override
   Future<bool> addBookModel(BookModel book) async {
     try {
-      final capaUrl = await _salvarCapaNoStorage(book);
-      final pdfUrl = await _salvarArquivoNoStorage(book);
+      final capaUrl = book.capa.contains('https')
+          ? book.capa
+          : await _salvarCapaNoStorage(book);
+      final pdfUrl = book.pdf.contains('https')
+          ? book.pdf
+          : await _salvarArquivoNoStorage(book);
 
       final toSaveBook = BookModel.fromEntity(book).copyWith(
         capa: capaUrl,
@@ -88,8 +92,8 @@ class BooksRepository implements IBooksRepository {
   }
 
   @override
-  Future<List<BookModel>> getBooks([bool inCache = true]) async {
-    if (inCache == true && _cachedBooks.isNotEmpty) {
+  Future<List<BookModel>> getBooks({bool cache = true}) async {
+    if (cache == true && _cachedBooks.isNotEmpty) {
       final searchedList = _getCachedBooks();
 
       if (searchedList.isNotEmpty) {

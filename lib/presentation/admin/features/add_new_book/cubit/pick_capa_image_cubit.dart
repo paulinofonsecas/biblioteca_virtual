@@ -18,4 +18,9 @@ class PickCapaImageCubit extends Cubit<PickCapaImageState> {
       emit(PickCapaImageError(e.toString()));
     }
   }
+
+  void changePath(String value) {
+    emit(PickCapaImageSuccess(value));
+  }
+
 }
