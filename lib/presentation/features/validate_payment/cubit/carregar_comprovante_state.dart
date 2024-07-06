@@ -9,6 +9,8 @@ sealed class CarregarComprovanteState extends Equatable {
 
 final class CarregarComprovanteInitial extends CarregarComprovanteState {}
 
+final class CarregarComprovanteLoading extends CarregarComprovanteState {}
+
 final class CarregarComprovanteFailed extends CarregarComprovanteState {}
 
 final class CarregarComprovanteWrongFileType extends CarregarComprovanteState {}

@@ -8,18 +8,33 @@ class ValidarButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton.filledTonal(
-      onPressed: () {
-        context.read<ValidarComprovativoCubit>().validar();
+    return BlocBuilder<ValidarComprovativoCubit, ValidarComprovativoState>(
+      builder: (context, state) {
+        if (state is ValidarComprovativoLoading) {
+          return const CircularProgressIndicator();
+        }
+
+        return Theme(
+          data: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.amber,
+            ),
+          ),
+          child: FilledButton(
+            onPressed: () {
+              context.read<ValidarComprovativoCubit>().validar();
+            },
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GutterSmall(),
+                Text('Validar pagamento'),
+                GutterSmall(),
+              ],
+            ),
+          ),
+        );
       },
-      icon: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GutterSmall(),
-          Text('Validar pagamento'),
-          GutterSmall(),
-        ],
-      ),
     );
   }
 }

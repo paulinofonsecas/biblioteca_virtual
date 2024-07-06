@@ -29,6 +29,15 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
     final result = await verifyPayment(file);
 
     if (result is VerifyPaymentSuccess) {
+      if (result.sTATUS == 423) {
+        emit(
+          const ValidarComprovativoError(
+            message: 'O comprovativo não representa uma transferência',
+          ),
+        );
+        return;
+      }
+
       emit(ValidarComprovativoSuccess(result: result));
     } else {
       emit(

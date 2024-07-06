@@ -8,6 +8,7 @@ class CarregarComprovanteCubit extends Cubit<CarregarComprovanteState> {
   CarregarComprovanteCubit() : super(CarregarComprovanteInitial());
 
   Future<void> selecionarComprovativo() async {
+    emit(CarregarComprovanteLoading());
     final file = await FilePicker.platform.pickFiles(
       dialogTitle: 'Selecionar comprovativo',
     );
