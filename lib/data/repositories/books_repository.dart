@@ -142,4 +142,13 @@ class BooksRepository implements IBooksRepository {
 
     return status;
   }
+
+  @override
+  Future<List<BookModel>> getBooksFromAuthor(String authorId) async {
+    final books = _cachedBooks
+        .where((element) => element.authors.map((x) => x.id).contains(authorId))
+        .toList();
+
+    return books;
+  }
 }
