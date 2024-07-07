@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:bilioteca_virtual/core/util/snackbar_message.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/fazer_check_out_modal.dart';
@@ -22,7 +23,12 @@ class BuildComprarLivroButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: OutlinedButton.icon(
-          icon: const Icon(FontAwesomeIcons.shoppingBag, size: 18),
+          icon: Icon(
+            book.preco == Preco.gratis()
+                ? FontAwesomeIcons.book
+                : FontAwesomeIcons.shoppingBag,
+            size: 18,
+          ),
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.white,
             backgroundColor: Colors.green,
@@ -33,6 +39,14 @@ class BuildComprarLivroButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
+            if (book.preco == Preco.gratis()) {
+              SnackBarMessage.showSuccessSnackBar(
+                message: 'Livro adicionado',
+                context: context,
+              );
+              return;
+            }
+
             showCupertinoModalBottomSheet(
               context: context,
               builder: (context) => FazerCheckOutModal(
