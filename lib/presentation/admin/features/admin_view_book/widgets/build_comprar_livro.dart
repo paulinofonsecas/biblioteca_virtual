@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/fazer_check_out_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -39,7 +40,9 @@ class BuildComprarLivroButton extends StatelessWidget {
               ),
             );
           },
-          label: const Text('Comprar agora'),
+          label: book.preco == Preco.gratis()
+              ? const Text('Adicionar a lista de leituras')
+              : const Text('Comprar agora'),
         ),
       ),
     );
