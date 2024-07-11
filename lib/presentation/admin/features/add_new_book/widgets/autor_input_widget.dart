@@ -1,12 +1,12 @@
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/data/models/author_model.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/add_new_author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
-import 'package:bilioteca_virtual/presentation/features/global_search/bloc/bloc.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart'
-    hide ModularWatchExtension;
 
 class AutorInputWidget extends StatelessWidget {
   const AutorInputWidget({super.key});
@@ -15,16 +15,10 @@ class AutorInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => DropdownAutorInputCubit(),
-      child: Row(
+      child: const Row(
         children: [
-          const Expanded(
+          Expanded(
             child: CustomAuthorDropdown(),
-          ),
-          IconButton(
-            onPressed: () {
-              Modular.to.pushNamed('/admin/add-new-author');
-            },
-            icon: const Icon(Icons.add),
           ),
         ],
       ),
@@ -41,6 +35,19 @@ class CustomAuthorDropdown extends StatefulWidget {
 
 class _CustomAuthorDropdownState extends State<CustomAuthorDropdown> {
   final selectedItems = <String>[];
+
+  @override
+  void initState() {
+    if (getIt.isRegistered<BookModel>()) {
+      final book = getIt.get<BookModel>();
+
+      setState(() {
+        selectedItems.addAll(book.authors.map((e) => e.toJson()));
+      });
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

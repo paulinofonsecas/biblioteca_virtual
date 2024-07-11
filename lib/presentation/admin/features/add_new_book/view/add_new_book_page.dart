@@ -1,6 +1,9 @@
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/core/util/snackbar_message.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/bloc/edit_book_bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/editora_input_cubit.dart';
@@ -18,18 +21,54 @@ import 'package:loader_overlay/loader_overlay.dart';
 /// {@template add_new_book_page}
 /// A description for AddNewBookPage
 /// {@endtemplate}
-class AddNewBookPage extends StatelessWidget {
+class AddNewBookPage extends StatefulWidget {
   /// {@macro add_new_book_page}
-  const AddNewBookPage({super.key});
+  const AddNewBookPage({super.key, this.book});
+
+  final BookModel? book;
 
   /// The static route for AddNewBookPage
-  static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const AddNewBookPage());
+  static Route<dynamic> route({BookModel? book}) {
+    return MaterialPageRoute<dynamic>(
+      builder: (_) => AddNewBookPage(
+        book: book,
+      ),
+    );
+  }
+
+  @override
+  State<AddNewBookPage> createState() => _AddNewBookPageState();
+}
+
+class _AddNewBookPageState extends State<AddNewBookPage> {
+  @override
+  void initState() {
+    if (widget.book != null) {
+      if (getIt.isRegistered<BookModel>()) {
+        getIt.unregister<BookModel>();
+      }
+
+      getIt.registerSingleton<BookModel>(widget.book!);
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (getIt.isRegistered<BookModel>()) {
+      getIt.unregister<BookModel>();
+    }
+    super.dispose();
   }
 
   void onTap(BuildContext context) {
     if (context.read<FormControlCubit>().formKey.currentState!.validate()) {
-      context.read<AddNewBookBloc>().add(SaveNewBookEvent(context));
+      if (widget.book != null) {
+        context.read<EditBookBloc>().add(UpdateNewBookEvent(context));
+      } else {
+        print('Add');
+        // context.read<AddNewBookBloc>().add(SaveNewBookEvent(context));
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -41,10 +80,15 @@ class AddNewBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEditMode = widget.book != null;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => AddNewBookBloc(),
+        ),
+        BlocProvider(
+          create: (context) => EditBookBloc(),
         ),
         BlocProvider(
           create: (context) => DropdownAutorInputCubit(),
@@ -109,14 +153,14 @@ class AddNewBookPage extends StatelessWidget {
             },
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('Novo Livro'),
+                title: Text(isEditMode ? 'Editar Livro' : 'Novo Livro'),
                 actions: [
                   TextButton.icon(
                     onPressed: () {
                       onTap(context);
                     },
                     icon: const Icon(FontAwesomeIcons.floppyDisk),
-                    label: const Text('Salvar'),
+                    label: Text(isEditMode ? 'Atualizar' : 'Salvar'),
                   ),
                 ],
               ),

@@ -54,10 +54,15 @@ class _ImageWidget extends StatelessWidget {
                   aspectRatio: 0.5 / 0.6,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.file(
-                      File(state.path!),
-                      fit: BoxFit.cover,
-                    ),
+                    child: state.path!.contains('https')
+                        ? Image.network(
+                            state.path!,
+                            fit: BoxFit.fill,
+                          )
+                        : Image.file(
+                            File(state.path!),
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 Center(
