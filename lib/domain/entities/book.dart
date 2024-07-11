@@ -6,6 +6,8 @@ import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:flutter/foundation.dart';
 
 class BookModel {
+  var author;
+
   BookModel({
     required this.id,
     required this.title,

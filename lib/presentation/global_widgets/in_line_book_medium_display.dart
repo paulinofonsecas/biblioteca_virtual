@@ -58,7 +58,7 @@ class InLineBookMediumDisplay extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                       ),
-                      Text('Autor: ${book.title}'),
+                      Text(book.authors.firstOrNull?.name ?? 'N/D'),
                     ],
                   ),
                 ),
@@ -112,7 +112,7 @@ class _FooterWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Autor: ',
+                book.authors.firstOrNull?.name ?? 'N/D',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(

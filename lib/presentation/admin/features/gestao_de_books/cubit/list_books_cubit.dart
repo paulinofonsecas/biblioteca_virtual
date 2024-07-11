@@ -11,13 +11,15 @@ part 'list_books_state.dart';
 class ListBooksCubit extends Cubit<ListBooksState> {
   ListBooksCubit() : super(ListBooksInitial());
 
-  Future<void> loadBookList() async {
+  Future<void> loadBookList({bool cache = true}) async {
     try {
       emit(ListBooksLoading());
       final booksUC = getIt<IBooksUseCases>();
 
       await booksUC
-          .getBooks()
+          .getBooks(
+            cache: cache,
+          )
           .then((books) => emit(ListBooksLoaded(books)))
           .onError(
         (error, stackTrace) {

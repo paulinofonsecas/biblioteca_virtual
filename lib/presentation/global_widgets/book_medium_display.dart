@@ -78,7 +78,7 @@ class _FooterWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Autor: ',
+                book.authors.firstOrNull?.name ?? 'N/D',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -86,7 +86,7 @@ class _FooterWidget extends StatelessWidget {
                     ),
               ),
               Text(
-                'book.authorsId',
+                book.authors.firstOrNull?.name ?? 'N/D',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(),
