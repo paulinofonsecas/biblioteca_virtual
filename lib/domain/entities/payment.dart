@@ -3,23 +3,26 @@ import 'dart:convert';
 
 class Payment {
   final String? id;
-  final double? amount;
-  final String? transactionId;
+  final String bookId;
+  final double amount;
+  final String transactionId;
   final String? currency;
-  final String? paymentMethod;
-  final DateTime? date;
+  final String paymentMethod;
+  final DateTime date;
 
   Payment({
+    required this.bookId,
+    required this.amount,
+    required this.transactionId,
+    required this.paymentMethod,
+    required this.date,
     this.id,
-    this.amount,
-    this.transactionId,
     this.currency,
-    this.paymentMethod,
-    this.date,
   });
 
   Payment copyWith({
     String? id,
+    String? bookId,
     double? amount,
     String? transactionId,
     String? currency,
@@ -28,6 +31,7 @@ class Payment {
   }) {
     return Payment(
       id: id ?? this.id,
+      bookId: bookId ?? this.bookId,
       amount: amount ?? this.amount,
       transactionId: transactionId ?? this.transactionId,
       currency: currency ?? this.currency,
@@ -39,26 +43,24 @@ class Payment {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'bookId': bookId,
       'amount': amount,
       'transactionId': transactionId,
       'currency': currency,
       'paymentMethod': paymentMethod,
-      'date': date?.millisecondsSinceEpoch,
+      'date': date.millisecondsSinceEpoch,
     };
   }
 
   factory Payment.fromMap(Map<String, dynamic> map) {
     return Payment(
       id: map['id'] != null ? map['id'] as String : null,
-      amount: map['amount'] != null ? map['amount'] as double : null,
-      transactionId:
-          map['transactionId'] != null ? map['transactionId'] as String : null,
+      bookId: map['bookId'] as String,
+      amount: map['amount'] as double,
+      transactionId: map['transactionId'] as String,
       currency: map['currency'] != null ? map['currency'] as String : null,
-      paymentMethod:
-          map['paymentMethod'] != null ? map['paymentMethod'] as String : null,
-      date: map['date'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['date'] as int)
-          : null,
+      paymentMethod: map['paymentMethod'] as String,
+      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
     );
   }
 
@@ -69,7 +71,7 @@ class Payment {
 
   @override
   String toString() {
-    return 'Payment(id: $id, amount: $amount, transactionId: $transactionId, currency: $currency, paymentMethod: $paymentMethod, date: $date)';
+    return 'Payment(id: $id, bookId: $bookId, amount: $amount, transactionId: $transactionId, currency: $currency, paymentMethod: $paymentMethod, date: $date)';
   }
 
   @override
@@ -77,6 +79,7 @@ class Payment {
     if (identical(this, other)) return true;
 
     return other.id == id &&
+        other.bookId == bookId &&
         other.amount == amount &&
         other.transactionId == transactionId &&
         other.currency == currency &&
@@ -87,6 +90,7 @@ class Payment {
   @override
   int get hashCode {
     return id.hashCode ^
+        bookId.hashCode ^
         amount.hashCode ^
         transactionId.hashCode ^
         currency.hashCode ^
