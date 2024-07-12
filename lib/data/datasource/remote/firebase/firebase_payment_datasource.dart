@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:bilioteca_virtual/domain/entities/payment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-abstract class FirebasePaymentDatasource {
+abstract class IFirebasePaymentDatasource {
   Future<void> processPayment(Payment payment);
   Future<void> refundPayment(String paymentId);
   Future<Payment> getPaymentDetails(String paymentId);
   Future<List<Payment>> getAllPayments();
 }
 
-class FirebasePaymentDatasourceImpl implements FirebasePaymentDatasource {
+class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
   FirebasePaymentDatasourceImpl(FirebaseFirestore? fire)
       : firestore = fire ?? FirebaseFirestore.instance;
 
