@@ -44,9 +44,9 @@ class BuildComprarLivroButton extends StatelessWidget {
           ),
           onPressed: () async {
             if (book.preco == Preco.gratis()) {
-              context.read<ListaLeiturasBloc>().add(
-                    AddBookToListaLeiturasEvent(book),
-                  );
+              context
+                  .read<ListaLeiturasBloc>()
+                  .add(AddBookToListaLeiturasEvent(book));
               return;
             }
 
