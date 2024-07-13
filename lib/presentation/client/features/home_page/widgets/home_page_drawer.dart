@@ -10,11 +10,17 @@ class HomePageDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(
-            child: Container(
-              color: Colors.red,
+          const DrawerHeader(
+            child: Center(
+              child: Text('Biblioteca Virtual'),
             ),
           ),
+          ListTile(
+            onTap: () {},
+            title: const Text('Lista de leitura'),
+            trailing: const Icon(Icons.book),
+          ),
+          const Divider(),
           ListTile(
             onTap: () {
               getIt<AuthBloc>().add(LogOutEvent());
