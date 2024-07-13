@@ -4,7 +4,7 @@ import 'package:bilioteca_virtual/domain/repositories/i_payment_repository.dart'
 
 class PaymentRepository implements IPaymentRepository {
   PaymentRepository(this._paymentDataSource);
-  final FirebasePaymentDatasourceImpl _paymentDataSource;
+  final IFirebasePaymentDatasource _paymentDataSource;
 
   @override
   Future<List<Payment>> getAllPayments() {
