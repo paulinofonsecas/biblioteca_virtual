@@ -10,7 +10,7 @@ class ListaLeiturasPage extends StatelessWidget {
   /// {@macro lista_leituras_page}
   const ListaLeiturasPage({super.key});
 
-  static void toScreen(String bookId) {
+  static void toScreen() {
     Modular.to.pushNamed(
       '/lista-leitura',
     );
