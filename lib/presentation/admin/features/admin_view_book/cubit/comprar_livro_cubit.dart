@@ -10,4 +10,6 @@ class ComprarLivroCubit extends Cubit<ComprarLivroState> {
   void comprarLivro({required BookModel book}) {}
 
   void validarComprovante() {}
+
+  void addBookToLibrary(BookModel book) {}
 }

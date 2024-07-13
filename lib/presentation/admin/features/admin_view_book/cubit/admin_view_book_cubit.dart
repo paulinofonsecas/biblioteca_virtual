@@ -22,4 +22,6 @@ class AdminViewBookCubit extends Cubit<AdminViewBookState> {
       emit(AdminViewBookError(error.toString()));
     });
   }
+
+  void addBookToLibrary(BookModel book) {}
 }

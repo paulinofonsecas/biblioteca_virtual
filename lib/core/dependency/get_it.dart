@@ -1,12 +1,16 @@
 import 'package:bilioteca_virtual/core/network/network_info.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_authors_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_authors_datasource.dart';
+import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_payment_datasource.dart';
 import 'package:bilioteca_virtual/data/repositories/authors_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/books_repository.dart';
+import 'package:bilioteca_virtual/data/repositories/payment_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_author_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
+import 'package:bilioteca_virtual/domain/repositories/i_payment_repository.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
+import 'package:bilioteca_virtual/domain/use_cases/payment_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/datasources/auth_remote_data_source.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/repositories/authentication_repository.dart';
@@ -52,6 +56,17 @@ Future<void> setupDependencies() async {
     ..registerLazySingleton(() => CheckVerificationUseCase(getIt()))
     ..registerLazySingleton(() => LogOutUseCase(getIt()))
     ..registerLazySingleton(() => GoogleAuthUseCase(getIt()))
+
+    // payment Clean Arch
+    ..registerLazySingleton<IFirebasePaymentDatasource>(
+      () => FirebasePaymentDatasourceImpl(getIt()),
+    )
+    ..registerLazySingleton<IPaymentRepository>(
+      () => PaymentRepository(getIt()),
+    )
+    ..registerLazySingleton<IPaymentUseCases>(
+      () => PaymentUseCases(getIt()),
+    )
 
 // Bloc
 

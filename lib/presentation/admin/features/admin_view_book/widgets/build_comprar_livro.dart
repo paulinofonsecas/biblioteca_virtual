@@ -1,10 +1,14 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
-import 'package:bilioteca_virtual/core/util/snackbar_message.dart';
+import 'dart:async';
+
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/comprar_livro_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/fazer_check_out_modal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -38,19 +42,23 @@ class BuildComprarLivroButton extends StatelessWidget {
               side: BorderSide(),
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
             if (book.preco == Preco.gratis()) {
-              SnackBarMessage.showSuccessSnackBar(
-                message: 'Livro adicionado',
-                context: context,
-              );
+              context.read<ComprarLivroCubit>().addBookToLibrary(book);
               return;
             }
 
-            showCupertinoModalBottomSheet(
-              context: context,
-              builder: (context) => FazerCheckOutModal(
-                book: book,
+            unawaited(
+              showCupertinoModalBottomSheet(
+                context: context,
+                isDismissible: false,
+                useRootNavigator: true,
+                builder: (c) => BlocProvider.value(
+                  value: context.read<ValidarCompraCubit>(),
+                  child: FazerCheckOutModal(
+                    book: book,
+                  ),
+                ),
               ),
             );
           },
