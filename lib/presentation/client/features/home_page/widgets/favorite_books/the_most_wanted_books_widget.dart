@@ -1,11 +1,10 @@
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/most_wanted_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/p_d_f_reader.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/book_mini_display.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart'
-    hide ModularWatchExtension;
 
 class TheMostWantedBooksWidget extends StatelessWidget {
   const TheMostWantedBooksWidget({super.key});
@@ -65,13 +64,7 @@ class _BooksListView extends StatelessWidget {
             return BookMiniDisplay(
               book: book,
               onTap: () {
-                Modular.to.pushNamed(
-                  '/admin/view-book',
-                  arguments: {
-                    'bookId': book.id,
-                    'parent': '/home-page',
-                  },
-                );
+                AdminViewBookPage.toScreen(book.id);
               },
             );
           },

@@ -18,7 +18,7 @@ class AdminViewBookPage extends StatefulWidget {
 
   static void toScreen(String bookId) {
     Modular.to.pushNamed(
-      '/admin/view-book/$bookId',
+      '/view-book/$bookId',
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:bilioteca_virtual/presentation/admin/admin_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/view/add_new_author_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
+import 'package:bilioteca_virtual/presentation/client/features/home_page/view/home_page.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -12,7 +13,7 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    Modular.setInitialRoute('/admin');
+    Modular.setInitialRoute('/client');
 
     r
       ..child(
@@ -44,7 +45,7 @@ class AppModule extends Module {
         child: (context) => const AddNewBookPage(),
       )
       ..child(
-        '/admin/view-book/:bookId',
+        '/view-book/:bookId',
         child: (context) {
           return AdminViewBookPage(
             bookId: r.args.params['bookId'] as String,
@@ -55,12 +56,12 @@ class AppModule extends Module {
       ..child(
         '/admin/read_pdf/:bookId',
         child: (context) {
-          print(r.args.params['bookId']);
           return PDFReaderPage(
             bookId: r.args.params['bookId'] as String,
             parent: 'parent',
           );
         },
-      );
+      )
+      ..child('/client', child: (c) => const HomePage());
   }
 }
