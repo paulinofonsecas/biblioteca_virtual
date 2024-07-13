@@ -67,7 +67,7 @@ class _ActionsState extends State<_Actions> {
             context: context,
             builder: (context) =>
                 SuccessValidationAlertDialog(state: state.result),
-          );
+          ).then((e) => Navigator.of(context).pop(state.result));
         }
       },
       builder: (c, s) {
