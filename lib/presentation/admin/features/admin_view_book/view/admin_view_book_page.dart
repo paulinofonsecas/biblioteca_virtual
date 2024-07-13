@@ -3,6 +3,7 @@ import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/admin_view_book_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/get_books_from_author_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/admin_view_book_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -52,6 +53,9 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
         ),
         BlocProvider(
           create: (context) => AdminViewBookCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ValidarCompraCubit(),
         ),
         BlocProvider(
           create: (context) => GetBooksFromAuthorCubit(),

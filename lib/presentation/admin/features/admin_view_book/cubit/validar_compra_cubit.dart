@@ -20,7 +20,7 @@ class ValidarCompraCubit extends Cubit<ValidarCompraState> {
     BookModel book,
     VerifyPaymentSuccess? paymentValidator,
   ) async {
-    emit(ValidarCompraLoading());
+    emit(ValidarCompraPaymentLoading());
 
     if (paymentValidator != null) {
       if (book.preco.valor == paymentValidator.dINHEIRO!.toDouble()) {
@@ -57,5 +57,9 @@ class ValidarCompraCubit extends Cubit<ValidarCompraState> {
     } else {
       emit(const ValidarCompraPaymentFailure('Pagamento inválido'));
     }
+  }
+
+  void reset() {
+    emit(ValidarCompraInitial());
   }
 }
