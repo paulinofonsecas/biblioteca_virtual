@@ -9,19 +9,25 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
 
   final FirebaseFirestore _firestore;
   final String collectionPath = 'lista-leituras';
+  final documentId = '123';
 
   @override
-  Future<bool> addBook(BookModel book) {
+  Future<bool> addBook(BookModel book) async {
+    // todo
+    // if (!getIt.isRegistered<MyUser>()) {
+    //   throw Exception('Usuário não logado');
+    // }
+
     try {
-      return _firestore
+      await _firestore
           .collection(collectionPath)
+          .doc(documentId)
+          .collection('livros')
           .doc(book.id)
-          .set(book.toMap())
-          .then((e) => true)
-          .onError((_, __) => false);
-    } catch (e) {
-      log(e.toString());
-      rethrow;
+          .set(book.toMap());
+      return true;
+    } catch (_) {
+      return false;
     }
   }
 
@@ -30,6 +36,8 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
     try {
       return _firestore
           .collection(collectionPath)
+          .doc(documentId)
+          .collection('livros')
           .doc(id)
           .delete()
           .then((e) => true)
@@ -45,6 +53,8 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
     try {
       return _firestore
           .collection(collectionPath)
+          .doc(documentId)
+          .collection('livros')
           .where('id', isEqualTo: id)
           .get()
           .then((value) {
@@ -61,7 +71,12 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
   @override
   Future<List<BookModel>> getListaLeitura() {
     try {
-      return _firestore.collection(collectionPath).get().then((value) {
+      return _firestore
+          .collection(collectionPath)
+          .doc(documentId)
+          .collection('livros')
+          .get()
+          .then((value) {
         final saida = <BookModel>[];
         for (final book in value.docs) {
           final b = BookModel.fromMap(book.data());

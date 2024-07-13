@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
@@ -26,47 +27,74 @@ class BuildComprarLivroButton extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: OutlinedButton.icon(
-          icon: Icon(
-            book.preco == Preco.gratis()
-                ? FontAwesomeIcons.book
-                : FontAwesomeIcons.shoppingBag,
-            size: 18,
-          ),
-          style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.green,
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            shape: const BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              side: BorderSide(),
-            ),
-          ),
-          onPressed: () async {
-            if (book.preco == Preco.gratis()) {
-              context
-                  .read<ListaLeiturasBloc>()
-                  .add(AddBookToListaLeiturasEvent(book));
-              return;
+        child: BlocConsumer<ListaLeiturasBloc, ListaLeiturasState>(
+          listener: (context, state) {
+            if (state is AddListaLeiturasSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text('Livro adicionado a lista de leitura'),
+                ),
+              );
             }
 
-            unawaited(
-              showCupertinoModalBottomSheet(
-                context: context,
-                isDismissible: false,
-                useRootNavigator: true,
-                builder: (c) => BlocProvider.value(
-                  value: context.read<ValidarCompraCubit>(),
-                  child: FazerCheckOutModal(
-                    book: book,
-                  ),
+            if (state is AddListaLeiturasFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                ),
+              );
+            }
+          },
+          bloc: getIt<ListaLeiturasBloc>(),
+          builder: (context, state) {
+            if (state is AddListaLeiturasLoading) {
+              return const CircularProgressIndicator();
+            }
+
+            return OutlinedButton.icon(
+              icon: Icon(
+                book.preco == Preco.gratis()
+                    ? FontAwesomeIcons.book
+                    : FontAwesomeIcons.shoppingBag,
+                size: 18,
+              ),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                shape: const BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  side: BorderSide(),
                 ),
               ),
+              onPressed: () async {
+                if (book.preco == Preco.gratis()) {
+                  getIt<ListaLeiturasBloc>()
+                      .add(AddBookToListaLeiturasEvent(book));
+                  return;
+                }
+
+                unawaited(
+                  showCupertinoModalBottomSheet(
+                    context: context,
+                    isDismissible: false,
+                    useRootNavigator: true,
+                    builder: (c) => BlocProvider.value(
+                      value: context.read<ValidarCompraCubit>(),
+                      child: FazerCheckOutModal(
+                        book: book,
+                      ),
+                    ),
+                  ),
+                );
+              },
+              label: book.preco == Preco.gratis()
+                  ? const Text('Adicionar a lista de leituras')
+                  : const Text('Comprar agora'),
             );
           },
-          label: book.preco == Preco.gratis()
-              ? const Text('Adicionar a lista de leituras')
-              : const Text('Comprar agora'),
         ),
       ),
     );
