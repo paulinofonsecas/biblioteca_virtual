@@ -28,7 +28,19 @@ class ListaLeiturasState extends Equatable {
 /// {@template lista_leituras_initial}
 /// The initial state of ListaLeiturasState
 /// {@endtemplate}
-class ListaLeiturasInitial extends ListaLeiturasState {
-  /// {@macro lista_leituras_initial}
-  const ListaLeiturasInitial() : super();
+class ListaLeiturasInitial extends ListaLeiturasState {}
+
+class AddListaLeiturasLoading extends ListaLeiturasState {}
+
+class AddListaLeiturasSuccess extends ListaLeiturasState {
+  const AddListaLeiturasSuccess();
+}
+
+class AddListaLeiturasFailure extends ListaLeiturasState {
+  const AddListaLeiturasFailure(this.message);
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
 }

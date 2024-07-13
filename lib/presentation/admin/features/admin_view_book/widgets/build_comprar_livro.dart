@@ -4,9 +4,9 @@ import 'dart:async';
 
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/comprar_livro_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/fazer_check_out_modal.dart';
+import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/bloc/lista_leituras_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,7 +44,9 @@ class BuildComprarLivroButton extends StatelessWidget {
           ),
           onPressed: () async {
             if (book.preco == Preco.gratis()) {
-              context.read<ComprarLivroCubit>().addBookToLibrary(book);
+              context.read<ListaLeiturasBloc>().add(
+                    AddBookToListaLeiturasEvent(book),
+                  );
               return;
             }
 
