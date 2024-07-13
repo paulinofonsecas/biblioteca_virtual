@@ -34,7 +34,7 @@ class ListaLeituraRepository implements IListaLeituraRepository {
   }
 
   @override
-  Future<BookModel> getBookModel(String id) {
+  Future<BookModel?> getBookModel(String id) {
     return _datasource.getBookModel(id);
   }
 

@@ -5,6 +5,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cu
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/get_books_from_author_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/admin_view_book_body.dart';
+import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/cubit/esta_na_lista_de_leitura_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -59,6 +60,9 @@ class _AdminViewBookPageState extends State<AdminViewBookPage> {
         ),
         BlocProvider(
           create: (context) => GetBooksFromAuthorCubit(),
+        ),
+        BlocProvider(
+          create: (context) => EstaNaListaDeLeituraCubit(),
         ),
       ],
       child: PopScope(

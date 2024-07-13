@@ -8,6 +8,8 @@ import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/fazer_check_out_modal.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/bloc/lista_leituras_bloc.dart';
+import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/cubit/esta_na_lista_de_leitura_cubit.dart';
+import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,56 +49,84 @@ class BuildComprarLivroButton extends StatelessWidget {
             }
           },
           bloc: getIt<ListaLeiturasBloc>(),
-          builder: (context, state) {
+          builder: (t, state) {
             if (state is AddListaLeiturasLoading) {
               return const CircularProgressIndicator();
             }
 
-            return OutlinedButton.icon(
-              icon: Icon(
-                book.preco == Preco.gratis()
-                    ? FontAwesomeIcons.book
-                    : FontAwesomeIcons.shoppingBag,
-                size: 18,
-              ),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.green,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                shape: const BeveledRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  side: BorderSide(),
-                ),
-              ),
-              onPressed: () async {
-                if (book.preco == Preco.gratis()) {
-                  getIt<ListaLeiturasBloc>()
-                      .add(AddBookToListaLeiturasEvent(book));
-                  return;
+            return BlocBuilder<EstaNaListaDeLeituraCubit,
+                EstaNaListaDeLeituraState>(
+              bloc: context.read<EstaNaListaDeLeituraCubit>()
+                ..estaNaListaDeLeituras(book.id),
+              builder: (context, estaNaListaState) {
+                if (estaNaListaState is EstaNaListaDeLeituraLoading) {
+                  return const CircularProgressIndicator();
                 }
 
-                unawaited(
-                  showCupertinoModalBottomSheet(
-                    context: context,
-                    isDismissible: false,
-                    useRootNavigator: true,
-                    builder: (c) => BlocProvider.value(
-                      value: context.read<ValidarCompraCubit>(),
-                      child: FazerCheckOutModal(
-                        book: book,
-                      ),
+                return OutlinedButton.icon(
+                  icon: Icon(
+                    book.preco == Preco.gratis()
+                        ? FontAwesomeIcons.book
+                        : FontAwesomeIcons.shoppingBag,
+                    size: 18,
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 10,
+                    ),
+                    shape: const BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      side: BorderSide(),
                     ),
                   ),
+                  onPressed: () async {
+                    if (_isInListaLeitura(estaNaListaState)) {
+                      PDFReaderPage.toScreen(book.id);
+                      return;
+                    }
+
+                    if (book.preco == Preco.gratis()) {
+                      getIt<ListaLeiturasBloc>()
+                          .add(AddBookToListaLeiturasEvent(book));
+                      return;
+                    }
+
+                    unawaited(
+                      showCupertinoModalBottomSheet(
+                        context: context,
+                        isDismissible: false,
+                        useRootNavigator: true,
+                        builder: (c) => BlocProvider.value(
+                          value: context.read<ValidarCompraCubit>(),
+                          child: FazerCheckOutModal(
+                            book: book,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  label: _isInListaLeitura(estaNaListaState)
+                      ? const Text('Ler agora')
+                      : book.preco == Preco.gratis()
+                          ? const Text('Adicionar a lista de leituras')
+                          : const Text('Comprar agora'),
                 );
               },
-              label: book.preco == Preco.gratis()
-                  ? const Text('Adicionar a lista de leituras')
-                  : const Text('Comprar agora'),
             );
           },
         ),
       ),
     );
+  }
+
+  bool _isInListaLeitura(EstaNaListaDeLeituraState estaNaListaState) {
+    if (estaNaListaState is EstaNaListaDeLeituraSuccess) {
+      return estaNaListaState.estaNaLista;
+    } else {
+      return false;
+    }
   }
 }

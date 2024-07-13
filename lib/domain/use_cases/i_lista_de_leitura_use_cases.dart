@@ -3,7 +3,7 @@ import 'package:bilioteca_virtual/domain/repositories/i_lista_de_leitura_reposit
 
 abstract class IListaLeituraUseCases {
   Future<bool> addBook(BookModel book);
-  Future<BookModel> getBookModel(String id);
+  Future<BookModel?> getBookModel(String id);
   Future<bool> deleteBook(String id);
   Future<List<BookModel>> getListaLeitura({bool cache = true});
 }
@@ -19,7 +19,7 @@ class ListaLeituraUseCases implements IListaLeituraUseCases {
   }
 
   @override
-  Future<BookModel> getBookModel(String id) {
+  Future<BookModel?> getBookModel(String id) {
     return _listaLeituraRepository.getBookModel(id);
   }
 

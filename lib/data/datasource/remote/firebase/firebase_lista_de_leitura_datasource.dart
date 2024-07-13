@@ -49,7 +49,7 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
   }
 
   @override
-  Future<BookModel> getBookModel(String id) {
+  Future<BookModel?> getBookModel(String id) async {
     try {
       return _firestore
           .collection(collectionPath)
@@ -64,7 +64,7 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
       });
     } catch (e) {
       log(e.toString());
-      rethrow;
+      return null;
     }
   }
 
