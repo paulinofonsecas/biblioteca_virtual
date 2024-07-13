@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/admin_view_book_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/comprar_livro_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/fazer_check_out_modal.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:verify_payment/models/response_model.dart';
 
 class BuildComprarLivroButton extends StatelessWidget {
   const BuildComprarLivroButton({
@@ -50,21 +48,18 @@ class BuildComprarLivroButton extends StatelessWidget {
               return;
             }
 
-            final paymentValidator = await showCupertinoModalBottomSheet(
-              context: context,
-              builder: (context) => FazerCheckOutModal(
-                book: book,
-              ),
-            );
-
-            if (paymentValidator == null) {
-              return;
-            }
             unawaited(
-              context.read<ValidarCompraCubit>().validarLivro(
-                    book,
-                    paymentValidator as VerifyPaymentSuccess?,
+              showCupertinoModalBottomSheet(
+                context: context,
+                isDismissible: false,
+                useRootNavigator: true,
+                builder: (c) => BlocProvider.value(
+                  value: context.read<ValidarCompraCubit>(),
+                  child: FazerCheckOutModal(
+                    book: book,
                   ),
+                ),
+              ),
             );
           },
           label: book.preco == Preco.gratis()

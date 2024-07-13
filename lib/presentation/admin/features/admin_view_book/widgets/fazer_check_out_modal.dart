@@ -3,12 +3,14 @@ import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/corrency.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
-import 'package:bilioteca_virtual/presentation/features/validate_payment/view/validate_payment_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/validar_compra_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/checkout_button_widget.dart';
+import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class FazerCheckOutModal extends StatefulWidget {
   const FazerCheckOutModal({
@@ -29,6 +31,7 @@ class _FazerCheckOutModalState extends State<FazerCheckOutModal> {
       getIt.unregister<BookModel>();
     }
     getIt.registerSingleton<BookModel>(widget.book);
+    context.read<ValidarCompraCubit>().reset();
     super.initState();
   }
 
@@ -75,26 +78,73 @@ class _ButtonsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 60,
-      decoration: BoxDecoration(
-        color: Colors.amber[700],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextButton(
-        onPressed: () {
-          showCupertinoModalBottomSheet(
-            context: context,
-            builder: (context) => const ValidatePaymentPage(),
+    return BlocConsumer<ValidarCompraCubit, ValidarCompraState>(
+      listener: (context, state) {
+        if (state is ValidarCompraPaymentFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+            ),
           );
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.amber[700]),
-          foregroundColor: MaterialStateProperty.all(Colors.black),
-        ),
-        child: const Text('Confirmar Pagamento'),
-      ),
+        }
+
+        if (state is ValidarCompraPaymentSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text('Livro adicionado a lista de leitura'),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is ValidarCompraPaymentLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state is ValidarCompraPaymentSuccess) {
+          return Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    'Pagamento concluído',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const Gutter(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Fechar'),
+                      ),
+                      const GutterLarge(),
+                      TextButton(
+                        onPressed: () {
+                          PDFReaderPage.toScreen(book.id);
+                        },
+                        child: const Text('Abrir livro'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return CheckoutButtonWidget(book: book);
+      },
     );
   }
 }

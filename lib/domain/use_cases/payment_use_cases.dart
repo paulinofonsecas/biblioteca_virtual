@@ -1,8 +1,11 @@
+import 'package:bilioteca_virtual/data/erros/valor_inferior.dart';
+import 'package:bilioteca_virtual/data/erros/valor_superior.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/payment.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_payment_repository.dart';
 
 abstract class IPaymentUseCases {
-  Future<void> processPayment(Payment payment);
+  Future<void> processPayment(Payment payment, BookModel book);
   Future<void> refundPayment(String paymentId);
   Future<Payment> getPaymentDetails(String paymentId);
   Future<List<Payment>> getAllPayments();
@@ -24,8 +27,18 @@ class PaymentUseCases implements IPaymentUseCases {
   }
 
   @override
-  Future<void> processPayment(Payment payment) {
-    return _paymentRepository.processPayment(payment);
+  Future<void> processPayment(Payment payment, BookModel book) async {
+    if (book.preco.valor < payment.amount) {
+      throw const PaymentInferior();
+    }
+
+    if (book.preco.valor > payment.amount) {
+      throw const PaymentSuperior();
+    }
+
+    if (book.preco.valor == payment.amount) {
+      return _paymentRepository.processPayment(payment);
+    }
   }
 
   @override

@@ -31,7 +31,7 @@ class CheckoutButtonWidget extends StatelessWidget {
               return;
             }
 
-            context.read<ValidarCompraCubit>().validarLivro(
+            context.read<ValidarCompraCubit>().validarPagamento(
                   book,
                   paymentValidator as VerifyPaymentSuccess?,
                 );
