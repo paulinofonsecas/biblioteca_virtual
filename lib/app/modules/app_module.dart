@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/vie
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/view/home_page.dart';
+import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/lista_leituras.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -62,6 +63,7 @@ class AppModule extends Module {
           );
         },
       )
-      ..child('/client', child: (c) => const HomePage());
+      ..child('/client', child: (c) => const HomePage())
+      ..child('/lista-leitura', child: (c) => const ListaLeiturasPage());
   }
 }

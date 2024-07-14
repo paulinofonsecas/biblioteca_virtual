@@ -1,5 +1,7 @@
 // ignore_for_file: inference_failure_on_instance_creation, lines_longer_than_80_chars, avoid_dynamic_calls
 
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_in_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/verify_email.dart';
@@ -61,6 +63,7 @@ class _LoginFormState extends State<LoginForm> {
           BlocProvider.of<AuthBloc>(context).add(CheckLoggingInEvent());
 
           final role = state.userCredential?.role;
+          getIt.registerLazySingleton<MyUser>(() => state.userCredential!);
           if (role == 'admin') {
             Modular.to.pushReplacementNamed('/admin');
           } else if (role == 'usuario') {
