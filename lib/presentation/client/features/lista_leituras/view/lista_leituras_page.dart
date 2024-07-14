@@ -1,6 +1,7 @@
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/cubit/esta_na_lista_de_leitura_cubit.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/cubit/get_all_books_cubit.dart';
+import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/cubit/remover_book_on_lista_leituras_cubit.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/widgets/lista_leituras_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -37,6 +38,9 @@ class ListaLeiturasPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => EstaNaListaDeLeituraCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RemoverBookOnListaLeiturasCubit(),
         ),
       ],
       child: Scaffold(

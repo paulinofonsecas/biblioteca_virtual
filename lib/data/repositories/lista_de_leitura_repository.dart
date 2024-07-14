@@ -30,6 +30,10 @@ class ListaLeituraRepository implements IListaLeituraRepository {
 
   @override
   Future<bool> deleteBook(String id) {
+    if (_getCachedBooks.isNotEmpty) {
+      _getCachedBooks.removeWhere((element) => element.id == id);
+    }
+
     return _datasource.deleteBook(id);
   }
 

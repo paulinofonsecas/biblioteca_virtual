@@ -9,12 +9,14 @@ class InLineBookMediumDisplay extends StatelessWidget {
     required this.book,
     required this.onTap,
     super.key,
+    this.trailing,
   });
 
   final BookModel book;
   final VoidCallback onTap;
   static double widthFactory = .32;
   static double heightFactory = .1;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +66,7 @@ class InLineBookMediumDisplay extends StatelessWidget {
                 ),
               ),
               const Gutter(),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.more_vert),
-              ),
+              trailing ?? const SizedBox(),
             ],
           ),
         ),
@@ -75,62 +74,3 @@ class InLineBookMediumDisplay extends StatelessWidget {
     );
   }
 }
-
-/*
-class _FooterWidget extends StatelessWidget {
-  const _FooterWidget({
-    required this.book,
-  });
-
-  final Book book;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(kDefaultPadding / 4),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Flexible(
-                flex: 11,
-                child: Text(
-                  book.title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                book.authors.firstOrNull?.name ?? 'N/D',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              Text(
-                book.authorsId,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-*/
