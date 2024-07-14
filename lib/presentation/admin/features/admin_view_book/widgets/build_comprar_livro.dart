@@ -32,12 +32,12 @@ class BuildComprarLivroButton extends StatelessWidget {
         child: BlocConsumer<ListaLeiturasBloc, ListaLeiturasState>(
           listener: (context, state) {
             if (state is AddListaLeiturasSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Text('Livro adicionado a lista de leitura'),
-                ),
-              );
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   const SnackBar(
+              //     backgroundColor: Colors.green,
+              //     content: Text('Livro adicionado a lista de leitura'),
+              //   ),
+              // );
             }
 
             if (state is AddListaLeiturasFailure) {

@@ -25,6 +25,8 @@ class ListaLeituraRepository implements IListaLeituraRepository {
 
   @override
   Future<bool> addBook(BookModel book) {
+    _saveInCache = [..._getCachedBooks, book];
+
     return _datasource.addBook(book);
   }
 
