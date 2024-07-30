@@ -6,6 +6,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -162,7 +163,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 const Text('Já tem uma conta?'),
                 TextButton(
                   onPressed: () {
-                    context.pushReplacement('/sign-in');
+                    Modular.to.pushReplacementNamed('/sign-in');
                   },
                   child: const Text('Login'),
                 ),
