@@ -17,6 +17,7 @@ import 'package:bilioteca_virtual/presentation/authentication/domain/usecases/ve
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -70,6 +71,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event is LogOutEvent) {
         final failureOrLogOut = await logOutUseCase();
         emit(eitherToState(failureOrLogOut, LoggedOutState()));
+        await Modular.to.pushNamed(
+          '/sign-in',
+        );
       } else if (event is SignInWithGoogleEvent) {
         emit(LoadingState());
         final failureOrUserCredential = await googleAuthUseCase();

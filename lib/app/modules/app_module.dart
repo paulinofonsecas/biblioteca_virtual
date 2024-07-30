@@ -3,6 +3,7 @@ import 'package:bilioteca_virtual/presentation/admin/admin_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/view/add_new_author_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
+import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/sign_in_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/view/home_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/lista_leituras.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
@@ -20,6 +21,10 @@ class AppModule extends Module {
       ..child(
         '/admin',
         child: (context) => const AdminPage(),
+      )
+      ..child(
+        '/sign-in',
+        child: (context) => const SignIn(),
       )
       ..child(
         '/admin/add-new-book',
