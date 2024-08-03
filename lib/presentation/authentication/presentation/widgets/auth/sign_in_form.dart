@@ -21,7 +21,8 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool isVisible = false;
+  bool isObscuredText = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -122,18 +123,18 @@ class _LoginFormState extends State<LoginForm> {
       constraints: const BoxConstraints(maxWidth: 500),
       child: TextFormField(
         controller: _passwordController,
-        obscureText: isVisible,
+        obscureText: isObscuredText,
         decoration: InputDecoration(
           labelText: 'Palavra-passe',
           border: const OutlineInputBorder(),
           suffixIcon: IconButton(
             icon: Icon(
-              isVisible ? Icons.visibility : Icons.visibility_off,
+              isObscuredText ? Icons.visibility : Icons.visibility_off,
               color: Colors.grey,
             ),
             onPressed: () {
               setState(() {
-                isVisible = !isVisible;
+                isObscuredText = !isObscuredText;
               });
             },
           ),
