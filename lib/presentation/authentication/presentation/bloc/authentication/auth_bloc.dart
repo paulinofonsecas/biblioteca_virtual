@@ -85,7 +85,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     final failureOrLogOut = await logOutUseCase();
     emit(eitherToState(failureOrLogOut, LoggedOutState()));
-    await Modular.to.pushNamed('/sign-in');
+    await Modular.to.pushReplacementNamed('/sign-in');
   }
 
   Future<void> onErrorAuthEvent(
