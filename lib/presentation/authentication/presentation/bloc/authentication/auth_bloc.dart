@@ -27,77 +27,73 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.signInUseCase,
     required this.signUpUseCase,
     required this.firstPage,
-    required this.verifyEmailUseCase,
-    required this.checkVerificationUseCase,
     required this.logOutUseCase,
-    required this.googleAuthUseCase,
   }) : super(AuthInitial()) {
-    on<AuthEvent>((event, emit) async {
-      if (event is CheckLoggingInEvent) {
-        final theFirstPage = firstPage();
-        if (theFirstPage.isLoggedIn) {
-          emit(SignedInPageState());
-        } else if (theFirstPage.isVerifyingEmail) {
-          emit(VerifyEmailPageState());
-        }
-      } else if (event is SignInEvent) {
-        emit(LoadingState());
-        final failureOrUserCredential = await signInUseCase(event.signInEntity);
-        if (failureOrUserCredential is Right) {
-          failureOrUserCredential.fold(
-            (l) {
-              emit(ErrorAuthState(message: 'Erro desconheicdo.'));
-            },
-            (r) {
-              emit(SignedInState(userCredential: r));
-            },
-          );
-        }
-      } else if (event is SignUpEvent) {
-        emit(LoadingState());
-        final failureOrUserCredential = await signUpUseCase(event.signUpEntity);
-        emit(eitherToState(failureOrUserCredential, SignedUpState()));
-      } else if (event is SendEmailVerificationEvent) {
-        final failureOrSentEmail = await verifyEmailUseCase();
-        emit(eitherToState(failureOrSentEmail, EmailIsSentState()));
-      } else if (event is CheckEmailVerificationEvent) {
-        if (!completer.isCompleted) {
-          completer.complete();
-          completer = Completer<void>();
-        }
-        final failureOrEmailVerified =
-            await checkVerificationUseCase(completer);
-        emit(eitherToState(failureOrEmailVerified, EmailIsVerifiedState()));
-      } else if (event is LogOutEvent) {
-        final failureOrLogOut = await logOutUseCase();
-        emit(eitherToState(failureOrLogOut, LoggedOutState()));
-        await Modular.to.pushNamed(
-          '/sign-in',
-        );
-      } else if (event is SignInWithGoogleEvent) {
-        emit(LoadingState());
-        final failureOrUserCredential = await googleAuthUseCase();
-        emit(eitherToState(failureOrUserCredential, GoogleSignInState()));
-      }
-    });
-
-    on<ErrorAuthEvent>((event, emit) {
-      emit(
-        ErrorAuthState(
-          message: 'Alguma coisa está errada. tente novamente!',
-        ),
-      );
-    });
+    on<CheckLoggingInEvent>(onCheckLoggingInEvent);
+    on<SignInEvent>(onSignInEvent);
+    on<SignUpEvent>(onSignUpEvent);
+    on<LogOutEvent>(onLogOutEvent);
+    on<ErrorAuthEvent>(onErrorAuthEvent);
   }
+
   final SignInUseCase signInUseCase;
   final SignUpUseCase signUpUseCase;
-  final VerifyEmailUseCase verifyEmailUseCase;
   final FirstPageUseCase firstPage;
-  final CheckVerificationUseCase checkVerificationUseCase;
   final LogOutUseCase logOutUseCase;
-  final GoogleAuthUseCase googleAuthUseCase;
 
   Completer<void> completer = Completer<void>();
+
+  void onCheckLoggingInEvent(
+    CheckLoggingInEvent event,
+    Emitter<AuthState> emit,
+  ) {
+    final theFirstPage = firstPage();
+    if (theFirstPage.isLoggedIn) {
+      emit(SignedInPageState());
+    } else if (theFirstPage.isVerifyingEmail) {
+      emit(VerifyEmailPageState());
+    }
+  }
+
+  Future<void> onSignInEvent(
+    SignInEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final failureOrUserCredential = await signInUseCase(event.signInEntity);
+    failureOrUserCredential.fold(
+      (l) {
+        emit(ErrorAuthState(message: 'Erro desconheicdo.'));
+      },
+      (r) {
+        emit(SignedInState(userCredential: r));
+      },
+    );
+  }
+
+  Future<void> onSignUpEvent(
+    SignUpEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(LoadingState());
+    final failureOrUserCredential = await signUpUseCase(event.signUpEntity);
+    emit(eitherToState(failureOrUserCredential, SignedUpState()));
+  }
+
+  Future<void> onLogOutEvent(
+    LogOutEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final failureOrLogOut = await logOutUseCase();
+    emit(eitherToState(failureOrLogOut, LoggedOutState()));
+    await Modular.to.pushNamed('/sign-in');
+  }
+
+  Future<void> onErrorAuthEvent(
+    ErrorAuthEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(ErrorAuthState(message: 'Erro desconhecido.'));
+  }
 
   AuthState eitherToState(Either either, AuthState state) {
     return either.fold(

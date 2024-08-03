@@ -58,10 +58,7 @@ Future<void> setupDependencies() async {
     ..registerLazySingleton(() => SignInUseCase(getIt()))
     ..registerLazySingleton(() => SignUpUseCase(getIt()))
     ..registerLazySingleton(() => FirstPageUseCase(getIt()))
-    ..registerLazySingleton(() => VerifyEmailUseCase(getIt()))
-    ..registerLazySingleton(() => CheckVerificationUseCase(getIt()))
     ..registerLazySingleton(() => LogOutUseCase(getIt()))
-    ..registerLazySingleton(() => GoogleAuthUseCase(getIt()))
 
     // payment Clean Arch
     ..registerLazySingleton<IFirebasePaymentDatasource>(
@@ -92,10 +89,7 @@ Future<void> setupDependencies() async {
         signInUseCase: getIt(),
         signUpUseCase: getIt(),
         firstPage: getIt(),
-        verifyEmailUseCase: getIt(),
-        checkVerificationUseCase: getIt(),
         logOutUseCase: getIt(),
-        googleAuthUseCase: getIt(),
       ),
     )
     // ..registerLazySingleton(AddNewAuthorBloc.new)
