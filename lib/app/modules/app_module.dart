@@ -8,6 +8,7 @@ import 'package:bilioteca_virtual/presentation/authentication/presentation/pages
 import 'package:bilioteca_virtual/presentation/client/features/home_page/view/home_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/lista_leituras.dart';
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
+import 'package:bilioteca_virtual/presentation/splash/view/splash_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
@@ -16,9 +17,13 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    Modular.setInitialRoute('/client');
+    Modular.setInitialRoute('/splash');
 
     r
+      ..child(
+        '/splash',
+        child: (context) => const SplashPage(),
+      )
       ..child(
         '/admin',
         child: (context) => const AdminPage(),
