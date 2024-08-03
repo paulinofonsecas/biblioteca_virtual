@@ -19,6 +19,7 @@ class ListaLeituraRepository implements IListaLeituraRepository {
     return _cachedBooks;
   }
 
+  @override
   void cleanCache() {
     _cachedBooks = [];
   }

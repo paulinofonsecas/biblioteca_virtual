@@ -26,7 +26,6 @@ import 'package:bilioteca_virtual/presentation/authentication/domain/usecases/si
 import 'package:bilioteca_virtual/presentation/authentication/domain/usecases/sign_up_usecase.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/bloc/bloc.dart';
-import 'package:bilioteca_virtual/presentation/splash/bloc/splash_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -35,9 +34,12 @@ import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
-Future<void> setupDependencies() async {
-  getIt
-    ..registerLazySingleton<FlutterSecureStorage>(
+Future<void> setupCoreDependencies() async {
+  getIt.pushNewScope(
+    scopeName: 'core_dependencies',
+    init: (g) {
+      g
+      ..registerLazySingleton<FlutterSecureStorage>(
       () => const FlutterSecureStorage(
         aOptions: AndroidOptions(
           encryptedSharedPreferences: true,
@@ -48,51 +50,11 @@ Future<void> setupDependencies() async {
     ..registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance)
     ..registerSingleton<FirebaseStorage>(FirebaseStorage.instance)
 
-    // Books dependancies
-    ..registerLazySingleton<IBooksRepository>(BooksRepository.new)
-    ..registerLazySingleton<IBooksUseCases>(() => BooksUseCases(getIt()))
-
-    // Authors dependencies
-    ..registerLazySingleton<IAuthorsDatasource>(
-      FirebaseAuthorsDatasource.new,
-    )
-    ..registerLazySingleton<IAuthorsRepository>(
-      () => AuthorsRepository(getIt()),
-    )
-    ..registerLazySingleton<IAuthorsUseCases>(() => AuthorsUseCases(getIt()))
-    ..registerLazySingleton(() => AuthCacheUsecase(getIt()))
-
     // outher
     ..registerLazySingleton(() => SignInUseCase(getIt()))
     ..registerLazySingleton(() => SignUpUseCase(getIt()))
     ..registerLazySingleton(() => FirstPageUseCase(getIt()))
     ..registerLazySingleton(() => LogOutUseCase(getIt()))
-
-    // payment Clean Arch
-    ..registerLazySingleton<IFirebasePaymentDatasource>(
-      () => FirebasePaymentDatasourceImpl(getIt()),
-    )
-    ..registerLazySingleton<IPaymentRepository>(
-      () => PaymentRepository(getIt()),
-    )
-    ..registerLazySingleton<IPaymentUseCases>(
-      () => PaymentUseCases(getIt()),
-    )
-
-    // Lista de leituras Clean Arch
-    ..registerLazySingleton<IListaLeituraDatasource>(
-      () => FirebaseListaDeLeituraDatasource(getIt()),
-    )
-    ..registerLazySingleton<IListaLeituraRepository>(
-      () => ListaLeituraRepository(getIt()),
-    )
-    ..registerLazySingleton<IListaLeituraUseCases>(
-      () => ListaLeituraUseCases(getIt()),
-    )
-
-// Bloc
-    ..registerLazySingleton(SplashBloc.new)
-    ..registerLazySingleton(ListaLeiturasBloc.new)
     ..registerLazySingleton(
       () => AuthBloc(
         signInUseCase: getIt(),
@@ -101,22 +63,70 @@ Future<void> setupDependencies() async {
         logOutUseCase: getIt(),
       ),
     )
-    // ..registerLazySingleton(AddNewAuthorBloc.new)
+    ..registerLazySingleton(() => AuthCacheUsecase(getIt()))
 
-// Repository
+    // Datasources
+    ..registerLazySingleton<AuthRemoteDataSource>(
+      AuthRemoteDataSourceImpl.new,
+    )
+    // Repository
+    ..registerLazySingleton<NetworkInfo>(NetworkInfoImpl.new)
     ..registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImp(
         networkInfo: getIt(),
         authRemoteDataSource: getIt(),
       ),
-    )
+    );
+    },
+  );
+}
 
-// Datasources
-    ..registerLazySingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl.new)
+Future<void> setupDependencies() async {
+  getIt.pushNewScope(
+    scopeName: 'app_dependencies',
+    init: (g) {
+      g // Books dependancies
+        ..registerLazySingleton<IBooksRepository>(BooksRepository.new)
+        ..registerLazySingleton<IBooksUseCases>(() => BooksUseCases(getIt()))
 
-//! Core
-    ..registerLazySingleton<NetworkInfo>(NetworkInfoImpl.new);
+        // Authors dependencies
+        ..registerLazySingleton<IAuthorsDatasource>(
+          FirebaseAuthorsDatasource.new,
+        )
+        ..registerLazySingleton<IAuthorsRepository>(
+          () => AuthorsRepository(getIt()),
+        )
+        ..registerLazySingleton<IAuthorsUseCases>(
+          () => AuthorsUseCases(getIt()),
+        )
 
-//! External
-  // ..registerLazySingleton(InternetConnection.new);
+        // payment Clean Arch
+        ..registerLazySingleton<IFirebasePaymentDatasource>(
+          () => FirebasePaymentDatasourceImpl(getIt()),
+        )
+        ..registerLazySingleton<IPaymentRepository>(
+          () => PaymentRepository(getIt()),
+        )
+        ..registerLazySingleton<IPaymentUseCases>(
+          () => PaymentUseCases(getIt()),
+        )
+
+        // Lista de leituras Clean Arch
+        ..registerLazySingleton<IListaLeituraDatasource>(
+          () => FirebaseListaDeLeituraDatasource(getIt()),
+        )
+        ..registerLazySingleton<IListaLeituraRepository>(
+          () => ListaLeituraRepository(getIt()),
+          dispose: (param) {
+            param.cleanCache();
+          },
+        )
+        ..registerLazySingleton<IListaLeituraUseCases>(
+          () => ListaLeituraUseCases(getIt()),
+        )
+
+        // Bloc
+        ..registerLazySingleton(ListaLeiturasBloc.new);
+    },
+  );
 }

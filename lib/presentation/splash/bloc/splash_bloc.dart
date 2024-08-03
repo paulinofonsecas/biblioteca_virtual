@@ -21,14 +21,17 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   FutureOr<void> _onCustomSplashEvent(
     CustomSplashEvent event,
     Emitter<SplashState> emit,
-  ) {
-    // TODO: Add Logic
-  }
+  ) {}
 
   FutureOr<void> _onSplashStartedEvent(
     SplashStartedEvent event,
     Emitter<SplashState> emit,
   ) async {
+    if (getIt.hasScope('app_dependencies')) {
+      await getIt.dropScope('app_dependencies');
+    }
+
+    await setupDependencies();
     emit(const SplashTryLogin());
 
     final user = await _authCacheUsecase.getUser();

@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/core/error/exceptions.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_lista_de_leitura_datasource.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
@@ -9,19 +12,22 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
 
   final FirebaseFirestore _firestore;
   final String collectionPath = 'lista-leituras';
-  final documentId = '123';
+
+  String get userGroup {
+    if (!getIt.isRegistered<MyUser>()) {
+      throw UserNotLoggedInException();
+    }
+
+    final user = getIt<MyUser>();
+    return user.credential.user!.uid;
+  }
 
   @override
   Future<bool> addBook(BookModel book) async {
-    // todo
-    // if (!getIt.isRegistered<MyUser>()) {
-    //   throw Exception('Usuário não logado');
-    // }
-
     try {
       await _firestore
           .collection(collectionPath)
-          .doc(documentId)
+          .doc(userGroup)
           .collection('livros')
           .doc(book.id)
           .set(book.toMap());
@@ -36,7 +42,7 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
     try {
       return _firestore
           .collection(collectionPath)
-          .doc(documentId)
+          .doc(userGroup)
           .collection('livros')
           .doc(id)
           .delete()
@@ -53,7 +59,7 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
     try {
       return _firestore
           .collection(collectionPath)
-          .doc(documentId)
+          .doc(userGroup)
           .collection('livros')
           .where('id', isEqualTo: id)
           .get()
@@ -73,7 +79,7 @@ class FirebaseListaDeLeituraDatasource implements IListaLeituraDatasource {
     try {
       return _firestore
           .collection(collectionPath)
-          .doc(documentId)
+          .doc(userGroup)
           .collection('livros')
           .get()
           .then((value) {

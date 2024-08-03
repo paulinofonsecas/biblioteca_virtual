@@ -20,7 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await setupDependencies();
+  await setupCoreDependencies();
 
   await bootstrap(
     () {
