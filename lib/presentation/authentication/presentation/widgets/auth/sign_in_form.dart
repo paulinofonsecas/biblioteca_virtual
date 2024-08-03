@@ -4,7 +4,6 @@ import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_in_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
-import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/verify_email.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,37 +59,27 @@ class _LoginFormState extends State<LoginForm> {
       bloc: BlocProvider.of<AuthBloc>(context),
       listener: (context, state) {
         if (state is SignedInState) {
-          BlocProvider.of<AuthBloc>(context).add(CheckLoggingInEvent());
-
           final role = state.userCredential?.role;
+
+          if (getIt.isRegistered<MyUser>()) {
+            getIt.unregister<MyUser>();
+          }
           getIt.registerLazySingleton<MyUser>(() => state.userCredential!);
+
           if (role == 'admin') {
             Modular.to.pushReplacementNamed('/admin');
           } else if (role == 'usuario') {
-            Modular.to.pushReplacementNamed('/home-page');
+            Modular.to.pushReplacementNamed('/client');
           }
-        } else if (state is SignedInPageState || state is GoogleSignInState) {
-          Modular.to.pushReplacementNamed('/home-page');
-        } else if (state is VerifyEmailPageState) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const VerifyEmail(),
-            ),
-          );
-          BlocProvider.of<AuthBloc>(context).add(SendEmailVerificationEvent());
         }
       },
       builder: (context, state) {
         switch (state) {
           case LoadingState():
-            {
-              Future.delayed(const Duration(seconds: 3), () {
-                BlocProvider.of<AuthBloc>(context).add(ErrorAuthEvent());
-              });
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+
           case ErrorAuthState():
             return Column(
               children: [

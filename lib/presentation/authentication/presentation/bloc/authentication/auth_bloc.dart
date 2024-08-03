@@ -44,18 +44,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     CheckLoggingInEvent event,
     Emitter<AuthState> emit,
   ) {
-    final theFirstPage = firstPage();
-    if (theFirstPage.isLoggedIn) {
-      emit(SignedInPageState());
-    } else if (theFirstPage.isVerifyingEmail) {
-      emit(VerifyEmailPageState());
-    }
+    emit(SignedInPageState());
+
+    // ! `TODO`: Implementar a verificação de login
+    // final theFirstPage = firstPage();
+    // if (theFirstPage.isLoggedIn) {
+    // } else if (theFirstPage.isVerifyingEmail) {
+    //   emit(VerifyEmailPageState());
+    // }
   }
 
   Future<void> onSignInEvent(
     SignInEvent event,
     Emitter<AuthState> emit,
   ) async {
+    emit(LoadingState());
     final failureOrUserCredential = await signInUseCase(event.signInEntity);
     failureOrUserCredential.fold(
       (l) {
