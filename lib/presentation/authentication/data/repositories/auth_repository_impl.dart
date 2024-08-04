@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/error/exceptions.dart';
 import 'package:bilioteca_virtual/core/error/failures.dart';
 import 'package:bilioteca_virtual/core/network/network_info.dart';
@@ -9,10 +10,12 @@ import 'package:bilioteca_virtual/presentation/authentication/data/datasources/a
 import 'package:bilioteca_virtual/presentation/authentication/data/models/first_page_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/models/sign_in_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/models/sign_up_model.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/entities/custom_firebase_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_in_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_up_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/repositories/authentication_repository.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/usecases/auth_cache_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,7 +23,11 @@ class AuthenticationRepositoryImp implements AuthenticationRepository {
   AuthenticationRepositoryImp({
     required this.networkInfo,
     required this.authRemoteDataSource,
-  });
+  }) {
+    authCache = getIt<AuthCacheUsecase>();
+  }
+
+  late final AuthCacheUsecase authCache;
   final AuthRemoteDataSource authRemoteDataSource;
   final NetworkInfo networkInfo;
 
@@ -31,6 +38,16 @@ class AuthenticationRepositoryImp implements AuthenticationRepository {
         final signInModel =
             SignInModel(email: signIn.email, password: signIn.password);
         final userCredential = await authRemoteDataSource.signIn(signInModel);
+
+        await authCache.saveUser(
+          CustomFirebaseUser(
+            uid: userCredential.credential.user!.uid,
+            email: userCredential.credential.user!.email!,
+            password: signIn.password,
+            role: userCredential.role,
+          ),
+        );
+
         return Right(userCredential);
       } on ExistedAccountException {
         return Left(ExistedAccountFailure());
@@ -127,8 +144,7 @@ class AuthenticationRepositoryImp implements AuthenticationRepository {
   Future<Either<Failure, Unit>> logOut() async {
     if (await networkInfo.isConnected) {
       try {
-        // final googleSignIn = GoogleSignIn();
-        // await googleSignIn.signOut();
+        await authCache.deleteUser();
         await FirebaseAuth.instance.signOut();
         return const Right(unit);
       } catch (e) {

@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:bilioteca_virtual/app/app.dart';
 import 'package:bilioteca_virtual/app/modules/app_module.dart';
 import 'package:bilioteca_virtual/bootstrap.dart';
-import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/firebase_options.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +19,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await setupDependencies();
+  // await setupDependencies();
 
   await bootstrap(
     () {

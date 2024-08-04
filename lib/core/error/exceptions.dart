@@ -1,5 +1,7 @@
 class ServerException implements Exception {}
 
+class UserNotLoggedInException implements Exception {}
+
 class OfflineException implements Exception {}
 
 class WeekPassException implements Exception {}

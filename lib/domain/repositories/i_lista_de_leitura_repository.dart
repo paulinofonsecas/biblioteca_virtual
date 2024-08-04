@@ -5,4 +5,5 @@ abstract class IListaLeituraRepository {
   Future<BookModel?> getBookModel(String id);
   Future<bool> deleteBook(String id);
   Future<List<BookModel>> getListaLeitura({bool cache = true});
+  void cleanCache();
 }
