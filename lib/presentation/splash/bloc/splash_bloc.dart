@@ -27,15 +27,20 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     SplashStartedEvent event,
     Emitter<SplashState> emit,
   ) async {
+    // remove as dependencias do usuario da memória!
     if (getIt.hasScope('app_dependencies')) {
       await getIt.dropScope('app_dependencies');
     }
 
+    // Injeta as dependencias do usuario na memoria
     await setupDependencies();
+
+    // emite o estado para a tela no sentido de mostrar o CircleProgressIndic...
     emit(const SplashTryLogin());
 
+    // recupera as credencias do usuario logado e em seguia informa se há uma
+    // conta de usuario afim de fazer login automaticamente
     final user = await _authCacheUsecase.getUser();
-
     if (user != null) {
       emit(SplashLoginSuccess(user));
     } else {
