@@ -13,28 +13,30 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         body: ListView(
           children: [
+            const GutterLarge(),
             Padding(
               padding: const EdgeInsets.all(20),
               child: SvgPicture.asset(
                 'assets/svgs/onbording.svg',
-                width: 200,
-                height: 200,
+                width: size.width * .2,
+                height: size.width * .2,
               ),
             ),
-            Column(
+            const GutterLarge(),
+            const Column(
               children: [
                 Text(
                   'Biblioteca Virtual',
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-                const GutterLarge(),
-                const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
