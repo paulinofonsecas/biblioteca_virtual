@@ -39,7 +39,7 @@ dependencies:
   loader_overlay: ^4.0.0
   modal_bottom_sheet: ^3.0.0
   pull_to_refresh: ^2.0.0
-  searchable_listview: ^2.14.0
+  searchable_listview: ^2.15.2
   shared_preferences: ^2.2.2
   syncfusion_flutter_pdf: ^25.2.5
   uuid: ^4.4.0
