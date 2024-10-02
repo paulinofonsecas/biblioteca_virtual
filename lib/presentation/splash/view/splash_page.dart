@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/presentation/splash/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/splash/widgets/splash_body.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SplashBloc(),
+      create: (context) => SplashBloc(getIt()),
       child: const Scaffold(
         body: SplashView(),
       ),

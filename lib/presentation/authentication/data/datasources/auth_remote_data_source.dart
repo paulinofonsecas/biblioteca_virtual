@@ -40,7 +40,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw ExistedAccountException();
-      } else if (e.code == 'wrong-password') {
+      } else if (e.code == 'invalid-credential') {
         throw WrongPasswordException();
       } else {
         throw ServerException();

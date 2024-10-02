@@ -59,9 +59,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gutter(),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: TextFormField(
@@ -81,9 +79,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gutter(),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: TextFormField(
@@ -114,9 +110,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gutter(),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: TextFormField(
@@ -136,29 +130,28 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const Gutter(),
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
-                  switch (state) {
-                    case LoadingState():
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    case ErrorAuthState():
-                      return Column(
-                        children: [
-                          Center(
-                            child: Text(state.message),
-                          ),
-                          const Gutter(),
-                          _buildLoginButton(context),
-                        ],
-                      );
-                    default:
-                      return _buildLoginButton(context);
+                  if (state is LoadingState) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
+
+                  if (state is ErrorAuthState) {
+                    return Column(
+                      children: [
+                        Center(
+                          child: Text(state.message),
+                        ),
+                        const Gutter(),
+                        _buildLoginButton(context),
+                      ],
+                    );
+                  }
+
+                  return _buildLoginButton(context);
                 },
               ),
               const GutterLarge(),

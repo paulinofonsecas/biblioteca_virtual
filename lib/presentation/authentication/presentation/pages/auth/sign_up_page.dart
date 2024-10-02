@@ -12,6 +12,8 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
     return SafeArea(
       child: Theme(
         data: ThemeData(
@@ -28,9 +30,9 @@ class _SignUpState extends State<SignUp> {
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: SvgPicture.asset(
-                      'svgs/online-learning-concept.svg',
-                      height: 200,
-                      width: 200,
+                      'assets/svgs/online-learning-concept.svg',
+                      height: size.height * .2,
+                      width: size.height * .2,
                     ),
                   ),
                   const Center(

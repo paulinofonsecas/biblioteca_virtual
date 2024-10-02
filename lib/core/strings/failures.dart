@@ -8,7 +8,7 @@ const String EXISTED_ACCOUNT_FAILURE_MESSAGE =
     'Já existe uma conta com este email.';
 const String NO_USER_FAILURE_MESSAGE = 'Não existe uma conta com este email.';
 const String WRONG_PASSWORD_FAILURE_MESSAGE =
-    'Palavra-passe incorreta, tente novamente.';
+    'Usuario ou senha incorretos.';
 const String UNMATCHED_PASSWORD_FAILURE_MESSAGE = 'Usuario ou senha invalidos.';
 const String TOO_MANY_REQUESTS_FAILURE_MESSAGE =
     'Varias requisições, Por favor tente novamente.';

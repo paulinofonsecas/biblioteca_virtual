@@ -62,7 +62,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final failureOrUserCredential = await signInUseCase(event.signInEntity);
     failureOrUserCredential.fold(
       (l) {
-        emit(ErrorAuthState(message: 'Erro desconheicdo.'));
+        emit(ErrorAuthState(message: _mapFailureToMessage(l)));
       },
       (r) {
         emit(SignedInState(userCredential: r));
