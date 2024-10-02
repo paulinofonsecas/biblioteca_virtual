@@ -55,6 +55,9 @@ class AuthenticationRepositoryImp implements AuthenticationRepository {
         return Left(WrongPasswordFailure());
       } on ServerException {
         return Left(ServerFailure());
+      } catch (e) {
+        print('Ocorreu um grande erro');
+        return Left(ServerFailure());
       }
     } else {
       return Left(OfflineFailure());

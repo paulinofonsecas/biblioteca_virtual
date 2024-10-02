@@ -66,11 +66,11 @@ Future<void> setupCoreDependencies() async {
     ..registerLazySingleton(() => AuthCacheUsecase(getIt()))
 
     // Datasources
-    ..registerLazySingleton<AuthRemoteDataSource>(
-      AuthRemoteDataSourceImpl.new,
+    ..registerSingleton<AuthRemoteDataSource>(
+      AuthRemoteDataSourceImpl(),
     )
     // Repository
-    ..registerLazySingleton<NetworkInfo>(NetworkInfoImpl.new)
+    ..registerSingleton<NetworkInfo>(NetworkInfoImpl())
     ..registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImp(
         networkInfo: getIt(),

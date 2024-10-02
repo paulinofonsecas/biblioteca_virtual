@@ -24,11 +24,17 @@ class App extends StatelessWidget {
         ),
       ],
       child: Builder(
-        builder: (context) {
-          final appBrightnessState =
-              context.select<AppBrightnessCubit, AppBrightnessState>(
-            (AppBrightnessCubit cubit) => cubit.state,
-          );
+        builder: (c) {
+          late AppBrightnessState appBrightnessState;
+
+          try {
+            appBrightnessState =
+                context.select<AppBrightnessCubit, AppBrightnessState>(
+              (AppBrightnessCubit cubit) => cubit.state,
+            );
+          } catch (dynamic) {
+            appBrightnessState = const AppBrightnessInitial(Brightness.light);
+          }
 
           return BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
