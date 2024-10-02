@@ -1,17 +1,22 @@
 import 'package:bilioteca_virtual/core/network/network_info.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_authors_datasource.dart';
+import 'package:bilioteca_virtual/data/datasource/contracts/i_categoria_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_lista_de_leitura_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_authors_datasource.dart';
+import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_categoria_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_lista_de_leitura_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_payment_datasource.dart';
 import 'package:bilioteca_virtual/data/repositories/authors_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/books_repository.dart';
+import 'package:bilioteca_virtual/data/repositories/categoria_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/lista_de_leitura_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/payment_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_author_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_books_repository.dart';
+import 'package:bilioteca_virtual/domain/repositories/i_categoria_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_lista_de_leitura_repository.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_payment_repository.dart';
+import 'package:bilioteca_virtual/domain/use_cases/categoria_use_case.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_lista_de_leitura_use_cases.dart';
@@ -39,44 +44,44 @@ Future<void> setupCoreDependencies() async {
     scopeName: 'core_dependencies',
     init: (g) {
       g
-      ..registerLazySingleton<FlutterSecureStorage>(
-      () => const FlutterSecureStorage(
-        aOptions: AndroidOptions(
-          encryptedSharedPreferences: true,
-        ),
-      ),
-    )
-    ..registerSingleton<FirebaseAuth>(FirebaseAuth.instance)
-    ..registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance)
-    ..registerSingleton<FirebaseStorage>(FirebaseStorage.instance)
+        ..registerLazySingleton<FlutterSecureStorage>(
+          () => const FlutterSecureStorage(
+            aOptions: AndroidOptions(
+              encryptedSharedPreferences: true,
+            ),
+          ),
+        )
+        ..registerSingleton<FirebaseAuth>(FirebaseAuth.instance)
+        ..registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance)
+        ..registerSingleton<FirebaseStorage>(FirebaseStorage.instance)
 
-    // outher
-    ..registerLazySingleton(() => SignInUseCase(getIt()))
-    ..registerLazySingleton(() => SignUpUseCase(getIt()))
-    ..registerLazySingleton(() => FirstPageUseCase(getIt()))
-    ..registerLazySingleton(() => LogOutUseCase(getIt()))
-    ..registerLazySingleton(
-      () => AuthBloc(
-        signInUseCase: getIt(),
-        signUpUseCase: getIt(),
-        firstPage: getIt(),
-        logOutUseCase: getIt(),
-      ),
-    )
-    ..registerLazySingleton(() => AuthCacheUsecase(getIt()))
+        // outher
+        ..registerLazySingleton(() => SignInUseCase(getIt()))
+        ..registerLazySingleton(() => SignUpUseCase(getIt()))
+        ..registerLazySingleton(() => FirstPageUseCase(getIt()))
+        ..registerLazySingleton(() => LogOutUseCase(getIt()))
+        ..registerLazySingleton(
+          () => AuthBloc(
+            signInUseCase: getIt(),
+            signUpUseCase: getIt(),
+            firstPage: getIt(),
+            logOutUseCase: getIt(),
+          ),
+        )
+        ..registerLazySingleton(() => AuthCacheUsecase(getIt()))
 
-    // Datasources
-    ..registerSingleton<AuthRemoteDataSource>(
-      AuthRemoteDataSourceImpl(),
-    )
-    // Repository
-    ..registerSingleton<NetworkInfo>(NetworkInfoImpl())
-    ..registerLazySingleton<AuthenticationRepository>(
-      () => AuthenticationRepositoryImp(
-        networkInfo: getIt(),
-        authRemoteDataSource: getIt(),
-      ),
-    );
+        // Datasources
+        ..registerSingleton<AuthRemoteDataSource>(
+          AuthRemoteDataSourceImpl(),
+        )
+        // Repository
+        ..registerSingleton<NetworkInfo>(NetworkInfoImpl())
+        ..registerLazySingleton<AuthenticationRepository>(
+          () => AuthenticationRepositoryImp(
+            networkInfo: getIt(),
+            authRemoteDataSource: getIt(),
+          ),
+        );
     },
   );
 }
@@ -123,6 +128,17 @@ Future<void> setupDependencies() async {
         )
         ..registerLazySingleton<IListaLeituraUseCases>(
           () => ListaLeituraUseCases(getIt()),
+        )
+
+        // Categorias
+        ..registerLazySingleton<ICategoriaDatasource>(
+          () => FirebaseCategoriaDatasource(firebaseFirestore: getIt()),
+        )
+        ..registerLazySingleton<ICategoriaRepository>(
+          () => CategoriaRepository(datasource: getIt()),
+        )
+        ..registerLazySingleton<ICategoriaUseCase>(
+          () => CategoriaUseCaseImpl(repository: getIt()),
         )
 
         // Bloc

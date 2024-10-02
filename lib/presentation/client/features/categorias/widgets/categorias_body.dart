@@ -1,5 +1,5 @@
+import 'package:bilioteca_virtual/domain/use_cases/categoria_use_case.dart';
 import 'package:flutter/material.dart';
-import 'package:bilioteca_virtual/presentation/client/features/categorias/cubit/cubit.dart';
 
 /// {@template categorias_body}
 /// Body of the CategoriasPage.
@@ -12,10 +12,12 @@ class CategoriasBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoriasCubit, CategoriasState>(
-      builder: (context, state) {
-        return Center(child: Text(state.customProperty));
-      },
+    return Center(
+      child: TextButton(
+        onPressed: () async {
+        },
+        child: const Text('Categorias'),
+      ),
     );
   }
 }

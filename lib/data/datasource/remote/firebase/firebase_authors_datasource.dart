@@ -11,6 +11,7 @@ class FirebaseAuthorsDatasource implements IAuthorsDatasource {
   }
 
   late final FirebaseFirestore _firebaseFirestore;
+
   @override
   Future<bool> addAuthor(AuthorModel book) async {
     try {
