@@ -9,15 +9,6 @@ class CategoriasListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categorias = [
-      'Teste',
-      'Testando',
-      'Infantil',
-      'Literatura literatura literatura',
-      'Ficção',
-      'Romance',
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
