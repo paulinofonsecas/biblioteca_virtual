@@ -3,6 +3,7 @@ import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/features/global_search/cubit/search_list_books_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/global_search/widgets/empty_list_books.dart';
 import 'package:bilioteca_virtual/presentation/features/global_search/widgets/searched_item.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:searchable_listview/searchable_listview.dart';
@@ -35,7 +36,7 @@ class GlobalSearchBody extends StatelessWidget {
               itemBuilder: (BookModel user) => SearchedItem(book: user),
               filter: (String value) => state.books
                   .where(
-                    (element) => element.title
+                    (element) => removeDiacritics(element.title)
                         .toLowerCase()
                         .contains(value.toLowerCase()),
                   )

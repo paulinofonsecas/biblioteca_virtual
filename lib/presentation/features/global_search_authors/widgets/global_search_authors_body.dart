@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/presentation/features/global_search_authors/bl
 import 'package:bilioteca_virtual/presentation/features/global_search_authors/cubit/search_list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/global_search_authors/widgets/author_searched_item.dart';
 import 'package:bilioteca_virtual/presentation/features/global_search_authors/widgets/empty_list_authors.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
@@ -43,7 +44,7 @@ class GlobalSearchAuthorsBody extends StatelessWidget {
               ),
               filter: (String value) => state.authors
                   .where(
-                    (element) => element.name
+                    (element) => removeDiacritics(element.name)
                         .toLowerCase()
                         .contains(value.toLowerCase()),
                   )

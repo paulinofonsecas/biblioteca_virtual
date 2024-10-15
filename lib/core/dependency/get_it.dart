@@ -46,6 +46,10 @@ Future<void> setupCoreDependencies() async {
       g
         ..registerLazySingleton<FlutterSecureStorage>(
           () => const FlutterSecureStorage(
+            webOptions: WebOptions(
+              dbName: 'bilioteca_virtual',
+              publicKey: 'publicKey',
+            ),
             aOptions: AndroidOptions(
               encryptedSharedPreferences: true,
             ),
@@ -68,7 +72,7 @@ Future<void> setupCoreDependencies() async {
             logOutUseCase: getIt(),
           ),
         )
-        ..registerLazySingleton(() => AuthCacheUsecase(getIt()))
+        ..registerLazySingleton(() => AuthCacheUsecase(g()))
 
         // Datasources
         ..registerSingleton<AuthRemoteDataSource>(

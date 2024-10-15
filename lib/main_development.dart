@@ -1,5 +1,7 @@
 // import 'dart:io';
 
+import 'dart:async';
+
 import 'package:bilioteca_virtual/app/app.dart';
 import 'package:bilioteca_virtual/app/modules/app_module.dart';
 import 'package:bilioteca_virtual/bootstrap.dart';
@@ -20,16 +22,18 @@ void main() async {
 
   await setupCoreDependencies();
 
-  await bootstrap(
-    () {
-      // if (Platform.isAndroid || Platform.isIOS) {
-      //   return ModularApp(module: AppModule(), child: const App());
-      // }
+  unawaited(
+    bootstrap(
+      () {
+        // if (Platform.isAndroid || Platform.isIOS) {
+        //   return ModularApp(module: AppModule(), child: const App());
+        // }
 
-      return ModularApp(
-        module: AppModule(),
-        child: const App(),
-      );
-    },
+        return ModularApp(
+          module: AppModule(),
+          child: const App(),
+        );
+      },
+    ),
   );
 }

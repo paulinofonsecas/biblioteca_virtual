@@ -7,7 +7,7 @@ import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_author_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart' hide ModularWatchExtension;
 import 'package:uuid/uuid.dart';
 
 part 'add_new_author_event.dart';
