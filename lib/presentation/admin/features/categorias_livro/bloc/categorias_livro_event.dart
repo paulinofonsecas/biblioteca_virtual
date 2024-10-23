@@ -22,3 +22,10 @@ class RemoveCategoriaLivroEvent extends CategoriasLivroEvent {
   final Categoria item;
   final List<Categoria> lista;
 }
+
+class AdiconarCategoriaLivroEvent extends CategoriasLivroEvent {
+  const AdiconarCategoriaLivroEvent({required this.item});
+
+  /// {@macro custom_categorias_livro_event}
+  final Categoria item;
+}

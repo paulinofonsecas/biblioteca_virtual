@@ -21,4 +21,5 @@ abstract class ICategoriaRepository {
   Future<Either<Failure, List<Categoria>>> getCategoriesBySearch(String search);
 
   Future<bool> deleteCategory(String id);
+  Future<bool> adicionarCategory(Map<String, dynamic> json);
 }

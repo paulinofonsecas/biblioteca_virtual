@@ -88,4 +88,13 @@ class CategoriaRepository implements ICategoriaRepository {
     await FirebaseFirestore.instance.collection('categories').doc(id).delete();
     return true;
   }
+
+  @override
+  Future<bool> adicionarCategory(Map<String, dynamic> json) async {
+    await FirebaseFirestore.instance
+        .collection('categories')
+        .doc(json['id'] as String)
+        .set(json);
+    return true;
+  }
 }
