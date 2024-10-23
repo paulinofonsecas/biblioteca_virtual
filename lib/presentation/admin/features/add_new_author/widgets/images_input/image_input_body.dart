@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/pick_image_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,9 @@ const width = 100.0;
 const height = 100.0;
 
 class ImageInputBody extends StatelessWidget {
-  const ImageInputBody({super.key});
+  ImageInputBody({super.key, this.author});
+
+  Author? author;
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +28,36 @@ class ImageInputBody extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is PickImageInitial) {
-          return const Column(
+        if (author != null) {
+          if (state is PickImageSuccess) {
+            return Column(
+              children: [
+                _ImageWidget(state.path!),
+                const GutterSmall(),
+                _AlterarImagemWidget(
+                  titulo: author == null ? 'Definir imagem' : 'Alterar imagem',
+                ),
+              ],
+            );
+          }
+          return Column(
             children: [
-              _EmptyImageWidget(),
-              GutterSmall(),
-              _AlterarImagemWidget(),
+              _ImageWidget(author!.photo!),
+              const GutterSmall(),
+              _AlterarImagemWidget(
+                titulo: author == null ? 'Definir imagem' : 'Alterar imagem',
+              ),
+            ],
+          );
+        }
+        if (state is PickImageInitial) {
+          return Column(
+            children: [
+              const _EmptyImageWidget(),
+              const GutterSmall(),
+              _AlterarImagemWidget(
+                titulo: author == null ? 'Definir imagem' : 'Alterar imagem',
+              ),
             ],
           );
         }
@@ -40,7 +67,9 @@ class ImageInputBody extends StatelessWidget {
             children: [
               _ImageWidget(state.path!),
               const GutterSmall(),
-              const _AlterarImagemWidget(),
+              _AlterarImagemWidget(
+                titulo: author == null ? 'Definir imagem' : 'Alterar imagem',
+              ),
             ],
           );
         }
@@ -82,6 +111,9 @@ class _ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (path.isEmpty) {
+      return const _EmptyImageWidget();
+    }
     return ClipRRect(
       borderRadius: BorderRadius.circular(100),
       child: Container(
@@ -91,17 +123,23 @@ class _ImageWidget extends StatelessWidget {
           color: Theme.of(context).colorScheme.primaryContainer.withOpacity(.3),
           shape: BoxShape.circle,
         ),
-        child: Image.file(
-          File(path),
-          fit: BoxFit.cover,
-        ),
+        child: path.contains('https')
+            ? Image.network(
+                path,
+                fit: BoxFit.fill,
+              )
+            : Image.file(
+                File(path),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }
 }
 
 class _AlterarImagemWidget extends StatelessWidget {
-  const _AlterarImagemWidget();
+  _AlterarImagemWidget({required this.titulo});
+  final String titulo;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +148,7 @@ class _AlterarImagemWidget extends StatelessWidget {
         onPressed: () {
           context.read<PickImageCubit>().pickImage();
         },
-        child: const Text('Alterar imagem'),
+        child: Text(titulo),
       ),
     );
   }

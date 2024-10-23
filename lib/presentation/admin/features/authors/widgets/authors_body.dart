@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
@@ -84,6 +85,7 @@ class AuthorsBody extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
+                  getIt.registerFactory(() => author);
                   Modular.to.pushNamed('/admin/edit-author', arguments: author);
                 },
                 icon: const Icon(Icons.edit),

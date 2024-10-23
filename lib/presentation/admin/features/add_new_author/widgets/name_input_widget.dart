@@ -3,13 +3,12 @@ import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/cubit/name_input_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide ModularWatchExtension;
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NameInputWidget extends StatelessWidget {
-  NameInputWidget({super.key}) {
-    authorOnEditMode = Modular.args.data as Author;
-  }
+  NameInputWidget({super.key, this.authorOnEditMode});
   Author? authorOnEditMode;
 
   @override
@@ -18,6 +17,8 @@ class NameInputWidget extends StatelessWidget {
       children: [
         Expanded(
           child: TextFormField(
+            controller: TextEditingController(
+                text: authorOnEditMode == null ? '' : authorOnEditMode!.name),
             onChanged: (value) {
               BlocProvider.of<NameInputCubit>(context).changeText(value);
             },
@@ -37,10 +38,6 @@ class NameInputWidget extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
         ),
       ],
     );

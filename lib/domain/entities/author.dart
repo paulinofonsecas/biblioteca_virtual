@@ -6,17 +6,23 @@ class Author {
     required this.id,
     required this.name,
     required this.photo,
+    required this.dataNascimento,
+    required this.formacao,
   });
 
   factory Author.nullo() => Author(
         id: '',
         name: '',
         photo: '',
+        dataNascimento: '',
+        formacao: '',
       );
 
   final String id;
   final String name;
-  final String? photo;
+  final String dataNascimento;
+  final String formacao;
+  String? photo;
 
   Author copyWith({
     String? id,
@@ -27,6 +33,8 @@ class Author {
       id: id ?? this.id,
       name: name ?? this.name,
       photo: photo ?? this.photo,
+      dataNascimento: dataNascimento,
+      formacao: formacao,
     );
   }
 
@@ -35,6 +43,8 @@ class Author {
       'id': id,
       'name': name,
       'photo': photo,
+      'data_nascimento': dataNascimento,
+      'formacao': formacao,
     };
   }
 
@@ -43,6 +53,8 @@ class Author {
       id: map['id'] as String,
       name: map['name'] as String,
       photo: map['photo'] != null ? map['photo'] as String : null,
+      dataNascimento: (map['data_nascimento']  ?? '')as String,
+      formacao: (map['formacao'] ?? '') as String,
     );
   }
 
