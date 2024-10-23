@@ -3,7 +3,10 @@ import 'package:bilioteca_virtual/presentation/admin/features/gestao_de_books/vi
 import 'package:bilioteca_virtual/presentation/admin/features/home/view/home_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/profile/view/profile_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/widgets/admin_navigation_widget.dart';
+import 'package:bilioteca_virtual/presentation/client/features/lista_leituras/view/lista_leituras_page.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/brightness_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AdminPage extends StatefulWidget {
@@ -39,6 +42,35 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Biblioteca Digital'),
+        actions: const [
+          BrightnessControl(),
+        ],
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.white
+              ),
+              accountName: Text('Usuário Administrador', style: TextStyle(color: Colors.black),),
+              accountEmail: Text('admin@admin.com', style: TextStyle(color: Colors.black),),
+            ),
+            const Gutter(),
+            ListTile(
+              onTap: () {
+                Modular.to.pushNamed(
+                  '/admin/categorias-livro',
+                );
+              },
+              title: const Text('Categorias de livros'),
+              trailing: const Icon(Icons.category),
+            )
+          ],
+        ),
+      ),
       body: SizedBox.expand(
         child: PageView(
           controller: _pageController,
