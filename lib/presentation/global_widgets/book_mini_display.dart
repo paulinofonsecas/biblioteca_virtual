@@ -33,6 +33,7 @@ class BookMiniDisplay extends StatelessWidget {
           height: height ?? size.height * heightFactory,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: ClipRRect(
@@ -45,11 +46,15 @@ class BookMiniDisplay extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: kDefaultPadding / 2),
-              Text(
-                book.title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.labelSmall,
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  book.title.toUpperCase(),
+                  maxLines: 1,
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
               ),
             ],
           ),
