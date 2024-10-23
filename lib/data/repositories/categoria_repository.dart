@@ -2,6 +2,7 @@ import 'package:bilioteca_virtual/core/error/failures.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_categoria_datasource.dart';
 import 'package:bilioteca_virtual/domain/entities/categoria.dart';
 import 'package:bilioteca_virtual/domain/repositories/i_categoria_repository.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 class CategoriaRepository implements ICategoriaRepository {
@@ -80,5 +81,11 @@ class CategoriaRepository implements ICategoriaRepository {
   ) async {
     // TODO: implement getCategoriesFromBookAndAuthor
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteCategory(String id) async {
+    await FirebaseFirestore.instance.collection('categories').doc(id).delete();
+    return true;
   }
 }

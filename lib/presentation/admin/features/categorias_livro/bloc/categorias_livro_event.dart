@@ -1,11 +1,10 @@
 part of 'categorias_livro_bloc.dart';
 
-abstract class CategoriasLivroEvent  extends Equatable {
+abstract class CategoriasLivroEvent extends Equatable {
   const CategoriasLivroEvent();
 
   @override
   List<Object> get props => [];
-
 }
 
 /// {@template custom_categorias_livro_event}
@@ -14,4 +13,12 @@ abstract class CategoriasLivroEvent  extends Equatable {
 class GetAllCategoriasLivroEvent extends CategoriasLivroEvent {
   /// {@macro custom_categorias_livro_event}
   const GetAllCategoriasLivroEvent();
+}
+
+class RemoveCategoriaLivroEvent extends CategoriasLivroEvent {
+  const RemoveCategoriaLivroEvent({required this.lista, required this.item});
+
+  /// {@macro custom_categorias_livro_event}
+  final Categoria item;
+  final List<Categoria> lista;
 }

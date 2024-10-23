@@ -44,6 +44,12 @@ class GettingCategoriasLivroSucess extends CategoriasLivroState {
   final List<Categoria> lista;
 }
 
+class RemoveCategoriasLivro extends CategoriasLivroState {
+  /// {@macro categorias_livro_initial}
+  const RemoveCategoriasLivro({required this.lista}) : super();
+  final List<Categoria> lista;
+}
+
 class GettingCategoriasError extends CategoriasLivroState {
   /// {@macro categorias_livro_initial}
   const GettingCategoriasError({required this.mensagem}) : super();

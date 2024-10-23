@@ -13,24 +13,45 @@ class CategoriasLivroBloc
     extends Bloc<CategoriasLivroEvent, CategoriasLivroState> {
   CategoriasLivroBloc() : super(const CategoriasLivroInitial()) {
     _useCase = getIt<ICategoriaUseCase>();
-    on<GetAllCategoriasLivroEvent>(_onCustomCategoriasLivroEvent);
+    on<GetAllCategoriasLivroEvent>(_onGetAllCategoriasLivroEvent);
+    on<RemoveCategoriaLivroEvent>(_onGetRemoveCategory);
   }
   late ICategoriaUseCase _useCase;
 
-  FutureOr<void> _onCustomCategoriasLivroEvent(
+  FutureOr<void> _onGetAllCategoriasLivroEvent(
     GetAllCategoriasLivroEvent event,
     Emitter<CategoriasLivroState> emit,
-  ) async{
+  ) async {
     emit(const GettingCategoriasLivro());
     try {
-      await _useCase.getCategories().then((value) {
-        value.fold((l) {
-          
-        }, (r) {
-          emit(GettingCategoriasLivroSucess(lista: r));
-        },);
-      },).onError((error, stackTrace) {
-      },);
+      await _useCase.getCategories().then(
+        (value) {
+          value.fold(
+            (l) {},
+            (r) {
+              emit(GettingCategoriasLivroSucess(lista: r));
+            },
+          );
+        },
+      ).onError(
+        (error, stackTrace) {},
+      );
+    } catch (e) {
+      emit(const GettingCategoriasError(mensagem: 'Houve aulgum erro!'));
+    }
+  }
+
+  FutureOr<void> _onGetRemoveCategory(
+    RemoveCategoriaLivroEvent event,
+    Emitter<CategoriasLivroState> emit,
+  ) async {
+    try {
+      emit(const GettingCategoriasLivro());
+      await _useCase.deleteCategory(event.item.id);
+      event.lista.removeWhere(
+        (element) => element.id == event.item.id,
+      );
+      emit(GettingCategoriasLivroSucess(lista: event.lista));
     } catch (e) {
       emit(const GettingCategoriasError(mensagem: 'Houve aulgum erro!'));
     }

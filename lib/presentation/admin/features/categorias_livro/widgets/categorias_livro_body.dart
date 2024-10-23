@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/presentation/global_widgets/dialogo_confirmar_accao.dart';
 import 'package:flutter/material.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/categorias_livro/bloc/bloc.dart';
 
@@ -42,7 +43,14 @@ class _CategoriasLivroBodyState extends State<CategoriasLivroBody> {
                             Icons.delete,
                           ),
                           onPressed: () {
-                            
+                            mostrarDialogoConfirmarAccao(
+                                context: context,
+                                mensagem: 'Deseja mesmo eliminar?',
+                                accaoAoConfirmar: () {
+                                  context.read<CategoriasLivroBloc>().add(
+                                      RemoveCategoriaLivroEvent(
+                                          lista: state.lista, item: cada));
+                                });
                           },
                         ),
                       ))
