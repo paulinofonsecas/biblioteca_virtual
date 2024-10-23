@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/core/util/messages.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_authors_datasource.dart';
 import 'package:bilioteca_virtual/data/models/author_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -77,10 +78,11 @@ class FirebaseAuthorsDatasource implements IAuthorsDatasource {
   @override
   Future<List<AuthorModel>> getAuthors() async {
     try {
-      return _firebaseFirestore.collection('authors').get().then(
+      final then = await _firebaseFirestore.collection('authors').get().then(
             (value) =>
                 value.docs.map((e) => AuthorModel.fromMap(e.data())).toList(),
           );
+      return then;
     } catch (e) {
       log(e.toString());
       return List<AuthorModel>.empty();

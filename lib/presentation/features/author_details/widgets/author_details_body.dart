@@ -57,7 +57,18 @@ class _AuthorDetailsBodyState extends State<AuthorDetailsBody>
                   if (tabController.index == 0)
                     const AuthorBestBooks()
                   else
-                    Container(),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(kDefaultPadding),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Data de Nascimento: ${getIt<Author>().dataNascimento}'),
+                          Text('Área de formação: ${getIt<Author>().formacao}'),
+                        ],
+                      ),
+                    ),
                 ],
               ),
             ],
