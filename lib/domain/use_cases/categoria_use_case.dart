@@ -20,6 +20,9 @@ abstract class ICategoriaUseCase {
   );
 
   Future<Either<Failure, List<Categoria>>> getCategoriesBySearch(String search);
+
+  Future<bool> deleteCategory(String id);
+  Future<bool> adcionarCategoria(Categoria dado);
 }
 
 Future<void> setupCategories() async {
@@ -96,5 +99,15 @@ class CategoriaUseCaseImpl implements ICategoriaUseCase {
   ) {
     // TODO: implement getCategoriesFromBookAndAuthor
     throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteCategory(String id) {
+    return _repository.deleteCategory(id);
+  }
+
+  @override
+  Future<bool> adcionarCategoria(Categoria dado) {
+    return _repository.adicionarCategory(dado.toMap());
   }
 }

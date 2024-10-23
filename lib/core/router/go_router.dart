@@ -28,6 +28,10 @@ final router = GoRouter(
           builder: (context, state) => const GestaoDeBooksPage(),
         ),
         GoRoute(
+          path: 'categorias-livro',
+          builder: (context, state) => const GestaoDeBooksPage(),
+        ),
+        GoRoute(
           path: 'add-new-book',
           builder: (context, state) => const AddNewBookPage(),
         ),

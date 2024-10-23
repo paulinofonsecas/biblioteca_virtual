@@ -32,15 +32,8 @@ class HomePage extends StatelessWidget {
           create: (context) => FeaturedBooksCubit(),
         ),
       ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Biblioteca Digital'),
-          actions: const [
-            GlobalSearchBookWidget(),
-            BrightnessControl(),
-          ],
-        ),
-        body: const HomeView(),
+      child: const Scaffold(
+        body: HomeView(),
       ),
     );
   }
