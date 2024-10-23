@@ -5,6 +5,7 @@ import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/authors/cubit/list_authors_state.dart';
 import 'package:bilioteca_virtual/presentation/features/author_details/author_details.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -85,6 +86,9 @@ class AuthorsBody extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
+                  if (getIt.isRegistered<Author>()) {
+                    getIt.unregister<Author>();
+                  }
                   getIt.registerFactory(() => author);
                   Modular.to.pushNamed('/admin/edit-author', arguments: author);
                 },
@@ -134,7 +138,29 @@ class AuthorsBody extends StatelessWidget {
               ),
             ],
           ),
-          leading: const Icon(Icons.person),
+          leading: author.photo != null &&
+                  author.photo!.isNotEmpty &&
+                  author.photo!.contains('http')
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(90),
+                  child: CachedNetworkImage(
+                    imageUrl: author.photo!,
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : Container(
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey,
+                  ),
+                  child: const Icon(
+                    Icons.person,
+                  ),
+                ),
         );
       },
     );
