@@ -8,6 +8,8 @@ class AuthorModel extends Author {
     required super.id,
     required super.name,
     required super.photo,
+    required super.formacao,
+    required super.dataNascimento,
   });
 
   factory AuthorModel.fromEntity(Author entity) {
@@ -15,6 +17,8 @@ class AuthorModel extends Author {
       id: entity.id,
       name: entity.name,
       photo: entity.photo,
+      dataNascimento: entity.dataNascimento,
+      formacao: entity.formacao,
     );
   }
 
@@ -23,6 +27,8 @@ class AuthorModel extends Author {
       id: id,
       name: name,
       photo: photo,
+      dataNascimento: dataNascimento,
+      formacao: formacao,
     );
   }
 
@@ -35,6 +41,8 @@ class AuthorModel extends Author {
       id: id ?? this.id,
       name: name ?? this.name,
       photo: photo ?? this.photo,
+      formacao: formacao,
+      dataNascimento: dataNascimento,
     );
   }
 
@@ -43,6 +51,8 @@ class AuthorModel extends Author {
       'id': id,
       'name': name,
       'photo': photo,
+      'formacao': formacao,
+      'data_nascimento': dataNascimento
     };
   }
 
@@ -51,6 +61,8 @@ class AuthorModel extends Author {
       id: map['id'] as String,
       name: map['name'] as String,
       photo: map['photo'] as String,
+      formacao: (map['formacao'] ?? '') as String,
+      dataNascimento: (map['data_nascimento'] ?? '') as String,
     );
   }
 
