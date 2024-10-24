@@ -5,6 +5,7 @@ import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/bloc/edit_book_bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/categoria_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/dropdown_autor_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/editora_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/form_control_cubit.dart';
@@ -66,8 +67,7 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
       if (widget.book != null) {
         context.read<EditBookBloc>().add(UpdateNewBookEvent(context));
       } else {
-        print('Add');
-        // context.read<AddNewBookBloc>().add(SaveNewBookEvent(context));
+        context.read<AddNewBookBloc>().add(SaveNewBookEvent(context));
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -100,6 +100,9 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
         ),
         BlocProvider(
           create: (context) => AutorInputCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CategoriaInputCubit(),
         ),
         BlocProvider(
           create: (context) => IsbnInputCubit(),

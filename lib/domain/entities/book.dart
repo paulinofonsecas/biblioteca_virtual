@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:bilioteca_virtual/core/util/messages.dart';
 import 'package:bilioteca_virtual/domain/entities/author.dart';
+import 'package:bilioteca_virtual/domain/entities/categoria.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:flutter/foundation.dart';
 
 class BookModel {
-
   BookModel({
     required this.id,
     required this.title,
     required this.authors,
+    required this.categorias,
     required this.capa,
     required this.pdf,
     required this.preco,
@@ -23,6 +25,7 @@ class BookModel {
         id: '',
         title: 'Titulo de exemplo grande',
         authors: [],
+        categorias: [],
         capa:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx4ONp_TLFBtxBvGsPl3Ny-r3l-EYkYjB6pQ&s',
         pdf: '',
@@ -32,6 +35,7 @@ class BookModel {
   final String id;
   final String title;
   final List<Author> authors;
+  final List<Categoria> categorias;
   final String? isbn;
   final String? editora;
   final String? resumo;
@@ -54,6 +58,7 @@ class BookModel {
       id: id ?? this.id,
       title: title ?? this.title,
       authors: authors ?? this.authors,
+      categorias: categorias ?? this.categorias,
       isbn: isbn ?? this.isbn,
       editora: editora ?? this.editora,
       resumo: resumo ?? this.resumo,
@@ -68,6 +73,7 @@ class BookModel {
       'id': id,
       'title': title,
       'authors': authors.map((x) => x.toMap()).toList(),
+      'categories': categorias.map((x) => x.toMap()).toList(),
       'isbn': isbn,
       'editora': editora,
       'resumo': resumo,
@@ -82,6 +88,7 @@ class BookModel {
       id: book.id,
       title: book.title,
       authors: book.authors,
+      categorias: book.categorias,
       isbn: book.isbn,
       editora: book.editora,
       resumo: book.resumo,
@@ -95,6 +102,7 @@ class BookModel {
         id: id,
         title: title,
         authors: authors,
+        categorias: categorias,
         isbn: isbn,
         editora: editora,
         resumo: resumo,
@@ -105,19 +113,26 @@ class BookModel {
 
   factory BookModel.fromMap(Map<String, dynamic> map) {
     return BookModel(
-      id: map['id'] as String,
-      title: map['title'] as String,
+      id: (map['id'] ?? '') as String,
+      title: (map['title'] ?? '') as String,
       authors: map['authors'] == null
           ? []
           : List<Author>.from(
               (map['authors'] as List<dynamic>)
                   .map((e) => Author.fromMap(e as Map<String, dynamic>)),
             ),
-      isbn: map['isbn'] != null ? map['isbn'] as String : null,
-      editora: map['editora'] != null ? map['editora'] as String : null,
-      resumo: map['resumo'] != null ? map['resumo'] as String : null,
-      capa: map['capa'] as String,
-      pdf: map['pdf'] as String,
+      categorias: map['categories'] == null
+          ? []
+          : List<Categoria>.from(
+              (map['categories'] as List<dynamic>).map((e) {
+                return Categoria.fromMap(e as Map<String, dynamic>);
+              }),
+            ),
+      isbn: map['isbn'] != null ? (map['isbn'] ?? '') as String : null,
+      editora: map['editora'] != null ? (map['editora'] ?? '') as String : null,
+      resumo: map['resumo'] != null ? (map['resumo'] ?? '') as String : null,
+      capa: (map['capa'] ?? '') as String,
+      pdf: (map['pdf'] ?? '') as String,
       preco: map['preco'] == null
           ? Preco.gratis()
           : Preco.fromMap(map['preco'] as Map<String, dynamic>),
@@ -131,7 +146,7 @@ class BookModel {
 
   @override
   String toString() {
-    return 'BookModel(id: $id, title: $title, authors: $authors, isbn: $isbn, editora: $editora, resumo: $resumo, capa: $capa, pdf: $pdf, preco: $preco)';
+    return 'BookModel(id: $id, title: $title, authors: $authors,categorias: $categorias, isbn: $isbn, editora: $editora, resumo: $resumo, capa: $capa, pdf: $pdf, preco: $preco)';
   }
 
   @override

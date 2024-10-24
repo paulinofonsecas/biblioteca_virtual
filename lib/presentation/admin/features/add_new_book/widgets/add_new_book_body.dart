@@ -3,6 +3,7 @@ import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/bloc/edit_book_bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/categoria_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/editora_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/form_control_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/isbn_input_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/resumo_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/titulo_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/autor_input_widget.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/categories_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/editora_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/images_input/imagens_input_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/widgets/isbn_input_widget.dart';
@@ -42,6 +44,7 @@ class _AddNewBookBodyState extends State<AddNewBookBody> {
       context.read<TituloInputCubit>().changeText(book.title);
       context.read<PrecoInputCubit>().precoChanged(book.preco.valor);
       context.read<AutorInputCubit>().changeAuthors(book.authors);
+      context.read<CategoriaInputCubit>().changeList(book.categorias);
       context.read<IsbnInputCubit>().changeText(book.isbn ?? '');
       context.read<EditoraInputCubit>().changeText(book.editora ?? '');
       context.read<ResumoInputCubit>().changeText(book.resumo ?? '');
@@ -83,6 +86,8 @@ class _AddNewBookBodyState extends State<AddNewBookBody> {
               PrecoInputWidget(),
               Gutter(),
               AutorInputWidget(),
+              Gutter(),
+              CategoriesInputWidget(),
               Gutter(),
               IsbnInputWidget(),
               Gutter(),
