@@ -61,6 +61,7 @@ class _BuildLiview extends StatelessWidget {
             book: BookModel(
               id: book.id,
               title: book.title,
+              categorias: book.categorias,
               authors: book.authors,
               capa: book.capa,
               pdf: book.pdf,

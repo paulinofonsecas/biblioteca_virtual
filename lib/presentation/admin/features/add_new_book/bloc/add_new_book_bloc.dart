@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/core/util/messages.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/add_new_book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/autor_input_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/categoria_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/editora_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/isbn_input_cubit.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/cubit/pick_capa_image_cubit.dart';
@@ -39,6 +41,7 @@ class AddNewBookBloc extends Bloc<AddNewBookEvent, AddNewBookState> {
 
       final titulo = context.read<TituloInputCubit>().state.text;
       final autor = context.read<AutorInputCubit>().state.authors;
+      final categorias = context.read<CategoriaInputCubit>().state.lista;
       final isbn = context.read<IsbnInputCubit>().state.text;
       final editora = context.read<EditoraInputCubit>().state.text;
       final resumo = context.read<ResumoInputCubit>().state.text;
@@ -60,6 +63,7 @@ class AddNewBookBloc extends Bloc<AddNewBookEvent, AddNewBookState> {
         id: const Uuid().v4(),
         title: titulo,
         authors: autor,
+        categorias: categorias,
         isbn: isbn,
         editora: editora,
         resumo: resumo,
