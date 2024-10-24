@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/cubit/admin_view_book_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/authors_info_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/book_info_widget.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/build_comprar_livro.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/widgets/description_widget.dart';
@@ -59,6 +60,7 @@ class _BuildScreen extends StatelessWidget {
             children: [
               BookInfoWidget(book: book),
               BookDescriptionWidget(book: book),
+              AuthorsInfoWidget(book: book),
               MoreFromAutorWidget(book: book),
             ],
           ),

@@ -9,27 +9,31 @@ Future<dynamic> mostrarDialogoAddPagamento({
   required Function(Categoria categoria) accaoAoConfirmar,
 }) {
   return showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (c) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => DialogoCategoriaBloc()),
-          ],
-          child: Builder(builder: (context) {
+    barrierDismissible: false,
+    context: context,
+    builder: (c) {
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => DialogoCategoriaBloc()),
+        ],
+        child: Builder(
+          builder: (context) {
             return DialogoCategoria(
-                bloc: context.read<DialogoCategoriaBloc>(),
-                accaoAoConfirmar: accaoAoConfirmar);
-          }),
-        );
-      });
+              bloc: context.read<DialogoCategoriaBloc>(),
+              accaoAoConfirmar: accaoAoConfirmar,
+            );
+          },
+        ),
+      );
+    },
+  );
 }
 
 class DialogoCategoria extends StatelessWidget {
   DialogoCategoria({
-    super.key,
     required this.bloc,
     required this.accaoAoConfirmar,
+    super.key,
   });
   final Function(Categoria categoria) accaoAoConfirmar;
   final DialogoCategoriaBloc bloc;
@@ -63,24 +67,26 @@ class DialogoCategoria extends StatelessWidget {
       ),
       actions: [
         TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Cancelar')),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Cancelar'),
+        ),
         ElevatedButton(
-            onPressed: () {
-              if (nome.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Preencha o campo'),
-                  ),
-                );
-                return;
-              }
-              Navigator.pop(context);
-              accaoAoConfirmar(Categoria(id: geradorId.v4(), nome: nome));
-            },
-            child: const Text('Confirmar'))
+          onPressed: () {
+            if (nome.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Preencha o campo'),
+                ),
+              );
+              return;
+            }
+            Navigator.pop(context);
+            accaoAoConfirmar(Categoria(id: geradorId.v4(), nome: nome));
+          },
+          child: const Text('Confirmar'),
+        ),
       ],
     );
   }
