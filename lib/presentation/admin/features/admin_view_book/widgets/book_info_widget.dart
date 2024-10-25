@@ -58,13 +58,15 @@ class BookInfoWidget extends StatelessWidget {
                           ),
                     ),
                     const Gutter(),
-                    const CategoriesList(
-                      categories: [
-                        'Ficão',
-                        'Conto',
-                        'Romance',
-                        'Aventura',
-                      ],
+                    Visibility(
+                      visible: book.categorias.isNotEmpty,
+                      replacement: const Text(
+                        'Categoria não atribuida',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      child: CategoriesList(
+                        categories: book.categorias.map((e) => e.nome).toList(),
+                      ),
                     ),
                     const Divider(),
                     const Gutter(),
