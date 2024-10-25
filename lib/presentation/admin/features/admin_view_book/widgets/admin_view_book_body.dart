@@ -61,7 +61,6 @@ class _BuildScreen extends StatelessWidget {
               BookInfoWidget(book: book),
               BookDescriptionWidget(book: book),
               AuthorsInfoWidget(book: book),
-              MoreFromAutorWidget(book: book),
             ],
           ),
         ),
