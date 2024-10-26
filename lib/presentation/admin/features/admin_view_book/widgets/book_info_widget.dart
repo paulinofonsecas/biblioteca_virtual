@@ -51,11 +51,22 @@ class BookInfoWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                    Text(
-                      book.authors.firstOrNull?.name ?? 'N/D',
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Colors.grey[500],
-                          ),
+                    Row(
+                      children: [
+                        Text(
+                          book.authors.firstOrNull?.name ?? 'N/D',
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                    color: Colors.grey[500],
+                                  ),
+                        ),
+                        TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Seguir',
+                              style: TextStyle(color: Colors.blue),
+                            ))
+                      ],
                     ),
                     const Gutter(),
                     Visibility(
