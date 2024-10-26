@@ -16,10 +16,8 @@ class HomePageBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchBooksWidget(),
-            GutterLarge(),
+            GutterSmall(),
             FavoriteBooksWidget(),
-            GutterLarge(),
-            CategoriasListWidget(),
             GutterLarge(),
             AllBooksWidget(),
           ],
