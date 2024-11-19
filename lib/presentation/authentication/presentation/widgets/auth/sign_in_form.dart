@@ -67,11 +67,12 @@ class _LoginFormState extends State<LoginForm> {
           }
           getIt.registerLazySingleton<MyUser>(() => state.userCredential!);
 
-          if (role == 'admin') {
             Modular.to.pushReplacementNamed('/admin');
-          } else if (role == 'usuario') {
-            Modular.to.pushReplacementNamed('/client');
-          }
+          // if (role == 'admin') {
+          //   Modular.to.pushReplacementNamed('/admin');
+          // } else if (role == 'usuario') {
+          //   Modular.to.pushReplacementNamed('/client');
+          // }
         }
       },
       builder: (context, state) {
