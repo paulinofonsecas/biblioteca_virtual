@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
 class MoreFromAutorWidget extends StatelessWidget {
-  const MoreFromAutorWidget({required this.book, super.key});
+  const MoreFromAutorWidget({required this.authorId, super.key});
 
-  final BookModel book;
+  final String authorId;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class MoreFromAutorWidget extends StatelessWidget {
             const GutterSmall(),
             BlocBuilder<GetBooksFromAuthorCubit, GetBooksFromAuthorState>(
               bloc: context.read<GetBooksFromAuthorCubit>()
-                ..getBooksFromAuthor(book.authors.first.id),
+                ..getBooksFromAuthor(authorId),
               builder: (context, state) {
                 if (state is GetBooksFromAuthorLoading) {
                   return const Center(
@@ -55,8 +55,7 @@ class MoreFromAutorWidget extends StatelessWidget {
                 }
 
                 if (state is GetBooksFromAuthorLoaded) {
-                  final books = state.books
-                    ..removeWhere((element) => element.id == book.id);
+                  final books = state.books;
 
                   if (books.isEmpty) {
                     return const Center(
