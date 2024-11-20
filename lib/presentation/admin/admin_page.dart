@@ -67,6 +67,15 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
               },
               title: const Text('Categorias de livros'),
               trailing: const Icon(Icons.category),
+            ),
+            ListTile(
+              onTap: () {
+                Modular.to.pushNamed(
+                  '/admin/relatorios',
+                );
+              },
+              title: const Text('Relatorios'),
+              trailing: const Icon(Icons.insert_drive_file_rounded),
             )
           ],
         ),
