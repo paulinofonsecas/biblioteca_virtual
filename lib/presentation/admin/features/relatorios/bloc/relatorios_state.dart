@@ -32,3 +32,13 @@ class RelatoriosInitial extends RelatoriosState {
   /// {@macro relatorios_initial}
   const RelatoriosInitial() : super();
 }
+
+class GerandoRalatorio extends RelatoriosState {
+  /// {@macro relatorios_initial}
+  const GerandoRalatorio() : super();
+}
+
+class RalatorioGerado extends RelatoriosState {
+  /// {@macro relatorios_initial}
+  const RalatorioGerado() : super();
+}

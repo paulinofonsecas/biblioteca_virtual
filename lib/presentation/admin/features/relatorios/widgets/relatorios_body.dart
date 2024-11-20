@@ -1,3 +1,4 @@
+import 'package:bilioteca_virtual/core/util/messages.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/relatorios/bloc/relatorios_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,19 +20,20 @@ class RelatoriosBody extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                
               },
-              child: const Padding(
-                padding: EdgeInsets.all(15),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
                 child: Card(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Row(
                       children: [
-                        Text('Relatório de usuários'),
-                        Spacer(),
-                        Icon(Icons.share),
+                        const Text('Relatório de usuários'),
+                        const Spacer(),
+                        InkWell(child: const Icon(Icons.share), onTap: () {
+                          context.read<RelatoriosBloc>().add(const GerarRelatorioUsuarioEvent());
+                        },),
                       ],
                     ),
                   ),
@@ -42,17 +44,21 @@ class RelatoriosBody extends StatelessWidget {
               onTap: () {
                 
               },
-              child: const Padding(
-                padding: EdgeInsets.all(15),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
                 child: Card(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Row(
                       children: [
-                        Text('Relatório de obras literárias'),
-                        Spacer(),
-                        Icon(Icons.share),
+                        const Text('Relatório de obras literárias'),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            context.read<RelatoriosBloc>().add(const GerarRelatorioObrasEvent());
+                          },
+                          child: const Icon(Icons.share)),
                       ],
                     ),
                   ),

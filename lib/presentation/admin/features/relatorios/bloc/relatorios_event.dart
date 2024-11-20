@@ -15,3 +15,17 @@ class CustomRelatoriosEvent extends RelatoriosEvent {
   /// {@macro custom_relatorios_event}
   const CustomRelatoriosEvent();
 }
+
+class GerarRelatorioUsuarioEvent extends RelatoriosEvent {
+  /// {@macro custom_relatorios_event}
+  const GerarRelatorioUsuarioEvent();
+}class GerarRelatorioObrasEvent extends RelatoriosEvent {
+  /// {@macro custom_relatorios_event}
+  const GerarRelatorioObrasEvent();
+}class GerarRelatorioConsultasEvent extends RelatoriosEvent {
+  /// {@macro custom_relatorios_event}
+  const GerarRelatorioConsultasEvent();
+}class GerarRelatorioSistemaEvent extends RelatoriosEvent {
+  /// {@macro custom_relatorios_event}
+  const GerarRelatorioSistemaEvent();
+}

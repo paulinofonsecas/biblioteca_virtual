@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/app/app.dart';
+import 'package:bilioteca_virtual/presentation/global_widgets/dialogo_carregando.dart';
 import 'package:flutter/material.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/relatorios/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/relatorios/widgets/relatorios_body.dart';
@@ -26,7 +27,7 @@ class RelatoriosPage extends StatelessWidget {
         body: const RelatoriosView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template relatorios_view}
@@ -38,6 +39,19 @@ class RelatoriosView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RelatoriosBody();
+    return BlocListener<RelatoriosBloc, RelatoriosState>(
+      listener: (context, state) {
+        if (state is GerandoRalatorio) {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return const DialogoCarregando();
+              });
+        } else if (state is RalatorioGerado) {
+          Navigator.pop(context);
+        }
+      },
+      child: const RelatoriosBody(),
+    );
   }
 }
