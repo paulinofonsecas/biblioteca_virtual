@@ -69,17 +69,21 @@ class RelatoriosBody extends StatelessWidget {
               onTap: () {
                 
               },
-              child: const Padding(
-                padding: EdgeInsets.all(15),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
                 child: Card(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Row(
                       children: [
-                        Text('Relatório de consultas de obras'),
-                        Spacer(),
-                        Icon(Icons.share),
+                        const Text('Relatório de consultas de obras'),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            context.read<RelatoriosBloc>().add(const GerarRelatorioConsultasEvent());
+                          },
+                          child: const Icon(Icons.share)),
                       ],
                     ),
                   ),
@@ -90,17 +94,21 @@ class RelatoriosBody extends StatelessWidget {
               onTap: () {
                 
               },
-              child: const Padding(
-                padding: EdgeInsets.all(15),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
                 child: Card(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     child: Row(
                       children: [
-                        Text('Relatório geral do sistema'),
-                        Spacer(),
-                        Icon(Icons.share),
+                        const Text('Relatório geral do sistema'),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            context.read<RelatoriosBloc>().add(const GerarRelatorioSistemaEvent());
+                          },
+                          child: const Icon(Icons.share)),
                       ],
                     ),
                   ),

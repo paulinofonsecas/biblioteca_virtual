@@ -19,6 +19,8 @@ class RelatoriosBloc extends Bloc<RelatoriosEvent, RelatoriosState> {
         booksUseCases: getIt<IBooksUseCases>());
     on<GerarRelatorioUsuarioEvent>(_onGerarRelatorioUsuarioEvent);
     on<GerarRelatorioObrasEvent>(_onGerarRelatorioObrasEvent);
+    on<GerarRelatorioConsultasEvent>(_onGerarRelatorioConsultasEvent);
+    on<GerarRelatorioSistemaEvent>(_onGerarRelatorioSistemaEvent);
   }
 
   FutureOr<void> _onGerarRelatorioUsuarioEvent(
@@ -37,6 +39,26 @@ class RelatoriosBloc extends Bloc<RelatoriosEvent, RelatoriosState> {
   ) async {
     emit(const GerandoRalatorio());
     final dados = await _useCase.gerarRelatorioObras();
+    emit(const RalatorioGerado());
+    await Printing.layoutPdf(onLayout: (format) async => dados);
+  }
+  
+  FutureOr<void> _onGerarRelatorioConsultasEvent(
+    GerarRelatorioConsultasEvent event,
+    Emitter<RelatoriosState> emit,
+  ) async {
+    emit(const GerandoRalatorio());
+    final dados = await _useCase.gerarRelatorioConsultas();
+    emit(const RalatorioGerado());
+    await Printing.layoutPdf(onLayout: (format) async => dados);
+  }
+  
+  FutureOr<void> _onGerarRelatorioSistemaEvent(
+    GerarRelatorioSistemaEvent event,
+    Emitter<RelatoriosState> emit,
+  ) async {
+    emit(const GerandoRalatorio());
+    final dados = await _useCase.gerarRelatorioSistema();
     emit(const RalatorioGerado());
     await Printing.layoutPdf(onLayout: (format) async => dados);
   }
