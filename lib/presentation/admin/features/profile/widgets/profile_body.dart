@@ -1,5 +1,3 @@
-import 'package:bilioteca_virtual/core/dependency/get_it.dart';
-import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 
 /// {@template profile_body}
@@ -13,14 +11,17 @@ class ProfileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextButton.icon(
-        onPressed: () {
-          getIt<AuthBloc>().add(LogOutEvent());
-        },
-        icon: const Icon(Icons.logout),
-        label: const Text('Terminar sessão'),
-      ),
+    return Column(
+      children: [
+        ListTile(
+          onTap: () {
+            Navigator.pushNamed(context, '/admin/users');
+          },
+          leading: const Icon(Icons.group),
+          title: const Text('Gestão de usuarios'),
+          trailing: const Icon(Icons.chevron_right),
+        ),
+      ],
     );
   }
 }

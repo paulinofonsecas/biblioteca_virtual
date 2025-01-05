@@ -16,7 +16,3 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
-
-buildscript {
-    ext.kotlin_version = '1.7.0' // <= expected version is 1.5.1
-}

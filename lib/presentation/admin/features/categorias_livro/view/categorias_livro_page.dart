@@ -13,7 +13,8 @@ class CategoriasLivroPage extends StatelessWidget {
   /// The static route for CategoriasLivroPage
   static Route<dynamic> route() {
     return MaterialPageRoute<dynamic>(
-        builder: (_) => const CategoriasLivroPage());
+      builder: (_) => const CategoriasLivroPage(),
+    );
   }
 
   @override
@@ -22,7 +23,7 @@ class CategoriasLivroPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => CategoriasLivroBloc(),
-        )
+        ),
       ],
       child: Builder(
         builder: (context2) {
@@ -32,16 +33,18 @@ class CategoriasLivroPage extends StatelessWidget {
             ),
             body: const CategoriasLivroView(),
             floatingActionButton: FloatingActionButton(
-                child: const Icon(Icons.add),
-                onPressed: () {
-                  mostrarDialogoAddPagamento(
-                      accaoAoConfirmar: (categoria) {
-                        context2
-                            .read<CategoriasLivroBloc>()
-                            .add(AdiconarCategoriaLivroEvent(item: categoria));
-                      },
-                      context: context);
-                }),
+              child: const Icon(Icons.add),
+              onPressed: () {
+                mostrarDialogoAddPagamento(
+                  accaoAoConfirmar: (categoria) {
+                    context2
+                        .read<CategoriasLivroBloc>()
+                        .add(AdiconarCategoriaLivroEvent(item: categoria));
+                  },
+                  context: context,
+                );
+              },
+            ),
           );
         },
       ),

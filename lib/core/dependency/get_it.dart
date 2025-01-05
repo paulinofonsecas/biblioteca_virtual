@@ -2,10 +2,12 @@ import 'package:bilioteca_virtual/core/network/network_info.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_authors_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_categoria_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/contracts/i_lista_de_leitura_datasource.dart';
+import 'package:bilioteca_virtual/data/datasource/contracts/i_users_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_authors_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_categoria_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_lista_de_leitura_datasource.dart';
 import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_payment_datasource.dart';
+import 'package:bilioteca_virtual/data/datasource/remote/firebase/firebase_users_datasource.dart';
 import 'package:bilioteca_virtual/data/repositories/authors_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/books_repository.dart';
 import 'package:bilioteca_virtual/data/repositories/categoria_repository.dart';
@@ -98,6 +100,10 @@ Future<void> setupDependencies() async {
         ..registerLazySingleton<IBooksRepository>(BooksRepository.new)
         ..registerLazySingleton<IBooksUseCases>(() => BooksUseCases(getIt()))
 
+        // Ussssssers dependencies
+        ..registerLazySingleton<IUsersDatasource>(
+          FirebaseUsersDatasource.new,
+        )
         // Authors dependencies
         ..registerLazySingleton<IAuthorsDatasource>(
           FirebaseAuthorsDatasource.new,

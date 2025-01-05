@@ -1,5 +1,6 @@
 import 'package:bilioteca_virtual/core/util/enums.dart';
 import 'package:bilioteca_virtual/presentation/admin/admin_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/admin_users_manager/view/admin_users_manager_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/view/add_new_author_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
@@ -82,6 +83,10 @@ class AppModule extends Module {
             parent: 'parent',
           );
         },
+      )
+      ..child(
+        '/admin/users',
+        child: (context) => const AdminUsersManagerPage(),
       )
       ..child('/client', child: (c) => const HomePage())
       ..child('/lista-leitura', child: (c) => const ListaLeiturasPage());
