@@ -7,6 +7,7 @@ import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/widgets/p_d
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
+import 'package:no_screenshot/no_screenshot.dart';
 
 class PDFReaderPage extends StatefulWidget {
   const PDFReaderPage({
@@ -58,7 +59,13 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
         ),
       ],
       child: PopScope(
-        onPopInvoked: (b) {
+        onPopInvoked: (b) async {
+          await NoScreenshot.instance.screenshotOff();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Capturas de tela abilitadas'),
+            ),
+          );
           router.go(widget.parent);
         },
         child: Scaffold(

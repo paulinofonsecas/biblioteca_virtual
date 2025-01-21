@@ -55,6 +55,7 @@ dependencies:
   auto_size_text: ^3.0.0
   diacritic: ^0.1.6
   firebase_admin: ^0.3.0
+  no_screenshot: ^0.3.1
 
 dev_dependencies:
   bloc_test: ^9.1.6
