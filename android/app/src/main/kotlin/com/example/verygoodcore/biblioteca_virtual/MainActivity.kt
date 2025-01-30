@@ -1,4 +1,4 @@
-package com.example.verygoodcore.biblioteca_virtual
+package com.tecno.elite.biblioteca_virtual
 
 import io.flutter.embedding.android.FlutterActivity
 

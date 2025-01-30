@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '789567736',
     projectId: 'biblioteca-virtual-689ea',
     storageBucket: 'biblioteca-virtual-689ea.appspot.com',
-    iosBundleId: 'com.example.verygoodcore.bilioteca-virtual',
+    iosBundleId: 'com.tecno.elite.bilioteca-virtual',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'biblioteca-virtual-689ea.appspot.com',
     measurementId: 'G-CCN0W2KS1T',
   );
-
 }

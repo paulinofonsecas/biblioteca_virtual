@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example.verygoodcore.bilioteca-virtual" "\0"
+            VALUE "CompanyName", "com.tecno.elite.bilioteca-virtual" "\0"
             VALUE "FileDescription", "bilioteca_virtual" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "bilioteca_virtual" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.example.verygoodcore.bilioteca-virtual. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.tecno.elite.bilioteca-virtual. All rights reserved." "\0"
             VALUE "OriginalFilename", "bilioteca_virtual.exe" "\0"
             VALUE "ProductName", "Bilioteca Virtual" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

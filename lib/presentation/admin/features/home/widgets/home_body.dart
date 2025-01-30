@@ -2,7 +2,6 @@ import 'package:bilioteca_virtual/presentation/admin/features/home/widgets/secti
 import 'package:bilioteca_virtual/presentation/admin/features/home/widgets/sections/livros_mais_acessados_section.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/home/widgets/todos_os_livros.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/cubit/search_books_cubit.dart';
-import 'package:bilioteca_virtual/presentation/global_widgets/banner_example_widget.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/search_books_widget.dart';
 import 'package:bilioteca_virtual/presentation/global_widgets/section_title.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +39,6 @@ class HomeBody extends StatelessWidget {
                   const LivrosMaisAcessadosSection(),
                   const GutterLarge(),
                   const AventuraSection(),
-                  const GutterLarge(),
-                  const BannerExample(),
                   const GutterLarge(),
                   const SectionTitle(
                     title: 'Todos os livros',
