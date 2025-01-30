@@ -5,6 +5,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/add_new_author/vie
 import 'package:bilioteca_virtual/presentation/admin/features/add_new_book/view/add_new_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/view/admin_view_book_page.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/categorias_livro/view/categorias_livro_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/view/stats_and_reports_page.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/sign_in_page.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/pages/auth/sign_up_page.dart';
 import 'package:bilioteca_virtual/presentation/client/features/home_page/view/home_page.dart';
@@ -87,6 +88,10 @@ class AppModule extends Module {
       ..child(
         '/admin/users',
         child: (context) => const AdminUsersManagerPage(),
+      )
+      ..child(
+        '/admin/stats_and_reports',
+        child: (context) => const StatsAndReportsPage(),
       )
       ..child('/client', child: (c) => const HomePage())
       ..child('/lista-leitura', child: (c) => const ListaLeiturasPage());
