@@ -1,0 +1,19 @@
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  generate: true
+  android: "launcher_icon"
+  image_path: "assets/icon/icon.png"
+  theme_color: "#ffffffff"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    background_color: "#ffffffff"
+    theme_color: "#ffffffff"
+  windows:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/icon/icon.png"
