@@ -7,7 +7,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Biblioteca Virtual'),
+      title: const Text('Livros do Coração de Angola'),
       centerTitle: true,
       actions: const [
         BrightnessControl(),

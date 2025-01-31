@@ -169,7 +169,7 @@ class _InformationPaymentWidget extends StatelessWidget {
         const GroupInformation(
           icon: FontAwesomeIcons.creditCard,
           title: 'Nome',
-          value: 'Biblioteca Digital',
+          value: 'Livros do Coração de Angola',
         ),
         const GutterSmall(),
         const GroupInformation(

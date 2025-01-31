@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789567736:android:84ff69c463889ea5f9030d",
+        "mobilesdk_app_id": "1:789567736:android:b7830267ce3ec2f2f9030d",
         "android_client_info": {
-          "package_name": "com.example.e_book"
+          "package_name": "com.example.verygoodcore.bilioteca_virtual"
         }
       },
       "oauth_client": [],
@@ -26,7 +26,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789567736:android:b7830267ce3ec2f2f9030d",
+        "mobilesdk_app_id": "1:789567736:android:a1b723732a15aadaf9030d",
         "android_client_info": {
           "package_name": "com.tecno.elite.bilioteca_virtual"
         }

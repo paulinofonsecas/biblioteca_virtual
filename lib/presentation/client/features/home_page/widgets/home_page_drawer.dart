@@ -15,7 +15,7 @@ class HomePageDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             child: Center(
-              child: Text('Biblioteca Virtual'),
+              child: Text('Livros do Coração de Angola'),
             ),
           ),
           const ListTile(

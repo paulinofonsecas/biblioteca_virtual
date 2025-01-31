@@ -1,6 +1,6 @@
 name: bilioteca_virtual
 description: A Very Good Project
-version: 1.0.0+1
+version: 1.0.2
 publish_to: none
 
 environment:
@@ -48,7 +48,6 @@ dependencies:
   device_preview: ^1.0.0
   dropdown_search: ^5.0.6
   flutter_modular: ^6.3.4
-  # google_mobile_ads: ^5.1.0
   lottie: ^3.1.2
   flutter_hooks: ^0.20.5
   flutter_secure_storage: ^9.2.2
@@ -69,5 +68,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/icon/
     - assets/svgs/
   generate: true

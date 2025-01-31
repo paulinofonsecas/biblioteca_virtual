@@ -42,7 +42,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Biblioteca Digital'),
+        title: const Text('Livros do Coração de Angola'),
         actions: const [
           BrightnessControl(),
         ],

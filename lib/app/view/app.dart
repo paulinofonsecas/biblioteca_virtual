@@ -5,7 +5,8 @@ import 'package:bilioteca_virtual/core/router/go_router.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart' hide ModularWatchExtension;
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -52,7 +53,7 @@ class App extends StatelessWidget {
                 );
               },
               child: MaterialApp.router(
-                title: 'Biblioteca Virtual',
+                title: 'LCA',
                 debugShowCheckedModeBanner: false,
                 theme: appTheme(appBrightnessState),
                 routerConfig: Modular.routerConfig,
