@@ -26,41 +26,50 @@ class App extends StatelessWidget {
       ],
       child: Builder(
         builder: (c) {
-          late AppBrightnessState appBrightnessState;
+          return const _RealApp();
+        },
+      ),
+    );
+  }
+}
 
-          try {
-            appBrightnessState =
-                context.select<AppBrightnessCubit, AppBrightnessState>(
-              (AppBrightnessCubit cubit) => cubit.state,
-            );
-          } catch (e) {
-            appBrightnessState = const AppBrightnessInitial(Brightness.light);
-          }
+class _RealApp extends StatelessWidget {
+  const _RealApp();
 
-          return BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is LoggedOutState) {
-                router.pushReplacement('/sign-in');
-              }
-            },
-            child: GlobalLoaderOverlay(
-              useDefaultLoading: false,
-              overlayWidgetBuilder: (_) {
-                return const Center(
-                  child: SpinKitFoldingCube(
-                    color: Colors.red,
-                  ),
-                );
-              },
-              child: MaterialApp.router(
-                title: 'LCA',
-                debugShowCheckedModeBanner: false,
-                theme: appTheme(appBrightnessState),
-                routerConfig: Modular.routerConfig,
-              ),
+  @override
+  Widget build(BuildContext context) {
+    late final AppBrightnessState appBrightnessState;
+
+    try {
+      appBrightnessState =
+          context.select<AppBrightnessCubit, AppBrightnessState>(
+        (AppBrightnessCubit cubit) => cubit.state,
+      );
+    } catch (e) {
+      appBrightnessState = const AppBrightnessInitial(Brightness.light);
+    }
+
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is LoggedOutState) {
+          router.pushReplacement('/sign-in');
+        }
+      },
+      child: GlobalLoaderOverlay(
+        useDefaultLoading: false,
+        overlayWidgetBuilder: (_) {
+          return const Center(
+            child: SpinKitFoldingCube(
+              color: Colors.red,
             ),
           );
         },
+        child: MaterialApp.router(
+          title: 'LCA',
+          debugShowCheckedModeBanner: false,
+          theme: appTheme(appBrightnessState),
+          routerConfig: Modular.routerConfig,
+        ),
       ),
     );
   }
