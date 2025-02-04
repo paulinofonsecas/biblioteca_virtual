@@ -13,12 +13,12 @@ class FirebaseAuthorsDatasource implements IAuthorsDatasource {
   late final FirebaseFirestore _firebaseFirestore;
 
   @override
-  Future<bool> addAuthor(AuthorModel book) async {
+  Future<bool> addAuthor(AuthorModel author) async {
     try {
       return _firebaseFirestore
           .collection('authors')
-          .doc(book.id)
-          .set(book.toMap())
+          .doc(author.id)
+          .set(author.toMap())
           .then((value) => true)
           .onError((error, stackTrace) {
         log(error.toString());
@@ -31,12 +31,12 @@ class FirebaseAuthorsDatasource implements IAuthorsDatasource {
   }
 
   @override
-  Future<bool> updateAuthor(AuthorModel book) async {
+  Future<bool> updateAuthor(AuthorModel autor) async {
     try {
       return _firebaseFirestore
           .collection('authors')
-          .doc(book.id)
-          .update(book.toMap())
+          .doc(autor.id)
+          .update(autor.toMap())
           .then((value) => true);
     } catch (e) {
       log(e.toString());

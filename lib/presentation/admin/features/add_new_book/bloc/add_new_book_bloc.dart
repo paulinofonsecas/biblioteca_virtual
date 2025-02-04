@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
-import 'package:bilioteca_virtual/core/util/messages.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
 import 'package:bilioteca_virtual/domain/use_cases/i_books_use_cases.dart';
