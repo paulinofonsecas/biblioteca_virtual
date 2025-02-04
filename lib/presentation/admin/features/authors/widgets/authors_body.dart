@@ -99,7 +99,7 @@ class AuthorsBody extends StatelessWidget {
                 onPressed: () {
                   showDialog(
                     context: context,
-                    builder: (context) {
+                    builder: (context2) {
                       return AlertDialog(
                         title: const Text('Deletar autor'),
                         content:
@@ -116,13 +116,14 @@ class AuthorsBody extends StatelessWidget {
                               onPressed: () {
                                 BlocProvider.of<ListAuthorsCubit>(context)
                                     .deleteAuthor(author.id, authors);
+                                Navigator.pop(context2);
                               },
                               child: const Text('Sim'),
                             ),
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pop(context2);
                             },
                             child: const Text('Não'),
                           ),
