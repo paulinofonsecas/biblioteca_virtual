@@ -32,6 +32,7 @@ class AuthorModel extends Author {
     );
   }
 
+  @override
   AuthorModel copyWith({
     String? id,
     String? name,
@@ -46,13 +47,14 @@ class AuthorModel extends Author {
     );
   }
 
+  @override
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'name': name,
       'photo': photo,
       'formacao': formacao,
-      'data_nascimento': dataNascimento
+      'data_nascimento': dataNascimento,
     };
   }
 
@@ -60,12 +62,13 @@ class AuthorModel extends Author {
     return AuthorModel(
       id: map['id'] as String,
       name: map['name'] as String,
-      photo: map['photo'] as String,
+      photo: (map['photo'] ?? '') as String,
       formacao: (map['formacao'] ?? '') as String,
       dataNascimento: (map['data_nascimento'] ?? '') as String,
     );
   }
 
+  @override
   String toJson() => json.encode(toMap());
 
   factory AuthorModel.fromJson(String source) =>

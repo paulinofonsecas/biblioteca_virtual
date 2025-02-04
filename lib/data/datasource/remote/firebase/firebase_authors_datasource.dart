@@ -77,11 +77,11 @@ class FirebaseAuthorsDatasource implements IAuthorsDatasource {
   @override
   Future<List<AuthorModel>> getAuthors() async {
     try {
-      final then = await _firebaseFirestore.collection('authors').get().then(
+      final results = await _firebaseFirestore.collection('authors').get().then(
             (value) =>
                 value.docs.map((e) => AuthorModel.fromMap(e.data())).toList(),
           );
-      return then;
+      return results;
     } catch (e) {
       log(e.toString());
       return List<AuthorModel>.empty();
