@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tecno.elite.bilioteca_virtual">
+    package="com.tecno.elite.lcb">
     <queries>
   <intent>
     <action android:name="android.intent.action.TTS_SERVICE" />
