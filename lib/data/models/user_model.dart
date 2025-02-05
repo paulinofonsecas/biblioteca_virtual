@@ -6,6 +6,7 @@ class UserModel extends User {
   UserModel({
     required super.id,
     required super.name,
+    required super.role,
     required super.email,
     super.photoUrl,
   });
@@ -14,6 +15,7 @@ class UserModel extends User {
     return UserModel(
       id: map['id'] as String,
       name: map['name'] as String,
+      role: map['role'] as String,
       email: map['email'] as String,
       photoUrl: map['photoUrl'] != null ? map['photoUrl'] as String : null,
     );
@@ -26,6 +28,7 @@ class UserModel extends User {
     return <String, dynamic>{
       'id': id,
       'name': name,
+      'role': role,
       'email': email,
       'photoUrl': photoUrl,
     };

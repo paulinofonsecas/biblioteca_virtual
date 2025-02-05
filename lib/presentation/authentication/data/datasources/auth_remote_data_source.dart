@@ -1,5 +1,6 @@
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/error/exceptions.dart';
+import 'package:bilioteca_virtual/data/models/user_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/models/sign_in_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/data/models/sign_up_model.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
@@ -28,15 +29,25 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         password: signIn.password,
       );
 
-      final role = await firestore
+      final userModel = await firestore
           .collection('users')
           .doc(credential.user?.uid)
           .get()
-          .then((data) {
-        return data['role'] as String;
-      });
+          .then(
+            (value) => UserModel.fromMap({
+              'id': value.id,
+              'name': value['name'] ?? '',
+              'role': value['role'],
+              'email': credential.user?.email,
+              'photoUrl': value['photoUrl'],
+            }),
+          );
 
-      return MyUser(credential: credential, role: role);
+      return MyUser(
+        credential: credential,
+        name: userModel.name,
+        role: userModel.role,
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw ExistedAccountException();
@@ -58,10 +69,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: signUp.email,
         password: signUp.password,
       );
-      await firestore
-          .collection('users')
-          .doc(credenciais.user?.uid)
-          .set({'role': 'usuario'});
+      await firestore.collection('users').doc(credenciais.user?.uid).set({
+        'role': 'usuario',
+        'name': signUp.name,
+      });
 
       return credenciais;
     } on FirebaseAuthException catch (e) {
