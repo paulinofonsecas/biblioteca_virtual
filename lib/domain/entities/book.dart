@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:bilioteca_virtual/core/util/messages.dart';
 import 'package:bilioteca_virtual/domain/entities/author.dart';
 import 'package:bilioteca_virtual/domain/entities/categoria.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
@@ -58,7 +57,7 @@ class BookModel {
       id: id ?? this.id,
       title: title ?? this.title,
       authors: authors ?? this.authors,
-      categorias: categorias ?? this.categorias,
+      categorias: categorias ?? categorias,
       isbn: isbn ?? this.isbn,
       editora: editora ?? this.editora,
       resumo: resumo ?? this.resumo,

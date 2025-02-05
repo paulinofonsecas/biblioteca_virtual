@@ -57,6 +57,12 @@ dependencies:
   no_screenshot: ^0.3.1
   flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
+  syncfusion_flutter_datagrid: ^26.2.14
+  syncfusion_flutter_datagrid_export: ^26.2.14
+  path_provider: ^2.1.5
+  permission_handler: ^11.3.1
+  share_plus: ^10.1.4
+  syncfusion_flutter_core: ^26.2.14
 
 dev_dependencies:
   bloc_test: ^9.1.6

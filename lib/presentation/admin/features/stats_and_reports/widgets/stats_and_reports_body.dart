@@ -1,5 +1,6 @@
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/view/books_stats_page.dart';
 import 'package:flutter/material.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/bloc/bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// {@template stats_and_reports_body}
 /// Body of the StatsAndReportsPage.
@@ -12,10 +13,27 @@ class StatsAndReportsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StatsAndReportsBloc, StatsAndReportsState>(
-      builder: (context, state) {
-        return Center(child: Text(state.customProperty));
-      },
+    return Column(
+      children: [
+        ListTile(
+          onTap: () {
+            Navigator.push(context, BooksStatsPage.route());
+          },
+          leading: const Icon(FontAwesomeIcons.bookBookmark),
+          title: const Text('Relatório de livros'),
+          trailing: const Icon(Icons.chevron_right),
+        ),
+        const ListTile(
+          leading: Icon(FontAwesomeIcons.users),
+          title: Text('Relatório de usuarios'),
+          trailing: Icon(Icons.chevron_right),
+        ),
+        const ListTile(
+          leading: Icon(FontAwesomeIcons.userPen),
+          title: Text('Relatório de autores'),
+          trailing: Icon(Icons.chevron_right),
+        ),
+      ],
     );
   }
 }
