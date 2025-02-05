@@ -86,11 +86,11 @@ class BuildComprarLivroButton extends StatelessWidget {
                   onPressed: () async {
                     if (_isInListaLeitura(estaNaListaState)) {
                       await NoScreenshot.instance.screenshotOff();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Capturas de tela desabilitadas'),
-                        ),
-                      );
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   const SnackBar(
+                      //     content: Text('Capturas de tela desabilitadas'),
+                      //   ),
+                      // );
                       PDFReaderPage.toScreen(book.id);
                       return;
                     }

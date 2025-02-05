@@ -12,6 +12,8 @@ class PDFReaderBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightnessState = context.watch<AppBrightnessCubit>().state;
+
     return BlocBuilder<PDFReaderBloc, PDFReaderState>(
       bloc: context.read<PDFReaderBloc>()
         ..add(PDFReaderGetBook(bookId: bookId)),
@@ -26,7 +28,7 @@ class PDFReaderBody extends StatelessWidget {
         if (state is PDFReaderGetBookLoaded) {
           return PDFViewerCachedFromUrl(
             book: state.book,
-            nightMode: Theme.of(context).brightness == Brightness.dark,
+            nightMode: brightnessState.brightness == Brightness.dark,
           );
         }
 
@@ -73,16 +75,6 @@ class _PDFViewerCachedFromUrlState extends State<PDFViewerCachedFromUrl> {
 
   @override
   Widget build(BuildContext context) {
-    context.select((AppBrightnessCubit cubit) {
-      setState(() {
-        pdf = const PDF(
-          swipeHorizontal: true,
-          nightMode: true,
-        );
-      });
-      return cubit;
-    });
-
     return BlocBuilder<PdfPageReaderCubit, PdfPageReaderState>(
       bloc: context.read<PdfPageReaderCubit>()..initState(),
       builder: (context, state) {

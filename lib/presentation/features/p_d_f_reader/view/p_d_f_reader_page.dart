@@ -48,7 +48,6 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.bookId);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -59,13 +58,13 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
         ),
       ],
       child: PopScope(
-        onPopInvoked: (b) async {
+        onPopInvokedWithResult: (_, __) async {
           await NoScreenshot.instance.screenshotOff();
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Capturas de tela abilitadas'),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Capturas de tela abilitadas'),
+          //   ),
+          // );
           router.go(widget.parent);
         },
         child: Scaffold(

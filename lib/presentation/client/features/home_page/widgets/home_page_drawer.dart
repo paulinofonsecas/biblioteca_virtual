@@ -11,33 +11,47 @@ class HomePageDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        children: [
-          const DrawerHeader(
-            child: Center(
-              child: Text('Livros do Coração de Angola'),
+      child: SafeArea(
+        child: Column(
+          children: [
+            const Gutter(),
+            Center(
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset('assets/icon/icon.png', height: 100),
+                  ),
+                  const Gutter(),
+                  const Text(
+                    'Livros do Coração de Angola',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const ListTile(
-            onTap: ListaLeiturasPage.toScreen,
-            title: Text('Lista de leitura'),
-            trailing: Icon(Icons.book),
-          ),
-          const Spacer(),
-          const UserInfo(),
-          const Divider(
-            indent: 16,
-            endIndent: 16,
-          ),
-          ListTile(
-            onTap: () {
-              getIt<AuthBloc>().add(LogOutEvent());
-            },
-            title: const Text('Terminar sessão'),
-            trailing: const Icon(Icons.logout),
-          ),
-          const Gutter(),
-        ],
+            const Gutter(),
+            const ListTile(
+              onTap: ListaLeiturasPage.toScreen,
+              title: Text('Lista de leitura'),
+              trailing: Icon(Icons.book),
+            ),
+            const Spacer(),
+            const UserInfo(),
+            const Divider(
+              indent: 16,
+              endIndent: 16,
+            ),
+            ListTile(
+              onTap: () {
+                getIt<AuthBloc>().add(LogOutEvent());
+              },
+              title: const Text('Terminar sessão'),
+              trailing: const Icon(Icons.logout),
+            ),
+            const Gutter(),
+          ],
+        ),
       ),
     );
   }

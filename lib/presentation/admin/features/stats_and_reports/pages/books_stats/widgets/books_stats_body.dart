@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/all_books_cubit.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/book_report_datasource.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/book_datasource.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/cubit/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart' as path;
@@ -42,7 +42,7 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
         }
 
         if (state is AllBooksLoaded) {
-          final booksDataSource = BooksDataSource(books: state.books);
+          final booksDataSource = BooksReportDataSource(books: state.books);
 
           return Center(
             child: Column(

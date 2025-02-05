@@ -20,8 +20,8 @@ class UserInfo extends StatelessWidget {
     final user = getUser();
 
     return ListTile(
-      title: Text(user!.credential.user!.email ?? ''),
-      subtitle: Text(user.role),
+      title: Text(user!.name),
+      subtitle: Text(user.credential.user!.email ?? ''),
       trailing: const Icon(Icons.person),
     );
   }

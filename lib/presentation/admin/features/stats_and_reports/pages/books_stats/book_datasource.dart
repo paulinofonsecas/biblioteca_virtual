@@ -2,8 +2,8 @@ import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-class BooksDataSource extends DataGridSource {
-  BooksDataSource({List<BookModel> books = const []}) {
+class BooksReportDataSource extends DataGridSource {
+  BooksReportDataSource({List<BookModel> books = const []}) {
     _books = books
         .map<DataGridRow>(
           (e) => DataGridRow(
