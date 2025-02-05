@@ -32,11 +32,11 @@ class StatsAndReportsBody extends StatelessWidget {
           title: const Text('Relatório de usuarios'),
           trailing: const Icon(Icons.chevron_right),
         ),
-        const ListTile(
-          leading: Icon(FontAwesomeIcons.userPen),
-          title: Text('Relatório de autores'),
-          trailing: Icon(Icons.chevron_right),
-        ),
+        // const ListTile(
+        //   leading: Icon(FontAwesomeIcons.userPen),
+        //   title: Text('Relatório de autores'),
+        //   trailing: Icon(Icons.chevron_right),
+        // ),
       ],
     );
   }

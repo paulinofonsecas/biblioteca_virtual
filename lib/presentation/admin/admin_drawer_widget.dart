@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
@@ -12,20 +13,22 @@ class AdminDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = getIt.get<MyUser>();
+
     return Drawer(
       child: Column(
         children: [
-          const UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
+          UserAccountsDrawerHeader(
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
             accountName: Text(
-              'Usuário Administrador',
-              style: TextStyle(color: Colors.black),
+              user.name,
+              style: const TextStyle(color: Colors.black),
             ),
             accountEmail: Text(
-              'admin@admin.com',
-              style: TextStyle(color: Colors.black),
+              user.credential.user!.email ?? '',
+              style: const TextStyle(color: Colors.black),
             ),
           ),
           ListTile(

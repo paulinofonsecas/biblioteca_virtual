@@ -1,8 +1,6 @@
 import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/widgets/stats_and_reports_body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gutter/flutter_gutter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// {@template stats_and_reports_page}
 /// A description for StatsAndReportsPage
@@ -25,13 +23,6 @@ class StatsAndReportsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Estatísticas e Relatórios'),
-          actions: [
-            IconButton(
-              icon: const Icon(FontAwesomeIcons.fileExport),
-              onPressed: () {},
-            ),
-            const GutterSmall(),
-          ],
         ),
         body: const StatsAndReportsView(),
       ),
