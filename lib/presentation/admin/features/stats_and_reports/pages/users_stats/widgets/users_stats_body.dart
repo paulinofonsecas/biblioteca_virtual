@@ -1,10 +1,8 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 
-import 'package:bilioteca_virtual/presentation/admin/features/home/cubit/all_books_cubit.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/book_report_datasource.dart';
-import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/cubit/cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/users_stats/cubit/all_users_cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/users_stats/cubit/cubit.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/users_stats/users_report_datasource.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
@@ -14,35 +12,41 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
-class BooksStatsBody extends StatefulWidget {
-  const BooksStatsBody({super.key});
+/// {@template users_stats_body}
+/// Body of the UsersStatsPage.
+///
+/// Add what it does
+/// {@endtemplate}
+class UsersStatsBody extends StatefulWidget {
+  /// {@macro users_stats_body}
+  const UsersStatsBody({super.key});
 
   @override
-  State<BooksStatsBody> createState() => _BooksStatsBodyState();
+  State<UsersStatsBody> createState() => _UsersStatsBodyState();
 }
 
-class _BooksStatsBodyState extends State<BooksStatsBody> {
+class _UsersStatsBodyState extends State<UsersStatsBody> {
   final GlobalKey<SfDataGridState> key = GlobalKey<SfDataGridState>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AllBooksCubit, AllBooksState>(
-      bloc: context.read<AllBooksCubit>()..getAllBooks(),
+    return BlocBuilder<AllUsersCubit, AllUsersState>(
+      bloc: context.read<AllUsersCubit>()..getAllUsers(),
       builder: (context, state) {
-        if (state is AllBooksLoading) {
+        if (state is AllUsersLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        if (state is AllBooksError) {
+        if (state is AllUsersError) {
           return Center(
             child: Text(state.message),
           );
         }
 
-        if (state is AllBooksLoaded) {
-          final booksDataSource = BooksDataSource(books: state.books);
+        if (state is AllUsersLoaded) {
+          final usersDataSource = UsersReportDataSource(users: state.users);
 
           return Center(
             child: Column(
@@ -58,18 +62,31 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
                     ),
                     child: SfDataGrid(
                       key: key,
-                      source: booksDataSource,
+                      source: usersDataSource,
                       allowSorting: true,
                       allowExpandCollapseGroup: true,
+                      tableSummaryRows: [
+                        GridTableSummaryRow(
+                          title: 'Total usuarios {Sum}',
+                          columns: [
+                            const GridSummaryColumn(
+                              name: 'Sum',
+                              columnName: 'name',
+                              summaryType: GridSummaryType.count,
+                            ),
+                          ],
+                          position: GridTableSummaryRowPosition.bottom,
+                        ),
+                      ],
                       columns: [
                         GridColumn(
-                          columnName: 'title',
+                          columnName: 'name',
                           columnWidthMode: ColumnWidthMode.fitByCellValue,
                           label: Container(
                             padding: const EdgeInsets.all(16),
                             alignment: Alignment.centerLeft,
                             child: const Text(
-                              'Titulo',
+                              'Nome',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -77,13 +94,13 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
                           ),
                         ),
                         GridColumn(
-                          columnName: 'author',
+                          columnName: 'email',
                           columnWidthMode: ColumnWidthMode.fitByCellValue,
                           label: Container(
                             padding: const EdgeInsets.all(16),
                             alignment: Alignment.centerLeft,
                             child: const Text(
-                              'Autor',
+                              'Email',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -91,27 +108,13 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
                           ),
                         ),
                         GridColumn(
-                          columnName: 'categoria',
+                          columnName: 'role',
                           columnWidthMode: ColumnWidthMode.fitByColumnName,
                           label: Container(
                             padding: const EdgeInsets.all(16),
                             alignment: Alignment.centerLeft,
                             child: const Text(
-                              'Categória',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        GridColumn(
-                          columnName: 'preco',
-                          columnWidthMode: ColumnWidthMode.fitByColumnName,
-                          label: Container(
-                            padding: const EdgeInsets.all(16),
-                            alignment: Alignment.centerLeft,
-                            child: const Text(
-                              'Preço',
+                              'Tipo',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -145,7 +148,7 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
         PdfPageTemplateElement(const Rect.fromLTWH(0, 0, 515, 50));
 
     headerTemplate.graphics.drawString(
-      'Relatório de Livros',
+      'Relatório de usuarios',
       PdfStandardFont(PdfFontFamily.helvetica, 12),
       bounds: const Rect.fromLTWH(0, 15, 200, 20),
     );
@@ -165,7 +168,7 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
       Directory('${dir.absolute.path}/relatorios').createSync(recursive: true);
     }
 
-    final fileName = 'relatorio_de_livros_${DateTime.now()}.pdf';
+    final fileName = 'relatorio_de_usuarios_${DateTime.now()}.pdf';
     final p = File('${dir.absolute.path}/relatorios/$fileName')
       ..createSync(recursive: true)
       ..writeAsBytesSync(bytes);

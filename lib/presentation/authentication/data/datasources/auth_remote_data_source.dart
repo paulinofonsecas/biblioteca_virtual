@@ -34,14 +34,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           .doc(credential.user?.uid)
           .get()
           .then(
-            (value) => UserModel.fromMap({
-              'id': value.id,
-              'name': value['name'] ?? '',
-              'role': value['role'],
-              'email': credential.user?.email,
-              'photoUrl': value['photoUrl'],
-            }),
-          );
+        (value) {
+          return UserModel.fromMap({
+            'id': value.id,
+            'name': (value.data()!['name'] as String?) ?? '',
+            'role': value.data()!['role'],
+            'email': credential.user?.email,
+            'photoUrl': value.data()!['photoUrl'],
+          });
+        },
+      );
 
       return MyUser(
         credential: credential,
@@ -72,6 +74,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       await firestore.collection('users').doc(credenciais.user?.uid).set({
         'role': 'usuario',
         'name': signUp.name,
+        'email': credenciais.user?.email,
+        'photoUrl': '',
       });
 
       return credenciais;

@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/view/books_stats_page.dart';
+import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/users_stats/users_stats.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,10 +24,13 @@ class StatsAndReportsBody extends StatelessWidget {
           title: const Text('Relatório de livros'),
           trailing: const Icon(Icons.chevron_right),
         ),
-        const ListTile(
-          leading: Icon(FontAwesomeIcons.users),
-          title: Text('Relatório de usuarios'),
-          trailing: Icon(Icons.chevron_right),
+        ListTile(
+          onTap: () {
+            Navigator.push(context, UsersStatsPage.route());
+          },
+          leading: const Icon(FontAwesomeIcons.users),
+          title: const Text('Relatório de usuarios'),
+          trailing: const Icon(Icons.chevron_right),
         ),
         const ListTile(
           leading: Icon(FontAwesomeIcons.userPen),
