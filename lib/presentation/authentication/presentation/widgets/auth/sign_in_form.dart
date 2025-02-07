@@ -4,6 +4,7 @@ import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/my_user.dart';
 import 'package:bilioteca_virtual/presentation/authentication/domain/entities/sign_in_entity.dart';
 import 'package:bilioteca_virtual/presentation/authentication/presentation/bloc/authentication/auth_bloc.dart';
+import 'package:bilioteca_virtual/presentation/authentication/presentation/bottomsheets/reset_password_bs.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +35,16 @@ class _LoginFormState extends State<LoginForm> {
             _buildUsernameFormField(),
             const Gutter(),
             _buildPasswordFormField(),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                style: TextButton.styleFrom(foregroundColor: Colors.blue),
+                onPressed: () async {
+                  ResetPasswordBs.show(context);
+                },
+                child: const Text('Esqueci minha senha'),
+              ),
+            ),
             const GutterLarge(),
             _loginButtonArea(),
             const GutterLarge(),
