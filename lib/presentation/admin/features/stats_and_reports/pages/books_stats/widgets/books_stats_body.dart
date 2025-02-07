@@ -7,7 +7,6 @@ import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/
 import 'package:bilioteca_virtual/presentation/admin/features/stats_and_reports/pages/books_stats/cubit/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart' as path;
-import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -133,12 +132,6 @@ class _BooksStatsBodyState extends State<BooksStatsBody> {
   }
 
   Future<void> gerarPDF() async {
-    final result = await Permission.manageExternalStorage.request().isGranted;
-    if (!result) {
-      const SnackBar(content: Text('Sem permissão para exportar para PDF'));
-      return;
-    }
-
     final document = PdfDocument();
     final pdfPage = document.pages.add();
     final headerTemplate =
