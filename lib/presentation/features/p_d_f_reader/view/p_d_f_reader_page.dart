@@ -59,7 +59,7 @@ class _PDFReaderPageState extends State<PDFReaderPage> {
       ],
       child: PopScope(
         onPopInvokedWithResult: (_, __) async {
-          await NoScreenshot.instance.screenshotOff();
+          await NoScreenshot.instance.screenshotOn();
           // ScaffoldMessenger.of(context).showSnackBar(
           //   const SnackBar(
           //     content: Text('Capturas de tela abilitadas'),
