@@ -1,6 +1,7 @@
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/core/util/snackbar_message.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/cubit/carregar_comprovante_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/cubit/validar_comprovativo_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/validate_payment.dart';
@@ -10,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
 class ValidatePaymentBody extends StatelessWidget {
-  const ValidatePaymentBody({super.key});
+  const ValidatePaymentBody({required this.book, super.key});
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +36,13 @@ class ValidatePaymentBody extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            const Expanded(
+            Expanded(
               child: Column(
                 children: [
-                  Spacer(),
-                  GutterLarge(),
-                  _Actions(),
-                  Spacer(),
+                  const Spacer(),
+                  const GutterLarge(),
+                  _Actions(book),
+                  const Spacer(),
                 ],
               ),
             ),
@@ -51,7 +54,9 @@ class ValidatePaymentBody extends StatelessWidget {
 }
 
 class _Actions extends StatefulWidget {
-  const _Actions();
+  const _Actions(this.book);
+
+  final BookModel book;
 
   @override
   State<_Actions> createState() => _ActionsState();
@@ -105,7 +110,7 @@ class _ActionsState extends State<_Actions> {
                   return const SizedBox();
                 }
 
-                return const ValidarButtonWidget();
+                return ValidarButtonWidget(book: widget.book);
               },
             ),
           ],

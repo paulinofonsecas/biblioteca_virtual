@@ -1,4 +1,5 @@
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/bloc/bloc.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/cubit/carregar_comprovante_cubit.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/cubit/validar_comprovativo_cubit.dart';
@@ -10,12 +11,16 @@ import 'package:flutter/material.dart';
 /// {@endtemplate}
 class ValidatePaymentPage extends StatefulWidget {
   /// {@macro validate_payment_page}
-  const ValidatePaymentPage({super.key});
+  const ValidatePaymentPage({required this.book, super.key});
+
+  final BookModel book;
 
   /// The static route for ValidatePaymentPage
-  static Route<dynamic> route() {
+  static Route<dynamic> route(BookModel book) {
     return MaterialPageRoute<dynamic>(
-      builder: (_) => const ValidatePaymentPage(),
+      builder: (_) => ValidatePaymentPage(
+        book: book,
+      ),
     );
   }
 
@@ -50,8 +55,10 @@ class _ValidatePaymentPageState extends State<ValidatePaymentPage> {
           create: (context) => ValidarComprovativoCubit(),
         ),
       ],
-      child: const Scaffold(
-        body: ValidatePaymentView(),
+      child: Scaffold(
+        body: ValidatePaymentView(
+          book: widget.book,
+        ),
       ),
     );
   }
@@ -62,10 +69,14 @@ class _ValidatePaymentPageState extends State<ValidatePaymentPage> {
 /// {@endtemplate}
 class ValidatePaymentView extends StatelessWidget {
   /// {@macro validate_payment_view}
-  const ValidatePaymentView({super.key});
+  const ValidatePaymentView({required this.book, super.key});
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
-    return const ValidatePaymentBody();
+    return ValidatePaymentBody(
+      book: book,
+    );
   }
 }

@@ -24,7 +24,9 @@ class CheckoutButtonWidget extends StatelessWidget {
         onPressed: () {
           showCupertinoModalBottomSheet(
             context: context,
-            builder: (context) => const ValidatePaymentPage(),
+            builder: (context) => ValidatePaymentPage(
+              book: book,
+            ),
             isDismissible: false,
           ).then((paymentValidator) {
             if (paymentValidator == null) {

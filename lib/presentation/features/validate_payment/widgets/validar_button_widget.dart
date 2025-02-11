@@ -1,10 +1,13 @@
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/presentation/features/validate_payment/cubit/validar_comprovativo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 
 class ValidarButtonWidget extends StatelessWidget {
-  const ValidarButtonWidget({super.key});
+  const ValidarButtonWidget({required this.book, super.key});
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class ValidarButtonWidget extends StatelessWidget {
           ),
           child: FilledButton(
             onPressed: () {
-              context.read<ValidarComprovativoCubit>().validar();
+              context.read<ValidarComprovativoCubit>().validar(book);
             },
             child: const Row(
               mainAxisSize: MainAxisSize.min,

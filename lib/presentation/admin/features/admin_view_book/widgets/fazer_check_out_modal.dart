@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, deprecated_member_use
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
+import 'package:bilioteca_virtual/core/util/constants.dart';
 import 'package:bilioteca_virtual/core/util/corrency.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/preco.dart';
@@ -8,6 +9,7 @@ import 'package:bilioteca_virtual/presentation/admin/features/admin_view_book/wi
 import 'package:bilioteca_virtual/presentation/features/p_d_f_reader/view/p_d_f_reader_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -166,16 +168,22 @@ class _InformationPaymentWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const GutterSmall(),
-        const GroupInformation(
-          icon: FontAwesomeIcons.creditCard,
+        GroupInformation(
+          icon: FontAwesomeIcons.user,
           title: 'Nome',
-          value: 'Livros do Coração de Angola',
+          value: kContaNome,
+          onPressed: () {
+            Clipboard.setData(const ClipboardData(text: kContaNome));
+          },
         ),
         const GutterSmall(),
-        const GroupInformation(
+        GroupInformation(
           icon: FontAwesomeIcons.creditCard,
           title: 'IBAN',
-          value: 'AO06.0040.0000.2323.8763.6341.2',
+          value: kContaIban,
+          onPressed: () {
+            Clipboard.setData(const ClipboardData(text: kContaIban));
+          },
         ),
       ],
     );
@@ -187,12 +195,14 @@ class GroupInformation extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.value,
+    this.onPressed,
     super.key,
   });
 
   final IconData icon;
   final String title;
   final String value;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +236,7 @@ class GroupInformation extends StatelessWidget {
             ),
             const GutterTiny(),
             IconButton(
-              onPressed: () {},
+              onPressed: onPressed,
               icon: const Icon(Icons.copy, size: 10),
               padding: EdgeInsets.zero,
               splashRadius: 8,

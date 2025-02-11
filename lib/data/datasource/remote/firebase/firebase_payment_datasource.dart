@@ -51,13 +51,20 @@ class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
   }
 
   @override
+  /// Process a payment in the database.
+  ///
+  /// Throws a [DuplicatePayment] if a payment with the same transactionId already
+  /// exists.
+  ///
+  /// Returns a [Future] that resolves to [void] when the payment is written to the
+  /// database.
   Future<void> processPayment(Payment payment) async {
     try {
       final anPaymentExists = await verifyPayment(payment.transactionId);
 
-      // if (anPaymentExists != null) {
-      //   throw const DuplicatePayment();
-      // }
+      if (anPaymentExists != null) {
+        throw const DuplicatePayment();
+      }
 
       return firestore
           .collection(_collentionName)
