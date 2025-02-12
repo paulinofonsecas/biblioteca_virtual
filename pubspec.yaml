@@ -54,7 +54,7 @@ dependencies:
   auto_size_text: ^3.0.0
   diacritic: ^0.1.6
   firebase_admin: ^0.3.0
-  no_screenshot: ^0.3.1
+  # no_screenshot: ^0.3.1
   flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
   syncfusion_flutter_datagrid: ^26.2.14
@@ -77,4 +77,5 @@ flutter:
     - assets/
     - assets/icon/
     - assets/svgs/
+    - shorebird.yaml
   generate: true

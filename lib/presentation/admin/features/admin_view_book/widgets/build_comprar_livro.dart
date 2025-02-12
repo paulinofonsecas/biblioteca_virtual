@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:no_screenshot/no_screenshot.dart';
+// import 'package:no_screenshot/no_screenshot.dart';
 
 class BuildComprarLivroButton extends StatelessWidget {
   const BuildComprarLivroButton({
@@ -85,7 +85,7 @@ class BuildComprarLivroButton extends StatelessWidget {
                   ),
                   onPressed: () async {
                     if (_isInListaLeitura(estaNaListaState)) {
-                      await NoScreenshot.instance.screenshotOff();
+                      // await NoScreenshot.instance.screenshotOff();
                       // ScaffoldMessenger.of(context).showSnackBar(
                       //   const SnackBar(
                       //     content: Text('Capturas de tela desabilitadas'),
