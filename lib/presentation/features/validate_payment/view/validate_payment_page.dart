@@ -52,7 +52,7 @@ class _ValidatePaymentPageState extends State<ValidatePaymentPage> {
           create: (context) => getIt<CarregarComprovanteCubit>(),
         ),
         BlocProvider(
-          create: (context) => ValidarComprovativoCubit(),
+          create: (context) => ValidarComprovativoCubit(getIt()),
         ),
       ],
       child: Scaffold(

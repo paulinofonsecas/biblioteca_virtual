@@ -13,8 +13,9 @@ abstract class IFirebasePaymentDatasource {
 }
 
 class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
-  FirebasePaymentDatasourceImpl(FirebaseFirestore? fire)
-      : firestore = fire ?? FirebaseFirestore.instance;
+  FirebasePaymentDatasourceImpl(
+    FirebaseFirestore? fire,
+  ) : firestore = fire ?? FirebaseFirestore.instance;
 
   final FirebaseFirestore firestore;
   final String _collentionName = 'payments';
@@ -51,6 +52,7 @@ class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
   }
 
   @override
+
   /// Process a payment in the database.
   ///
   /// Throws a [DuplicatePayment] if a payment with the same transactionId already
@@ -62,14 +64,15 @@ class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
     try {
       final anPaymentExists = await verifyPayment(payment.transactionId);
 
-      if (anPaymentExists != null) {
+      if (anPaymentExists == null) {
         throw const DuplicatePayment();
       }
 
-      return firestore
+      await firestore
           .collection(_collentionName)
           .doc(payment.id)
           .set(payment.toMap());
+
     } catch (e) {
       log(e.toString());
       return Future.error(e);

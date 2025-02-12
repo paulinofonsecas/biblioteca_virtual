@@ -1,12 +1,18 @@
 import 'package:bilioteca_virtual/core/util/corrency.dart';
+import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gutter/flutter_gutter.dart';
 import 'package:verify_payment/models/response_model.dart';
 
 class SuccessValidationAlertDialog extends StatelessWidget {
-  const SuccessValidationAlertDialog({required this.state, super.key});
+  const SuccessValidationAlertDialog({
+    required this.state,
+    required this.book,
+    super.key,
+  });
 
   final VerifyPaymentSuccess state;
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +44,7 @@ class SuccessValidationAlertDialog extends StatelessWidget {
               _DualValue(
                 title: 'Preço do livro',
                 //! fix-me
-                value: normalizePrice(12000.54),
+                value: normalizePrice(book.preco.valor),
                 crossAxisAlignment: CrossAxisAlignment.end,
                 valueColor: Colors.green,
               ),

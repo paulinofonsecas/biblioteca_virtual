@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bilioteca_virtual/core/dependency/get_it.dart';
 import 'package:bilioteca_virtual/core/util/constants.dart';
+import 'package:bilioteca_virtual/data/datasource/contracts/i_lista_de_leitura_datasource.dart';
 import 'package:bilioteca_virtual/data/erros/duplicate_payment.dart';
 import 'package:bilioteca_virtual/domain/entities/book.dart';
 import 'package:bilioteca_virtual/domain/entities/payment.dart';
@@ -16,7 +17,10 @@ import 'package:verify_payment/verify_payment.dart';
 part 'validar_comprovativo_state.dart';
 
 class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
-  ValidarComprovativoCubit() : super(ValidarComprovativoInitial());
+  ValidarComprovativoCubit(this._listaDeLeituraDatasource)
+      : super(ValidarComprovativoInitial());
+
+  final IListaLeituraDatasource _listaDeLeituraDatasource;
 
   final paymentUC = getIt<IPaymentUseCases>();
 
@@ -59,7 +63,8 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
 
         // verifica se o valor pago e igual ou maior que do livro?
         if (result.mONTANTE != null &&
-            double.parse(result.mONTANTE!) < book.preco.valor) {
+            double.parse(result.mONTANTE!.replaceAll(',', '.')) <
+                book.preco.valor) {
           emit(
             const ValidarComprovativoError(
               message: 'O valor pago e menor que o valor do livro,'
@@ -70,11 +75,12 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
         }
 
         // verifica se o iban e o nome de destino estao corretos?
-        if (result.iBAN != kContaIban || result.dESTINATARIO != kContaNome) {
+        if (result.iBAN != kContaIban ||
+            result.dESTINATARIO!.toLowerCase() != kContaNome.toLowerCase()) {
           emit(
             const ValidarComprovativoError(
-              message:
-                  'O comprovativo nao representa uma transferencia para o livro',
+              message: 'O comprovativo nao representa uma'
+                  ' transferencia para o livro',
             ),
           );
           return;
@@ -85,7 +91,7 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
             id: const Uuid().v4(),
             bookId: book.id,
             amount: result.mONTANTE != null
-                ? double.parse(result.mONTANTE!)
+                ? double.parse(result.mONTANTE!.replaceAll(',', '.'))
                 : result.dINHEIRO?.toDouble() ?? 0.0,
             currency: 'Kz',
             date: _parseData(result.dATA!),
@@ -94,6 +100,8 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
           ),
           book,
         );
+
+        await _listaDeLeituraDatasource.addBook(book);
 
         emit(ValidarComprovativoSuccess(result: result));
       } else {
