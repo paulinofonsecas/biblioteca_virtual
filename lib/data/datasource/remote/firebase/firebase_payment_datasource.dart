@@ -64,7 +64,7 @@ class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
     try {
       final anPaymentExists = await verifyPayment(payment.transactionId);
 
-      if (anPaymentExists == null) {
+      if (anPaymentExists != null) {
         throw const DuplicatePayment();
       }
 
@@ -72,7 +72,6 @@ class FirebasePaymentDatasourceImpl implements IFirebasePaymentDatasource {
           .collection(_collentionName)
           .doc(payment.id)
           .set(payment.toMap());
-
     } catch (e) {
       log(e.toString());
       return Future.error(e);

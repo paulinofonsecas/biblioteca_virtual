@@ -1,6 +1,6 @@
 name: bilioteca_virtual
 description: A Very Good Project
-version: 1.0.2
+version: 1.2.1+10
 publish_to: none
 
 environment:
