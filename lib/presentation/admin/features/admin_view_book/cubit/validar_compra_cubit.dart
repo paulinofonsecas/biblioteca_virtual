@@ -38,11 +38,7 @@ class ValidarCompraCubit extends Cubit<ValidarCompraState> {
           transactionId: paymentValidator.tRANSACAO!.toString(),
         );
 
-        await _paymentUseCases.processPayment(payment, book).then((value) {
-          emit(ValidarCompraPaymentSuccess(payment));
-        }).onError(_onPaymentFailure);
-      } else {
-        emit(const ValidarCompraPaymentFailure('Pagamento inválido'));
+        emit(ValidarCompraPaymentSuccess(payment));
       }
     } catch (e) {
       emit(

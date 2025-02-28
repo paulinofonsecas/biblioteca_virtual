@@ -91,12 +91,12 @@ class _ButtonsWidget extends StatelessWidget {
         }
 
         if (state is ValidarCompraPaymentSuccess) {
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(
-          //     backgroundColor: Colors.green,
-          //     content: Text('Livro adicionado a lista de leitura'),
-          //   ),
-          // );
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text('Livro adicionado a lista de leitura'),
+            ),
+          );
         }
       },
       builder: (context, state) {

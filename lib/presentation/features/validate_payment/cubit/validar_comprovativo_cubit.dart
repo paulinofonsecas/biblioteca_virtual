@@ -61,10 +61,12 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
           return;
         }
 
+        final montante = double.parse(
+          result.mONTANTE!.replaceAll('.', '').replaceAll(',', '.'),
+        );
+
         // verifica se o valor pago e igual ou maior que do livro?
-        if (result.mONTANTE != null &&
-            double.parse(result.mONTANTE!.replaceAll(',', '.')) <
-                book.preco.valor) {
+        if (result.mONTANTE != null && montante < book.preco.valor) {
           emit(
             const ValidarComprovativoError(
               message: 'O valor pago e menor que o valor do livro,'
@@ -91,7 +93,7 @@ class ValidarComprovativoCubit extends Cubit<ValidarComprovativoState> {
             id: const Uuid().v4(),
             bookId: book.id,
             amount: result.mONTANTE != null
-                ? double.parse(result.mONTANTE!.replaceAll(',', '.'))
+                ? montante
                 : result.dINHEIRO?.toDouble() ?? 0.0,
             currency: 'Kz',
             date: _parseData(result.dATA!),
