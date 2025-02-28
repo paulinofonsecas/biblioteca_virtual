@@ -73,17 +73,17 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Bilioteca Virtual"]
+            manifestPlaceholders = [appName: "LCB"]
         }
         staging {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "[STG] Bilioteca Virtual"]
+            manifestPlaceholders = [appName: "[STG] LCB"]
         }
         development {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "[DEV] Bilioteca Virtual"]
+            manifestPlaceholders = [appName: "[DEV] LCB"]
         }
     }
 

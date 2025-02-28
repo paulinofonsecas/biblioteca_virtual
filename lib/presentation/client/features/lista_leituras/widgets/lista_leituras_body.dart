@@ -60,41 +60,46 @@ class _BuildLiview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RemoverBookOnListaLeiturasCubit,
-        RemoverBookOnListaLeiturasState>(
-      listener: (context, state) {
-        if (state is RemoverBookOnListaLeiturasSuccess) {
-          context.read<GetAllBooksCubit>().getAllBooks();
-        }
+    return RefreshIndicator(
+      onRefresh: () async {
+        await context.read<GetAllBooksCubit>().getAllBooks();
       },
-      child: Column(
-        children: [
-          ...books.map((book) {
-            return InLineBookMediumDisplay(
-              onTap: () {
-                PDFReaderPage.toScreen(book.id);
-              },
-              trailing: PopopMenu(
-                onSelected: (value) {
-                  if (value == 1) {
-                    context
-                        .read<RemoverBookOnListaLeiturasCubit>()
-                        .removeBook(book.id);
-                  }
+      child: BlocListener<RemoverBookOnListaLeiturasCubit,
+          RemoverBookOnListaLeiturasState>(
+        listener: (context, state) {
+          if (state is RemoverBookOnListaLeiturasSuccess) {
+            context.read<GetAllBooksCubit>().getAllBooks();
+          }
+        },
+        child: Column(
+          children: [
+            ...books.map((book) {
+              return InLineBookMediumDisplay(
+                onTap: () {
+                  PDFReaderPage.toScreen(book.id);
                 },
-              ),
-              book: BookModel(
-                id: book.id,
-                title: book.title,
-                authors: book.authors,
-                categorias: book.categorias,
-                capa: book.capa,
-                pdf: book.pdf,
-                preco: Preco.gratis(),
-              ),
-            );
-          }),
-        ],
+                trailing: PopopMenu(
+                  onSelected: (value) {
+                    if (value == 1) {
+                      context
+                          .read<RemoverBookOnListaLeiturasCubit>()
+                          .removeBook(book.id);
+                    }
+                  },
+                ),
+                book: BookModel(
+                  id: book.id,
+                  title: book.title,
+                  authors: book.authors,
+                  categorias: book.categorias,
+                  capa: book.capa,
+                  pdf: book.pdf,
+                  preco: Preco.gratis(),
+                ),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
@@ -121,10 +126,6 @@ class PopopMenu extends StatelessWidget {
                 size: 16,
               ),
             ),
-          ),
-          const PopupMenuItem(
-            value: 2,
-            child: Text('Item 2'),
           ),
         ];
       },
